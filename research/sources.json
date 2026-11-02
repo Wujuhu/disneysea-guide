@@ -1,0 +1,315 @@
+[
+  {
+    "id": 230,
+    "title": "Venetian Gondolas",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/230/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/581_main_visual_name_1.jpg?mod=20261021143829",
+    "local": "assets/attractions/230.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 219,
+    "title": "Soaring: Fantastic Flight",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/219/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/1005_main_visual_name_1.jpg?mod=20261020141145",
+    "local": "assets/attractions/219.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 227,
+    "title": "DisneySea Transit Steamer Line (Mediterranean Harbor)",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/227/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/121_main_visual_name_1.jpg?mod=20261021151144",
+    "local": "assets/attractions/227.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 244,
+    "title": "Fortress Explorations",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/244/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/221_main_visual_name_1.jpg?mod=20261021151404",
+    "local": "assets/attractions/244.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 245,
+    "title": "Fortress Explorations“The Leonardo Challenge”",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/245/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/991_main_visual_name_1.jpg?mod=20261021151611",
+    "local": "assets/attractions/245.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 246,
+    "title": "Turtle Talk",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/246/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/91_main_visual_name_1.jpg?mod=20261021151841",
+    "local": "assets/attractions/246.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 243,
+    "title": "Tower of Terror",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/243/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/71_main_visual_name_1.jpg?mod=20261020141312",
+    "local": "assets/attractions/243.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 232,
+    "title": "DisneySea Electric Railway (American Waterfront)",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/232/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/101_main_visual_name_1.jpg?mod=20261021152044",
+    "local": "assets/attractions/232.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 228,
+    "title": "DisneySea Transit Steamer Line (American Waterfront)",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/228/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/111_main_visual_name_1.jpg?mod=20261021144135",
+    "local": "assets/attractions/228.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 218,
+    "title": "Toy Story Mania!",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/218/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/161_main_visual_name_1.jpg?mod=20261020141402",
+    "local": "assets/attractions/218.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 233,
+    "title": "Big City Vehicles",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/233/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/191_main_visual_name_1.jpg?mod=20261021144410",
+    "local": "assets/attractions/233.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 231,
+    "title": "DisneySea Electric Railway (Port Discovery)",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/231/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/471_main_visual_name_1.jpg?mod=20261021144735",
+    "local": "assets/attractions/231.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 247,
+    "title": "Nemo & Friends SeaRider",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/247/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/963_main_visual_name_1.jpg?mod=20261021152251",
+    "local": "assets/attractions/247.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 222,
+    "title": "Indiana Jones Adventure®: Temple of the Crystal Skull",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/222/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/531_main_visual_name_1.jpg?mod=20261020141459",
+    "local": "assets/attractions/222.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 229,
+    "title": "DisneySea Transit Steamer Line (Lost River Delta)",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/229/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/131_main_visual_name_1.jpg?mod=20261021152727",
+    "local": "assets/attractions/229.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 242,
+    "title": "Raging Spirits",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/242/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/371_main_visual_name_1.jpg?mod=20261020141630",
+    "local": "assets/attractions/242.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 255,
+    "title": "Anna and Elsa's Frozen Journey",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/255/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/1110_main_visual_name_1.jpg?mod=20261027101057",
+    "local": "assets/attractions/255.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 257,
+    "title": "Peter Pan's Never Land Adventure",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/257/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/1124_main_visual_name_1.jpg?mod=20261020141820",
+    "local": "assets/attractions/257.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 258,
+    "title": "Fairy Tinker Bell's Busy Buggies",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/258/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/1131_main_visual_name_1.jpg?mod=20261027101152",
+    "local": "assets/attractions/258.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 256,
+    "title": "Rapunzel's Lantern Festival",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/256/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/1117_main_visual_name_1.jpg?mod=20261020141916",
+    "local": "assets/attractions/256.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 236,
+    "title": "Caravan Carousel",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/236/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/651_main_visual_name_1.jpg?mod=20261027100726",
+    "local": "assets/attractions/236.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 220,
+    "title": "Jasmine's Flying Carpets",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/220/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/541_main_visual_name_1.jpg?mod=20261021153209",
+    "local": "assets/attractions/220.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 235,
+    "title": "Sindbad's Storybook Voyage",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/235/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/511_main_visual_name_1.jpg?mod=20261021153413",
+    "local": "assets/attractions/235.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 226,
+    "title": "The Magic Lamp Theater",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/226/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/331_main_visual_name_1.jpg?mod=20261021145153",
+    "local": "assets/attractions/226.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 202,
+    "title": "Ariel's Playground",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/202/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/491_main_visual_name_1.jpg?mod=20261021153759",
+    "local": "assets/attractions/202.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 239,
+    "title": "Jumpin' Jellyfish",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/239/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/551_main_visual_name_1.jpg?mod=20261021145405",
+    "local": "assets/attractions/239.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 238,
+    "title": "Scuttle's Scooters",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/238/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/591_main_visual_name_1.jpg?mod=20261021145630",
+    "local": "assets/attractions/238.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 237,
+    "title": "Flounder's Flying Fish Coaster",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/237/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/261_main_visual_name_1.jpg?mod=20261021145845",
+    "local": "assets/attractions/237.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 240,
+    "title": "Blowfish Balloon Race",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/240/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/301_main_visual_name_1.jpg?mod=20261021150116",
+    "local": "assets/attractions/240.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 221,
+    "title": "Mermaid Lagoon Theater",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/221/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/361_main_visual_name_1.jpg?mod=20261021150326",
+    "local": "assets/attractions/221.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 241,
+    "title": "The Whirlpool",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/241/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/391_main_visual_name_1.jpg?mod=20261021150615",
+    "local": "assets/attractions/241.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 224,
+    "title": "20,000 Leagues Under the Sea",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/224/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/621_main_visual_name_1.jpg?mod=20261021154023",
+    "local": "assets/attractions/224.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 223,
+    "title": "Journey to the Center of the Earth",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/223/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/attraction/631_main_visual_name_1.jpg?mod=20261020142012",
+    "local": "assets/attractions/223.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 20001,
+    "title": "Sparkling Jubilee Celebration",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/show/detail/7404/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/show/2748_main_visual_name_1.jpg",
+    "local": "assets/shows/day.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 20002,
+    "title": "Believe! Sea of Dreams",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/show/detail/967/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/show/2067_main_visual_name_1.jpg",
+    "local": "assets/shows/night.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 30001,
+    "title": "Zambini Brothers' Ristorante",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/403/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/restaurant/572_main_visual_name_1.jpg",
+    "local": "assets/dining/lunch.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 30002,
+    "title": "New York Deli",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/restaurant/642_main_visual_name_1.jpg",
+    "local": "assets/dining/dinner.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 30003,
+    "title": "Smoked Turkey Leg",
+    "url": "https://www.tokyodisneyresort.jp/en/food/128/",
+    "image": "https://media1.tokyodisneyresort.jp/food_menu/image/128_1.12_1_tdfhE3gp.jpg",
+    "local": "assets/dining/turkey.jpg",
+    "checked": "2026-11-01"
+  },
+  {
+    "id": 30004,
+    "title": "Lost River Cookhouse (Spicy Smoked Chicken Leg)",
+    "url": "https://www.tokyodisneyresort.jp/en/tds/restaurant/food/461/",
+    "image": "https://media1.tokyodisneyresort.jp/images/adventure/restaurant/812_main_visual_name_1.jpg",
+    "local": "assets/dining/chicken.jpg",
+    "checked": "2026-11-01",
+    "imageNote": "Restaurant exterior"
+  }
+]

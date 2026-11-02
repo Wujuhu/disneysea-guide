@@ -1,0 +1,618 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T15:03:19.999Z",
+  "title": "Design System: 海洋漫游",
+  "extensions": {
+    "colorMeta": {
+      "teal": {
+        "role": "primary",
+        "displayName": "海港青绿",
+        "tonalRamp": [
+          "oklch(15.00% 0.0792 189.07)",
+          "oklch(26.43% 0.0792 189.07)",
+          "oklch(37.86% 0.0792 189.07)",
+          "oklch(49.29% 0.0792 189.07)",
+          "oklch(60.71% 0.0792 189.07)",
+          "oklch(72.14% 0.0792 189.07)",
+          "oklch(83.57% 0.0792 189.07)",
+          "oklch(95.00% 0.0792 189.07)"
+        ]
+      },
+      "teal-dark": {
+        "role": "primary",
+        "displayName": "深青绿悬停",
+        "tonalRamp": [
+          "oklch(15.00% 0.0731 189.76)",
+          "oklch(26.43% 0.0731 189.76)",
+          "oklch(37.86% 0.0731 189.76)",
+          "oklch(49.29% 0.0731 189.76)",
+          "oklch(60.71% 0.0731 189.76)",
+          "oklch(72.14% 0.0731 189.76)",
+          "oklch(83.57% 0.0731 189.76)",
+          "oklch(95.00% 0.0731 189.76)"
+        ]
+      },
+      "teal-light": {
+        "role": "primary",
+        "displayName": "浅青绿",
+        "tonalRamp": [
+          "oklch(15.00% 0.0147 175.72)",
+          "oklch(26.43% 0.0147 175.72)",
+          "oklch(37.86% 0.0147 175.72)",
+          "oklch(49.29% 0.0147 175.72)",
+          "oklch(60.71% 0.0147 175.72)",
+          "oklch(72.14% 0.0147 175.72)",
+          "oklch(83.57% 0.0147 175.72)",
+          "oklch(95.00% 0.0147 175.72)"
+        ]
+      },
+      "route": {
+        "role": "secondary",
+        "displayName": "路线紫红",
+        "tonalRamp": [
+          "oklch(15.00% 0.1868 358.77)",
+          "oklch(26.43% 0.1868 358.77)",
+          "oklch(37.86% 0.1868 358.77)",
+          "oklch(49.29% 0.1868 358.77)",
+          "oklch(60.71% 0.1868 358.77)",
+          "oklch(72.14% 0.1868 358.77)",
+          "oklch(83.57% 0.1868 358.77)",
+          "oklch(95.00% 0.1868 358.77)"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "赭金信息",
+        "tonalRamp": [
+          "oklch(15.00% 0.1007 73.87)",
+          "oklch(26.43% 0.1007 73.87)",
+          "oklch(37.86% 0.1007 73.87)",
+          "oklch(49.29% 0.1007 73.87)",
+          "oklch(60.71% 0.1007 73.87)",
+          "oklch(72.14% 0.1007 73.87)",
+          "oklch(83.57% 0.1007 73.87)",
+          "oklch(95.00% 0.1007 73.87)"
+        ]
+      },
+      "gold-light": {
+        "role": "secondary",
+        "displayName": "浅金底色",
+        "tonalRamp": [
+          "oklch(15.00% 0.0356 83.78)",
+          "oklch(26.43% 0.0356 83.78)",
+          "oklch(37.86% 0.0356 83.78)",
+          "oklch(49.29% 0.0356 83.78)",
+          "oklch(60.71% 0.0356 83.78)",
+          "oklch(72.14% 0.0356 83.78)",
+          "oklch(83.57% 0.0356 83.78)",
+          "oklch(95.00% 0.0356 83.78)"
+        ]
+      },
+      "dpa-label": {
+        "role": "secondary",
+        "displayName": "DPA 深金文字",
+        "tonalRamp": [
+          "oklch(15.00% 0.0836 74.86)",
+          "oklch(26.43% 0.0836 74.86)",
+          "oklch(37.86% 0.0836 74.86)",
+          "oklch(49.29% 0.0836 74.86)",
+          "oklch(60.71% 0.0836 74.86)",
+          "oklch(72.14% 0.0836 74.86)",
+          "oklch(83.57% 0.0836 74.86)",
+          "oklch(95.00% 0.0836 74.86)"
+        ]
+      },
+      "core-pin": {
+        "role": "secondary",
+        "displayName": "五大项目赭金",
+        "tonalRamp": [
+          "oklch(15.00% 0.1015 73.91)",
+          "oklch(26.43% 0.1015 73.91)",
+          "oklch(37.86% 0.1015 73.91)",
+          "oklch(49.29% 0.1015 73.91)",
+          "oklch(60.71% 0.1015 73.91)",
+          "oklch(72.14% 0.1015 73.91)",
+          "oklch(83.57% 0.1015 73.91)",
+          "oklch(95.00% 0.1015 73.91)"
+        ]
+      },
+      "show-day": {
+        "role": "secondary",
+        "displayName": "白天花船琥珀",
+        "tonalRamp": [
+          "oklch(15.00% 0.1307 63.72)",
+          "oklch(26.43% 0.1307 63.72)",
+          "oklch(37.86% 0.1307 63.72)",
+          "oklch(49.29% 0.1307 63.72)",
+          "oklch(60.71% 0.1307 63.72)",
+          "oklch(72.14% 0.1307 63.72)",
+          "oklch(83.57% 0.1307 63.72)",
+          "oklch(95.00% 0.1307 63.72)"
+        ]
+      },
+      "show-night": {
+        "role": "secondary",
+        "displayName": "夜间演出紫",
+        "tonalRamp": [
+          "oklch(15.00% 0.1555 299.06)",
+          "oklch(26.43% 0.1555 299.06)",
+          "oklch(37.86% 0.1555 299.06)",
+          "oklch(49.29% 0.1555 299.06)",
+          "oklch(60.71% 0.1555 299.06)",
+          "oklch(72.14% 0.1555 299.06)",
+          "oklch(83.57% 0.1555 299.06)",
+          "oklch(95.00% 0.1555 299.06)"
+        ]
+      },
+      "area-harbor": {
+        "role": "tertiary",
+        "displayName": "地中海港湾棕",
+        "tonalRamp": [
+          "oklch(15.00% 0.1014 56.00)",
+          "oklch(26.43% 0.1014 56.00)",
+          "oklch(37.86% 0.1014 56.00)",
+          "oklch(49.29% 0.1014 56.00)",
+          "oklch(60.71% 0.1014 56.00)",
+          "oklch(72.14% 0.1014 56.00)",
+          "oklch(83.57% 0.1014 56.00)",
+          "oklch(95.00% 0.1014 56.00)"
+        ]
+      },
+      "area-american": {
+        "role": "tertiary",
+        "displayName": "美国海滨红",
+        "tonalRamp": [
+          "oklch(15.00% 0.1329 16.53)",
+          "oklch(26.43% 0.1329 16.53)",
+          "oklch(37.86% 0.1329 16.53)",
+          "oklch(49.29% 0.1329 16.53)",
+          "oklch(60.71% 0.1329 16.53)",
+          "oklch(72.14% 0.1329 16.53)",
+          "oklch(83.57% 0.1329 16.53)",
+          "oklch(95.00% 0.1329 16.53)"
+        ]
+      },
+      "area-port": {
+        "role": "tertiary",
+        "displayName": "发现港橄榄金",
+        "tonalRamp": [
+          "oklch(15.00% 0.0973 89.95)",
+          "oklch(26.43% 0.0973 89.95)",
+          "oklch(37.86% 0.0973 89.95)",
+          "oklch(49.29% 0.0973 89.95)",
+          "oklch(60.71% 0.0973 89.95)",
+          "oklch(72.14% 0.0973 89.95)",
+          "oklch(83.57% 0.0973 89.95)",
+          "oklch(95.00% 0.0973 89.95)"
+        ]
+      },
+      "area-delta": {
+        "role": "tertiary",
+        "displayName": "失落河三角洲绿",
+        "tonalRamp": [
+          "oklch(15.00% 0.0891 163.70)",
+          "oklch(26.43% 0.0891 163.70)",
+          "oklch(37.86% 0.0891 163.70)",
+          "oklch(49.29% 0.0891 163.70)",
+          "oklch(60.71% 0.0891 163.70)",
+          "oklch(72.14% 0.0891 163.70)",
+          "oklch(83.57% 0.0891 163.70)",
+          "oklch(95.00% 0.0891 163.70)"
+        ]
+      },
+      "area-fantasy": {
+        "role": "tertiary",
+        "displayName": "梦幻泉乡蓝",
+        "tonalRamp": [
+          "oklch(15.00% 0.0960 257.26)",
+          "oklch(26.43% 0.0960 257.26)",
+          "oklch(37.86% 0.0960 257.26)",
+          "oklch(49.29% 0.0960 257.26)",
+          "oklch(60.71% 0.0960 257.26)",
+          "oklch(72.14% 0.0960 257.26)",
+          "oklch(83.57% 0.0960 257.26)",
+          "oklch(95.00% 0.0960 257.26)"
+        ]
+      },
+      "area-arabian": {
+        "role": "tertiary",
+        "displayName": "阿拉伯海岸紫",
+        "tonalRamp": [
+          "oklch(15.00% 0.1094 311.01)",
+          "oklch(26.43% 0.1094 311.01)",
+          "oklch(37.86% 0.1094 311.01)",
+          "oklch(49.29% 0.1094 311.01)",
+          "oklch(60.71% 0.1094 311.01)",
+          "oklch(72.14% 0.1094 311.01)",
+          "oklch(83.57% 0.1094 311.01)",
+          "oklch(95.00% 0.1094 311.01)"
+        ]
+      },
+      "area-mermaid": {
+        "role": "tertiary",
+        "displayName": "美人鱼礁湖粉",
+        "tonalRamp": [
+          "oklch(15.00% 0.1278 352.14)",
+          "oklch(26.43% 0.1278 352.14)",
+          "oklch(37.86% 0.1278 352.14)",
+          "oklch(49.29% 0.1278 352.14)",
+          "oklch(60.71% 0.1278 352.14)",
+          "oklch(72.14% 0.1278 352.14)",
+          "oklch(83.57% 0.1278 352.14)",
+          "oklch(95.00% 0.1278 352.14)"
+        ]
+      },
+      "area-mysterious": {
+        "role": "tertiary",
+        "displayName": "神秘岛青",
+        "tonalRamp": [
+          "oklch(15.00% 0.0887 203.99)",
+          "oklch(26.43% 0.0887 203.99)",
+          "oklch(37.86% 0.0887 203.99)",
+          "oklch(49.29% 0.0887 203.99)",
+          "oklch(60.71% 0.0887 203.99)",
+          "oklch(72.14% 0.0887 203.99)",
+          "oklch(83.57% 0.0887 203.99)",
+          "oklch(95.00% 0.0887 203.99)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "深海文字",
+        "tonalRamp": [
+          "oklch(15.00% 0.0460 220.27)",
+          "oklch(26.43% 0.0460 220.27)",
+          "oklch(37.86% 0.0460 220.27)",
+          "oklch(49.29% 0.0460 220.27)",
+          "oklch(60.71% 0.0460 220.27)",
+          "oklch(72.14% 0.0460 220.27)",
+          "oklch(83.57% 0.0460 220.27)",
+          "oklch(95.00% 0.0460 220.27)"
+        ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "次要文字",
+        "tonalRamp": [
+          "oklch(15.00% 0.0308 214.01)",
+          "oklch(26.43% 0.0308 214.01)",
+          "oklch(37.86% 0.0308 214.01)",
+          "oklch(49.29% 0.0308 214.01)",
+          "oklch(60.71% 0.0308 214.01)",
+          "oklch(72.14% 0.0308 214.01)",
+          "oklch(83.57% 0.0308 214.01)",
+          "oklch(95.00% 0.0308 214.01)"
+        ]
+      },
+      "page": {
+        "role": "neutral",
+        "displayName": "浅雾页面",
+        "tonalRamp": [
+          "oklch(15.00% 0.0025 165.08)",
+          "oklch(26.43% 0.0025 165.08)",
+          "oklch(37.86% 0.0025 165.08)",
+          "oklch(49.29% 0.0025 165.08)",
+          "oklch(60.71% 0.0025 165.08)",
+          "oklch(72.14% 0.0025 165.08)",
+          "oklch(83.57% 0.0025 165.08)",
+          "oklch(95.00% 0.0025 165.08)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "白色表面",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 0.00)",
+          "oklch(26.43% 0.0000 0.00)",
+          "oklch(37.86% 0.0000 0.00)",
+          "oklch(49.29% 0.0000 0.00)",
+          "oklch(60.71% 0.0000 0.00)",
+          "oklch(72.14% 0.0000 0.00)",
+          "oklch(83.57% 0.0000 0.00)",
+          "oklch(95.00% 0.0000 0.00)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "柔和边线",
+        "tonalRamp": [
+          "oklch(15.00% 0.0100 181.39)",
+          "oklch(26.43% 0.0100 181.39)",
+          "oklch(37.86% 0.0100 181.39)",
+          "oklch(49.29% 0.0100 181.39)",
+          "oklch(60.71% 0.0100 181.39)",
+          "oklch(72.14% 0.0100 181.39)",
+          "oklch(83.57% 0.0100 181.39)",
+          "oklch(95.00% 0.0100 181.39)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "图片占位底色",
+        "tonalRamp": [
+          "oklch(15.00% 0.0059 170.45)",
+          "oklch(26.43% 0.0059 170.45)",
+          "oklch(37.86% 0.0059 170.45)",
+          "oklch(49.29% 0.0059 170.45)",
+          "oklch(60.71% 0.0059 170.45)",
+          "oklch(72.14% 0.0059 170.45)",
+          "oklch(83.57% 0.0059 170.45)",
+          "oklch(95.00% 0.0059 170.45)"
+        ]
+      },
+      "search-surface": {
+        "role": "neutral",
+        "displayName": "搜索浅底",
+        "tonalRamp": [
+          "oklch(15.00% 0.0034 174.48)",
+          "oklch(26.43% 0.0034 174.48)",
+          "oklch(37.86% 0.0034 174.48)",
+          "oklch(49.29% 0.0034 174.48)",
+          "oklch(60.71% 0.0034 174.48)",
+          "oklch(72.14% 0.0034 174.48)",
+          "oklch(83.57% 0.0034 174.48)",
+          "oklch(95.00% 0.0034 174.48)"
+        ]
+      },
+      "focus": {
+        "role": "tertiary",
+        "displayName": "键盘焦点金",
+        "tonalRamp": [
+          "oklch(15.00% 0.1359 73.78)",
+          "oklch(26.43% 0.1359 73.78)",
+          "oklch(37.86% 0.1359 73.78)",
+          "oklch(49.29% 0.1359 73.78)",
+          "oklch(60.71% 0.1359 73.78)",
+          "oklch(72.14% 0.1359 73.78)",
+          "oklch(83.57% 0.1359 73.78)",
+          "oklch(95.00% 0.1359 73.78)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "攻略标题",
+        "purpose": "宽屏攻略首屏标题；响应式字号见 DESIGN.md Layout 与 CSS。"
+      },
+      "title": {
+        "displayName": "详情标题",
+        "purpose": "项目中文名称。"
+      },
+      "body": {
+        "displayName": "基础正文",
+        "purpose": "页面基础阅读字号与行高。"
+      },
+      "body-reading": {
+        "displayName": "攻略导语",
+        "purpose": "较舒展的攻略说明。"
+      },
+      "body-detail": {
+        "displayName": "一句话玩法",
+        "purpose": "详情中的主要解释。"
+      },
+      "label": {
+        "displayName": "控件文字",
+        "purpose": "辅助动作与小型说明。"
+      },
+      "caption": {
+        "displayName": "辅助标签",
+        "purpose": "清单海港名、轻量状态与元信息。"
+      },
+      "action": {
+        "displayName": "按钮文字",
+        "purpose": "主要及描边按钮。"
+      },
+      "navigation": {
+        "displayName": "主导航",
+        "purpose": "桌面地图／攻略切换；手机使用对应覆盖值。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "surface-overlay",
+        "value": "0 12px 36px rgb(22 57 63 / 13%)",
+        "purpose": "根变量 --shadow；地图加载失败提示使用。"
+      },
+      {
+        "name": "map-pin",
+        "value": "0 2px 6px rgb(24 56 47 / 25%)",
+        "purpose": "将点位从复杂底图中提起。"
+      },
+      {
+        "name": "pin-label",
+        "value": "0 3px 10px rgb(22 57 63 / 15%)",
+        "purpose": "点位名称的小型浮层。"
+      },
+      {
+        "name": "map-controls",
+        "value": "0 5px 22px rgb(22 57 63 / 13%)",
+        "purpose": "地图缩放与全图控制器。"
+      },
+      {
+        "name": "detail-desktop",
+        "value": "0 12px 36px rgb(22 57 63 / 22%)",
+        "purpose": "桌面详情面板。"
+      },
+      {
+        "name": "detail-mobile",
+        "value": "0 -8px 35px rgb(22 57 63 / 24%)",
+        "purpose": "手机底部详情面板。"
+      },
+      {
+        "name": "mobile-switch",
+        "value": "0 4px 24px rgb(22 57 63 / 20%)",
+        "purpose": "手机地图／项目清单切换。"
+      },
+      {
+        "name": "dialog",
+        "value": "0 20px 80px rgb(13 34 36 / 25%)",
+        "purpose": "新手说明对话框。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-color",
+        "value": "150ms",
+        "purpose": "按钮背景、筛选颜色和海港填色反馈。"
+      },
+      {
+        "name": "pin-scale",
+        "value": "180ms",
+        "purpose": "点位的悬停、焦点与选中反馈。"
+      },
+      {
+        "name": "detail-desktop",
+        "value": "250ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "桌面详情从右侧短距离进入。"
+      },
+      {
+        "name": "detail-mobile",
+        "value": "200ms ease-out",
+        "purpose": "手机详情淡入。"
+      },
+      {
+        "name": "toast",
+        "value": "200ms",
+        "purpose": "提示的透明度和短距离位移。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-max",
+        "value": "760px"
+      },
+      {
+        "name": "desktop-min",
+        "value": "761px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "900px"
+      },
+      {
+        "name": "compact-desktop-max",
+        "value": "1150px"
+      },
+      {
+        "name": "wide-min",
+        "value": "1650px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "主要按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "进入主要任务；用于查看时间表、在地图上看路线及开始探索。",
+      "html": "<button class=\"ds-primary\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"6\" cy=\"5\" r=\"2\"/><circle cx=\"18\" cy=\"19\" r=\"2\"/><path d=\"M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8\"/></svg>查看一日时间表</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 15px;min-height:40px;font-size:12px;line-height:1.5;font-weight:550;border-radius:7px;transition:background .15s;cursor:pointer;font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;background:var(--teal,#126d68);color:var(--white,#fff);border:1px solid var(--teal,#126d68)}.ds-primary:hover{background:var(--teal-dark,#10625e)}.ds-primary:focus-visible{outline:3px solid #d99833;outline-offset:4px;}.ds-primary:disabled{opacity:.4;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "描边按钮",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "导出时间表或回到全部项目等次要动作。",
+      "html": "<button class=\"ds-outline\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v12m-5-5 5 5 5-5M4 15v6h16v-6\"/></svg>导出时间表</button>",
+      "css": ".ds-outline{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 15px;min-height:40px;font-size:12px;line-height:1.5;font-weight:550;border-radius:7px;transition:background .15s;cursor:pointer;font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;background:var(--white,#fff);color:var(--ink,#173c47);border:1px solid #cfddd5}.ds-outline:hover{background:#eef5f1}.ds-outline:focus-visible{outline:3px solid #d99833;outline-offset:4px;}.ds-outline:disabled{opacity:.4;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-outline{transition:none}}"
+    },
+    {
+      "name": "文字按钮",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "地图帮助等辅助操作，保留图标和文字。",
+      "html": "<button class=\"ds-text\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v6m0-10v.5\"/></svg>怎么看地图</button>",
+      "css": ".ds-text{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;display:inline-flex;gap:7px;align-items:center;padding:7px 0;font-size:12px;line-height:1.65;white-space:nowrap;color:var(--ink,#173c47);background:none;border:0;cursor:pointer}.ds-text:hover{color:var(--teal,#126d68)}.ds-text:focus-visible{outline:3px solid #d99833;outline-offset:4px;}.ds-text:disabled{opacity:.4;cursor:not-allowed}"
+    },
+    {
+      "name": "项目搜索",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "按中文、英文或别名检索；焦点反馈作用于整个搜索框。",
+      "html": "<label class=\"ds-search\"><svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"10.5\" cy=\"10.5\" r=\"7\"/><path d=\"m16 16 5 5\"/></svg><input class=\"ds-search-input\" type=\"search\" placeholder=\"搜项目，例如：冰雪奇缘\" aria-label=\"搜索项目中文名、英文名或别名\" autocomplete=\"off\"></label>",
+      "css": ".ds-search{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;display:flex;align-items:center;gap:8px;padding:0 11px;background:#f3f6f5;border:1px solid #e0e8e5;border-radius:8px;height:43px;color:#647b7d}.ds-search:focus-within{border-color:var(--teal,#126d68);outline:2px solid #d3eae1}.ds-search>svg{flex-shrink:0}.ds-search-input{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;min-width:0;width:100%;background:none;border:0;outline:none;font-size:12px;line-height:1.65;color:var(--ink,#173c47);caret-color:var(--teal,#126d68)}.ds-search-input::placeholder{color:#5e7478;opacity:1}.ds-search-input:focus-visible{outline:none}@media(max-width:760px){.ds-search-input{font-size:13px}}"
+    },
+    {
+      "name": "主导航",
+      "kind": "nav",
+      "refersTo": "navigation-active",
+      "description": "地图与一日攻略的一级切换；选中项有文字颜色和下划线两种提示。",
+      "html": "<nav class=\"ds-nav\" aria-label=\"主要导航\"><button class=\"ds-nav-item\" aria-current=\"page\"><svg aria-hidden=\"true\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z M9 3v15m6-12v15\"/></svg><span>探索地图</span></button><button class=\"ds-nav-item\"><svg aria-hidden=\"true\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"6\" cy=\"5\" r=\"2\"/><circle cx=\"18\" cy=\"19\" r=\"2\"/><path d=\"M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8\"/></svg><span>一日攻略</span></button></nav>",
+      "css": ".ds-nav{display:flex;gap:28px;height:68px}.ds-nav-item{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;display:flex;gap:9px;align-items:center;position:relative;font-weight:600;font-size:15px;line-height:1.65;color:var(--secondary,#566f75);padding:0 8px;border:0;background:none;cursor:pointer}.ds-nav-item:hover,.ds-nav-item[aria-current=page]{color:var(--teal,#126d68)}.ds-nav-item[aria-current=page]:after{content:'';position:absolute;left:6px;right:6px;bottom:0;height:3px;background:var(--teal,#126d68);border-radius:4px 4px 0 0}.ds-nav-item:focus-visible{outline:3px solid #d99833;outline-offset:4px;}@media(max-width:760px){.ds-nav{height:40px;gap:36px;justify-content:center}.ds-nav-item{font-size:13px;padding:0 6px;gap:7px}.ds-nav-item>svg{width:17px;height:17px}}"
+    },
+    {
+      "name": "筛选按钮",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "默认与选中状态；实际页面用 aria-pressed 维护筛选选择。",
+      "html": "<div class=\"ds-chips\" aria-label=\"项目类型筛选\"><button class=\"ds-chip\" aria-pressed=\"true\">全部项目</button><button class=\"ds-chip\" aria-pressed=\"false\">五大项目</button><button class=\"ds-chip\" aria-pressed=\"false\">水上演出</button></div>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:7px}.ds-chip{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;font-size:11px;line-height:1.65;font-weight:400;color:var(--ink,#173c47);background:none;padding:5px 10px;border:1px solid #e0e7e4;border-radius:6px;white-space:nowrap;transition:background .15s,color .15s;cursor:pointer}.ds-chip:hover{background:#eef5f2}.ds-chip[aria-pressed=true]{background:var(--ink,#173c47);color:var(--white,#fff);border-color:var(--ink,#173c47)}.ds-chip:focus-visible{outline:3px solid #d99833;outline-offset:4px;}@media(max-width:760px){.ds-chips{gap:8px}.ds-chip{padding:6px 11px}}@media(prefers-reduced-motion:reduce){.ds-chip{transition:none}}"
+    },
+    {
+      "name": "项目状态标签",
+      "kind": "chip",
+      "refersTo": "dpa-tag",
+      "description": "清单内的必要文字状态；这些标签本身不触发操作。",
+      "html": "<div class=\"ds-tags\"><span class=\"ds-tag ds-tag-dpa\">DPA</span><span class=\"ds-tag ds-tag-closed\">已公布停运</span></div>",
+      "css": ".ds-tags{display:flex;align-items:center;flex-wrap:wrap;gap:5px}.ds-tag{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;font-size:11px;line-height:1.4;padding:2px 4px;border-radius:3px;white-space:nowrap}.ds-tag-dpa{background:var(--gold-light,#fff2d9);color:#795620;font-weight:650}.ds-tag-closed{background:#eee9e6;color:#76544c}"
+    },
+    {
+      "name": "项目与演出标记",
+      "kind": "custom",
+      "refersTo": "show-marker-day",
+      "description": "路线内序号与 11px 名称常显；其他项目为高对比圆点。全部餐饮名称只在悬停／键盘聚焦时显示。文字与图标分层、自动避让，必要时用细线关联。控件尺寸不随缩放变化；预览排布不是地图坐标。",
+      "html": "<div class=\"ds-markers\"><button class=\"ds-marker\" aria-label=\"第1站\"><span class=\"ds-order\">1</span></button><button class=\"ds-marker\" aria-label=\"其他项目\"><span class=\"ds-dot\"></span></button><button class=\"ds-marker\" aria-label=\"第3站，白天花船\"><span class=\"ds-order ds-show\"><b>3</b></span></button><button class=\"ds-marker\" aria-label=\"第7站，夜间水上秀\"><span class=\"ds-order ds-show ds-night\"><b>7</b></span></button><button class=\"ds-marker\" aria-label=\"餐厅\"><span class=\"ds-food\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 3v6a3 3 0 0 0 6 0V3M7 3v18M18 3c-4 4-4 10 1 10V3m0 10v8\"/></svg></span></button></div>",
+      "css": ".ds-markers{display:flex;align-items:center;gap:24px;padding:16px;font-family:'Guide Sans','Microsoft YaHei',sans-serif}.ds-marker{display:grid;place-items:center;width:40px;height:40px;border:0;background:none;padding:0;cursor:pointer}.ds-marker:focus-visible{outline:3px solid #d99833;outline-offset:3px}.ds-order{display:grid;place-items:center;width:31px;height:31px;border:2px solid white;border-radius:50%;background:#ac175f;color:white;font-size:15px;font-weight:700;box-sizing:border-box;box-shadow:0 2px 7px rgb(22 57 63 / 20%)}.ds-dot{width:10px;height:10px;border-radius:50%;background:#126d68}.ds-show{width:32px;height:32px;border-radius:9px;background:#9c6419;transform:rotate(45deg)}.ds-show b{transform:rotate(-45deg)}.ds-night{background:#663da1}.ds-food{width:27px;height:27px;display:grid;place-items:center;border:2px solid white;border-radius:7px;background:#173c47;color:white;box-sizing:border-box;box-shadow:0 2px 6px rgb(22 57 63 / 20%)}"
+    },
+    {
+      "name": "时间表项目行",
+      "kind": "custom",
+      "refersTo": "timeline-number",
+      "description": "顺序编号与地图一致；时间、体验、排队预算和步行时间保持可分辨。示例是草案中的一行。",
+      "html": "<article class=\"ds-timed-stop\"><div class=\"ds-stop-time\"><time>09:15</time><small>至 10:00</small></div><div class=\"ds-stop-body\"><div class=\"ds-stop-title\"><span class=\"ds-stop-number\">1</span><button class=\"ds-stop-button\">Soaring 梦幻奇航 <svg aria-hidden=\"true\" width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 12h16m-6-6 6 6-6 6\"/></svg></button></div><div class=\"ds-step-facts\"><span>体验约 5 分钟</span><span>排队预算 10–25 分钟 · DPA</span><span>步行约 10 分钟</span></div></div></article>",
+      "css": ".ds-timed-stop{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;color:var(--ink,#173c47);display:grid;grid-template-columns:80px minmax(0,1fr);gap:18px;padding:0 0 27px;position:relative}.ds-timed-stop:after{content:'';position:absolute;left:88px;top:29px;bottom:2px;border-left:1px solid #d8e4dc}.ds-stop-time{display:flex;flex-direction:column;align-items:flex-start;font-variant-numeric:tabular-nums;line-height:1.5;padding-top:1px}.ds-stop-time time{font-size:18px;font-weight:650}.ds-stop-time small{font-size:11px;color:var(--secondary,#566f75)}.ds-stop-title{display:flex;align-items:center;gap:9px;min-height:27px}.ds-stop-button{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;display:flex;align-items:center;gap:7px;font-size:15px;font-weight:600;text-align:left;padding:0;line-height:1.6;background:none;border:0;color:var(--ink,#173c47);cursor:pointer}.ds-stop-button>svg{color:var(--teal,#126d68);flex-shrink:0}.ds-stop-button:focus-visible{outline:3px solid #d99833;outline-offset:4px;}.ds-stop-number{width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:#ac175f;color:white;font-size:11px;font-weight:600;flex-shrink:0}.ds-step-facts{display:flex;gap:5px 13px;flex-wrap:wrap;margin-top:9px;font-size:12px;color:var(--secondary,#566f75);line-height:1.8}@media(max-width:760px){.ds-timed-stop{grid-template-columns:60px minmax(0,1fr);gap:14px;padding-bottom:26px}.ds-timed-stop:after{left:66px}.ds-stop-time time{font-size:17px}.ds-stop-button{font-size:14px}.ds-stop-number{width:21px;height:21px}.ds-step-facts{gap:4px 10px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "海港游客中心",
+    "overview": "海港游客中心的视觉方向来自既有 surface 约定：白色与浅雾色承托内容，深海色负责阅读，青绿提示操作。界面保持紧凑、平实，地图和真实项目照片承担主要识别工作。\n\n同一套字形、细边框、温和圆角连接地图与攻略；强阴影只用于浮在内容之上的控件和面板。表达服务于查找、理解与安排，不增加宣传式文案。",
+    "keyCharacteristics": [
+      "清楚的中文层级，英文名作为辅助。",
+      "颜色、图形和文字共同表达状态。",
+      "地图点位与清单、详情、时间表相互对应。",
+      "电脑与手机沿用同一套控件，按空间改变排布。"
+    ],
+    "rules": [
+      {
+        "name": "The Semantic Color Rule",
+        "body": "用青绿识别操作，用紫红识别顺序；付费、停运和待公布状态都同时写出文字。",
+        "section": "colors"
+      },
+      {
+        "name": "The One Typeface Rule",
+        "body": "沿用本地 Guide Sans 与既有后备字体，用字号、字重和间距建立层级，不再加入装饰字体。",
+        "section": "typography"
+      },
+      {
+        "name": "The Overlay Depth Rule",
+        "body": "普通内容用底色和细边框分层；阴影说明浮层关系，不为每个内容块加阴影。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 保持简短中文和明确状态；项目玩法只用一句话。",
+      "Do 沿用实际照片、官方底图及其来源记录；图标保持细线条。",
+      "Do 保留键盘焦点、文字标签和减少动态效果支持。",
+      "Do 同步地图序号与时间表顺序，给未知场次保留明确的待公布文字。",
+      "Do 按 PRODUCT.md 与 surface.md 延续当前范围，新增界面先复用现有组件。"
+    ],
+    "donts": [
+      "Don't 在地图上叠加大块海港名称或用不透明色块盖住底图。",
+      "Don't 把紫红连线画成精确步行导航，或只靠颜色区分演出与项目。",
+      "Don't 恢复收藏入口、长篇适合人群说明或未渲染的旧组件。",
+      "Don't 把默认日期草案、排队预算或未公布场次表现为已确认安排。",
+      "Don't 声称存在未提供的字体字重、实时数据或未执行的可访问性验证。"
+    ]
+  }
+}
+

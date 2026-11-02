@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d48">
+  <meta name="description" content="给第一次去东京迪士尼海洋的你：中文交互地图、项目介绍、DPA 与移动点餐攻略，轻松规划自己的海洋一日游。">
+  <title>海洋漫游 · 东京迪士尼海洋新手指南</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="assets/vendor/bootstrap/bootstrap.min.js" defer></script>
+  <script src="data.js" defer></script>
+  <script src="planner.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5Z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z M9 3v15m6-12v15"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.5 4.6a5.5 5.5 0 0 0-7.8 0L12 5.3l-.7-.7a5.5 5.5 0 0 0-7.8 7.8L12 21l8.5-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 5h18v5a2 2 0 0 0 0 4v5H3v-5a2 2 0 0 0 0-4Z M15 5v3m0 3v2m0 3v3"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h2m4 0h2"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14m-1-9H3v16h16v-6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 15v6h16v-6"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M4 3v6a3 3 0 0 0 6 0V3M7 3v18M18 3c-4 4-4 10 1 10V3m0 10v8"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4m-3 14h2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 5h12M9 12h12M9 19h12M3 5h1m-1 7h1m-1 7h1"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7"/></symbol>
+    <symbol id="i-boat" viewBox="0 0 24 24"><path d="M3 14h18l-3 6H6Z M7 14V9h10v5M12 9V3m0 0 6 4h-6M2 22c2-2 4 2 6 0s4 2 6 0 4 2 8 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14a8 8 0 0 1-10-10A9 9 0 1 0 20 14Z M18 3v4m-2-2h4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></symbol>
+  </defs></svg>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="#map" aria-label="海洋漫游首页"><span class="brand-mark"><svg><use href="#i-compass"/></svg></span><span><strong>海洋漫游</strong></span></a>
+    <nav class="primary-nav" aria-label="主要导航">
+      <button class="nav-item active" data-view="map" aria-current="page"><svg><use href="#i-map"/></svg><span>探索地图</span></button>
+      <button class="nav-item" data-view="guide"><svg><use href="#i-route"/></svg><span>一日攻略</span></button>
+    </nav>
+    <div class="header-actions"><button class="text-button newbie-button" data-action="help"><svg><use href="#i-info"/></svg>第一次来？</button></div>
+  </header>
+  <main id="main">
+    <section id="map-view" aria-label="园区交互地图">
+      <div class="page-intro"><div><h1>东京迪士尼海洋</h1></div><a class="official-map-link" href="https://media2.tokyodisneyresort.jp/home/download/map/TDS_map_sc.pdf" target="_blank" rel="noopener noreferrer"><svg><use href="#i-external"/></svg>官方地图</a></div>
+      <div class="map-workspace" id="workspace">
+        <aside class="explorer" aria-label="查找游乐项目">
+          <div class="explorer-head">
+            <label class="search-box"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索项目" aria-label="搜索项目中文名、英文名或别名" autocomplete="off"></label>
+            <div class="filter-chips btn-group" id="filters" role="group" aria-label="项目筛选"><button class="chip btn btn-sm active" data-filter="all" aria-pressed="true">全部</button><button class="chip btn btn-sm" data-filter="recommended" aria-pressed="false">星标</button><button class="chip btn btn-sm" data-filter="dpa" aria-pressed="false">DPA</button><button class="chip btn btn-sm" data-filter="show" aria-pressed="false">演出</button></div>
+            <div class="filter-selects"><select class="form-select form-select-sm" id="area-filter" aria-label="按主题海港筛选"><option value="all">全部园区</option></select><select class="form-select form-select-sm" id="extra-filter" aria-label="更多项目类型"><option value="all">全部类型</option><option value="gentle">温和体验</option><option value="thrill">刺激冒险</option><option value="indoor">室内项目</option></select></div>
+          </div>
+          <div class="list-heading"><h2 id="list-title">探索全部项目</h2><span id="result-count" aria-live="polite">32 个</span><button class="reset-link" id="clear-filter" hidden>重置</button></div>
+          <div class="attraction-list" id="attraction-list" aria-label="项目搜索结果"></div>
+        </aside>
+        <div class="map-panel">
+          <div class="map-topbar"><div class="map-caption"><span class="status-dot"></span><strong>全园导览</strong><span class="map-total">32 个项目 · 2 场水上演出</span></div><label class="route-toggle form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="route-visible" checked><span class="form-check-label">连线</span></label><button class="text-button" data-action="help"><svg><use href="#i-info"/></svg><span>怎么看地图</span></button></div>
+          <div class="map-viewport" id="map-viewport" tabindex="0" role="region" aria-label="可缩放和拖动的园区地图；也可使用左侧项目清单。方向键平移，加减键缩放，0 键查看全图。">
+            <div class="map-stage" id="map-stage">
+              <svg class="map-art" viewBox="580 40 2450 2100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="东京迪士尼海洋官方园区地图，主入口在图下方，梦幻泉乡在右上方，美人鱼礁湖室内详图位于右下方。">
+                <defs><clipPath id="park-clip"><path d="M2480 60H2880L2925 155 2985 240 2940 330 2940 480 2810 550 2760 625 2710 690 2590 724 2380 770 2390 860 2325 945 2310 1030 2250 1120 2180 1198 2070 1215 1980 1280 2025 1365 2000 1510 2100 1800 2125 1900 2000 1970 1910 2050 1700 2125H910L850 2030 820 1900 750 1750 670 1625 620 1450 665 1330 680 1250 790 1200 865 1100 925 1000 990 925 1050 850 1160 780 1230 703 1330 646 1450 650 1560 700 1640 650 1730 570 1860 525 1950 540 2070 510 2210 355 2380 170Z"/><rect x="2198" y="1502" width="520" height="478" rx="16"/></clipPath></defs>
+                <image href="assets/official-map.jpg" x="0" y="0" width="3776" height="2670" clip-path="url(#park-clip)"/>
+              </svg>
+              <div class="map-areas" id="map-areas"></div>
+              <div class="map-leaders" id="map-leaders" aria-hidden="true"></div>
+              <div class="map-route" id="map-route" aria-hidden="true"></div>
+              <div class="map-labels" id="map-labels" aria-hidden="true"></div>
+              <div class="map-pins" id="map-pins"></div><div class="map-dining" id="map-dining"></div>
+              <div class="indoor-label">室内项目放大图</div>
+              <div class="entry-label"><svg><use href="#i-arrow"/></svg><span>主入口 · 从这里出发</span></div>
+            </div>
+            <div class="map-error" id="map-error" hidden>地图暂时无法加载。你仍可通过项目清单查看全部详情。<button class="text-button" id="retry-map">重新加载地图</button></div>
+          </div>
+          <div class="map-controls" aria-label="地图控制"><button id="zoom-in" aria-label="放大地图" title="放大"><svg><use href="#i-plus"/></svg></button><span id="zoom-level">100%</span><button id="zoom-out" aria-label="缩小地图" title="缩小"><svg><use href="#i-minus"/></svg></button><span class="control-divider"></span><button id="reset-map" aria-label="显示全园地图" title="查看全图"><svg><use href="#i-fit"/></svg></button></div>
+          <div class="map-bottom"><span id="map-legend"><i class="legend-route"></i>紫线是游玩顺序，非步行导航</span><span>© Disney · © Disney/Pixar</span></div>
+          <aside class="detail-panel" id="detail-panel" hidden tabindex="-1" aria-label="项目详情"></aside>
+        </div>
+      </div>
+      <div class="map-footnote"><details class="about-note"><summary>资料来源</summary><p>地图与图片来自东京迪士尼度假区官方资料，© Disney / Pixar。分区边界为导览示意。内容核对于 2026.11.01，运营与预约以官方 App 为准。</p><a href="https://www.tokyodisneyresort.jp/en/tds/map.html" target="_blank" rel="noopener noreferrer">查看官方地图 ↗</a></details><details class="excluded-note"><summary>排除 <span id="excluded-count">1</span> 项</summary><div id="excluded-list"></div></details></div>
+      <div class="mobile-switch" aria-label="手机视图切换"><button class="active" data-mobile="map" aria-pressed="true"><svg><use href="#i-map"/></svg>地图</button><button data-mobile="list" aria-pressed="false"><svg><use href="#i-list"/></svg>项目清单</button></div>
+    </section>
+
+    <section id="guide-view" hidden aria-label="游玩攻略">
+      <div class="guide-toolbar">
+        <nav class="nav nav-tabs" id="guide-tabs" role="tablist" aria-label="攻略内容">
+          <button class="nav-link active" id="plan-tab" data-bs-toggle="tab" data-bs-target="#day-route" type="button" role="tab" aria-controls="day-route" aria-selected="true">时间表</button>
+          <button class="nav-link" id="dpa-tab" data-bs-toggle="tab" data-bs-target="#dpa-guide" type="button" role="tab" aria-controls="dpa-guide" aria-selected="false">DPA</button>
+          <button class="nav-link" id="food-tab" data-bs-toggle="tab" data-bs-target="#dining-guide" type="button" role="tab" aria-controls="dining-guide" aria-selected="false">吃饭</button>
+        </nav>
+        <div class="hours-strip"><label class="hours-date"><span class="visually-hidden">规划日期</span><input class="form-control form-control-sm" type="date" id="visit-date" aria-label="选择游玩日期"></label><div id="park-hours" aria-live="polite"></div><a href="https://www.tokyodisneyresort.jp/en/tds/monthly/calendar/202702/" target="_blank" rel="noopener noreferrer" aria-label="查看官方营业日历"><svg><use href="#i-external"/></svg></a></div>
+      </div>
+      <div class="tab-content guide-content">
+        <section class="tab-pane show active" id="day-route" role="tabpanel" aria-labelledby="plan-tab" tabindex="0">
+          <div class="plan-topline"><div id="route-changes" class="plan-change" hidden><div id="route-change-list"></div></div><div class="route-actions"><button class="btn btn-primary btn-sm" id="route-to-map">看地图</button><button class="btn btn-outline-secondary btn-sm" id="export-route">导出</button></div></div>
+          <div class="route-timeline" id="route-timeline"></div>
+          <div class="accordion accordion-flush compact-accordion" id="plan-more">
+            <div class="accordion-item" id="shows-guide"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#show-information" aria-expanded="false" aria-controls="show-information">花船与夜秀场次</button></h2><div class="accordion-collapse collapse" id="show-information"><div class="accordion-body" id="show-cards"></div></div></div>
+            <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#trip-information" aria-expanded="false" aria-controls="trip-information">2 月出行须知</button></h2><div class="accordion-collapse collapse" id="trip-information"><div class="accordion-body"><p>2027 年 2 月 1–6 日：地心探险检修；夜秀 1–5 日停演；5 日 18:30 闭园。6 日未列夜秀停演，场次仍待公布。</p><a href="https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20270206/" target="_blank" rel="noopener noreferrer">官方安排 ↗</a></div></div></div>
+          </div>
+        </section>
+        <section class="tab-pane" id="dpa-guide" role="tabpanel" aria-labelledby="dpa-tab" tabindex="0">
+          <p class="section-intro">早上短队先玩，约 10–11 点再看是否需要 DPA。必玩项目先确认余量，DPA 可能提前售完。</p>
+          <ol class="simple-steps"><li>入园后，在 App 的 Disney Premier Access 选择门票、项目和时段。</li><li>队列较长时再考虑购买，按买到的时段调整路线。</li><li>下一张何时能买，直接看 App 提示。</li></ol>
+          <table class="table price-table"><thead><tr><th scope="col">项目</th><th scope="col">日元 / 人 / 次</th></tr></thead><tbody id="dpa-table-body"></tbody></table>
+          <div class="accordion accordion-flush compact-accordion">
+            <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dpa-how" aria-expanded="false" aria-controls="dpa-how">购买规则</button></h2><div class="accordion-collapse collapse" id="dpa-how"><div class="accordion-body"><p>按现行规则，常规当日 DPA 在入园后购买。另一项目通常在购卡后 60 分钟，或首张入场时段开始时可买，以较早者为准。</p><p>早上也可能排长队；晚买不保证还有名额。若某项一定要玩，应结合库存决定是否提前购买。</p><a href="https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/disneypremieraccess.html" target="_blank" rel="noopener noreferrer">官方价格与规则 ↗</a></div></div></div>
+            <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#show-dpa" aria-expanded="false" aria-controls="show-dpa">演出 DPA</button></h2><div class="accordion-collapse collapse" id="show-dpa"><div class="accordion-body" id="show-dpa-list"></div></div></div>
+          </div>
+        </section>
+        <section class="tab-pane" id="dining-guide" role="tabpanel" aria-labelledby="food-tab" tabindex="0">
+          <div class="nav nav-pills dining-tabs" role="tablist" aria-label="用餐方式"><button class="nav-link active" id="mobile-order-tab" data-bs-toggle="tab" data-bs-target="#mobile-order-panel" type="button" role="tab" aria-controls="mobile-order-panel" aria-selected="true">当天点餐</button><button class="nav-link" id="seating-tab" data-bs-toggle="tab" data-bs-target="#seating-panel" type="button" role="tab" aria-controls="seating-panel" aria-selected="false">餐厅订位</button></div>
+          <div class="tab-content dining-content">
+            <div class="tab-pane show active" id="mobile-order-panel" role="tabpanel" aria-labelledby="mobile-order-tab"><p class="section-intro">入园当天在 App 点好餐、选取餐时段。到店再点 I'm Here，等通知取餐。</p><div class="dining-options" id="dining-options"></div></div>
+            <div class="tab-pane" id="seating-panel" role="tabpanel" aria-labelledby="seating-tab"><p class="section-intro"><strong>提前一个月，是最早开放预约的时间，不是必须提前一个月订。</strong></p><p>之后只要有空位就能订，当天也可查看名额。优先入座预约的是用餐时间，到店后等空桌带位。</p><p id="booking-example"></p><a href="https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/priorityseating.html" target="_blank" rel="noopener noreferrer">官方预约入口与规则 ↗</a></div>
+          </div>
+          <div class="snack-section"><h2>火鸡腿在哪里？</h2><div id="snack-options"></div></div>
+        </section>
+      </div>
+      <footer class="guide-footer"><span>日本时间 · 价格与运营以官方当日信息为准</span><a href="https://www.tokyodisneyresort.jp/sc/tds/" target="_blank" rel="noopener noreferrer">官网 ↗</a></footer>
+    </section>
+
+  </main>
+
+  <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title"><div class="dialog-heading"><span class="brand-mark"><svg><use href="#i-compass"/></svg></span><button class="icon-button" data-close="help-dialog" aria-label="关闭新手说明"><svg><use href="#i-close"/></svg></button></div><h2 id="help-title">从地图挑出你想玩的。</h2><ol class="help-points"><li><strong>点分区，再点项目</strong><p>手机上先点一个分区展开项目。拖动或缩放地图，也可以切换到项目清单。</p></li><li><strong>看一句话，就知道怎么玩</strong><p>每个项目都有照片与简单介绍，水上演出使用特别的菱形标记。</p></li><li><strong>看时间表与路线</strong><p>攻略按五大项目与花船排好时间。地图上的“显示路线”可以随时开关。</p></li></ol><button class="primary-button full-width" data-close="help-dialog">开始探索 <svg><use href="#i-arrow"/></svg></button></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><div class="noscript">请开启 JavaScript 来使用交互地图。你也可以<a href="https://www.tokyodisneyresort.jp/sc/tds/map.html">查看官方地图</a>；本页攻略文字仍可阅读。</div></noscript>
+</body>
+</html>
+
+
+
+

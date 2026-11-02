@@ -1,0 +1,8 @@
+.impeccable/review/
+research/*.html
+research/*.pdf
+research/*.jpg
+*.log
+node_modules/
+__pycache__/
+_site/
