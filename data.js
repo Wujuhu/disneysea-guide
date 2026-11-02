@@ -51,11 +51,12 @@ window.DISNEY_DATA = {
     {id:226,no:'91',name:'神灯剧场',short:'神灯剧场',en:'The Magic Lamp Theater',aliases:'Magic Lamp 神灯 精灵 阿拉丁',area:'arabian',x:2151,y:1174,kind:'真人表演 · 3D 影像',intensity:1,height:0,duration:null,indoor:true,description:'欣赏魔术师和神灯精灵带来的演出，把真人表演、3D 影像与剧场效果结合在一起。',fit:'喜欢喜剧和舞台效果、想坐下休息的游客。',caution:'主要使用日语，有 3D 影像、黑暗与音效。',tip:'按剧场一场一场入场，排队时间不能只靠队伍长短判断。',closures:[['2026-12-08','2026-12-22']]},
     {id:237,no:'100',name:'小胖的飞鱼云霄飞车',short:'飞鱼过山车',en:"Flounder's Flying Fish Coaster",aliases:'Flounder 小胖 飞鱼 过山车',area:'mermaid',x:1910,y:928,kind:'小型过山车 · 户外',intensity:2,height:90,duration:'约 1 分钟',description:'乘坐飞鱼造型的小型过山车，在美人鱼礁湖的户外轨道上穿行。',fit:'想尝试较短过山车、身高达到要求的游客。',caution:'身高须满 90 cm，仍有速度感、转弯和起伏。',tip:'体量较小也不代表完全不刺激，先观察运行再决定。'},
     {id:238,no:'99',name:'史卡托的寄居蟹',short:'寄居蟹',en:"Scuttle's Scooters",aliases:'Scuttle 寄居蟹 海鸥',area:'mermaid',x:1907,y:1060,kind:'旋转小车 · 户外',intensity:1,height:0,duration:'约 1.5 分钟',description:'坐在寄居蟹造型的载具上，围绕海鸥史卡托转圈、改变朝向。',fit:'喜欢小型旋转设施的游客。',caution:'车辆有旋转；需符合独立坐稳等要求。',tip:'这是美人鱼礁湖的户外项目，和室内海底王国不是同一层空间。'},
-    {id:202,no:'97',name:'爱丽儿游乐场',short:'爱丽儿游乐场',en:"Ariel's Playground",aliases:'Ariel 爱丽儿 小美人鱼 游乐场',area:'mermaid',x:2488,y:1697,kind:'室内探索 · 游乐空间',intensity:1,height:0,duration:'自由探索',indoor:true,inset:true,description:'在爱丽儿和伙伴们的海底世界里，自由探索洞穴、宝藏与不同游乐空间。',fit:'喜欢自主探索、想从乘骑项目中休息一下的家庭。',caution:'部分区域黑暗、有音效或令人紧张的角色；各区域规则不同。',tip:'位于川顿王海底王国室内。地图右下角是室内放大图，不是园区外另一块区域。'},
-    {id:239,no:'98',name:'跳跃水母',short:'跳跃水母',en:"Jumpin' Jellyfish",aliases:'Jellyfish 水母',area:'mermaid',x:2304,y:1748,kind:'缓慢升降 · 室内',intensity:1,height:0,duration:'约 1 分钟',indoor:true,inset:true,description:'坐在贝壳中，随着水母主题设施缓缓上升、下降，看看室内海底王国。',fit:'喜欢轻缓升降、可独立坐稳的游客。',caution:'虽无最低身高，仍需独立保持稳定坐姿，儿童陪同依官方规定。',tip:'它不是惊魂古塔那种自由落体，但怕高的孩子仍可能不适。'},
-    {id:240,no:'101',name:'河豚气球竞赛',short:'河豚气球',en:'Blowfish Balloon Race',aliases:'Blowfish 河豚 气球',area:'mermaid',x:2348,y:1624,kind:'旋转升降 · 室内',intensity:1,height:0,duration:'约 1.5 分钟',indoor:true,inset:true,description:'坐进贝壳吊篮，跟着河豚气球升到空中，围绕中心旋转。',fit:'喜欢旋转设施、想体验室内项目的游客。',caution:'有旋转和高度变化，不适合对旋转很敏感的人。',tip:'同在室内海底王国，可与水母、爱丽儿游乐场一起了解。'},
-    {id:241,no:'103',name:'旋转海藻杯',short:'海藻杯',en:'The Whirlpool',aliases:'Whirlpool 咖啡杯 海藻杯',area:'mermaid',x:2407,y:1787,kind:'旋转杯 · 室内',intensity:2,height:0,duration:null,indoor:true,inset:true,description:'坐入海藻杯，在漩涡般的轨道上旋转，感受类似旋转茶杯的乐趣。',fit:'喜欢转圈、对晕动不敏感的游客。',caution:'旋转感较明显，刺激程度为本导览的主观提示。',tip:'吃饭后不必立刻玩旋转类项目，可以先安排散步或温和的乘船体验。'},
-    {id:221,no:'102',name:'美人鱼礁湖剧场',short:'美人鱼剧场',en:'Mermaid Lagoon Theater',aliases:'Mermaid Theater 小美人鱼 剧场',area:'mermaid',x:2266,y:1639,kind:'室内剧场',intensity:1,height:0,duration:null,indoor:true,inset:true,description:'位于川顿王海底王国的剧场设施。保留位置，方便理解园区地图。',fit:'了解园区布局的游客。',caution:'官方目前列为暂停运营，恢复日期待定。',tip:'不要把它排进必玩行程；这里的停运不代表整个美人鱼礁湖关闭。',closures:[['2020-07-01',null]]}
+    // Indoor experiences share one building-entrance pin on the main map.
+    {id:202,no:'97',name:'爱丽儿游乐场',short:'爱丽儿游乐场',en:"Ariel's Playground",aliases:'Ariel 爱丽儿 小美人鱼 游乐场',area:'mermaid',x:1810,y:1015,kind:'室内探索 · 游乐空间',intensity:1,height:0,duration:'自由探索',indoor:true,description:'在爱丽儿和伙伴们的海底世界里，自由探索洞穴、宝藏与不同游乐空间。',fit:'喜欢自主探索、想从乘骑项目中休息一下的家庭。',caution:'部分区域黑暗、有音效或令人紧张的角色；各区域规则不同。',tip:'位于川顿王海底王国室内，地图在美人鱼礁湖的建筑入口附近统一标注。'},
+    {id:239,no:'98',name:'跳跃水母',short:'跳跃水母',en:"Jumpin' Jellyfish",aliases:'Jellyfish 水母',area:'mermaid',x:1810,y:1015,kind:'缓慢升降 · 室内',intensity:1,height:0,duration:'约 1 分钟',indoor:true,description:'坐在贝壳中，随着水母主题设施缓缓上升、下降，看看室内海底王国。',fit:'喜欢轻缓升降、可独立坐稳的游客。',caution:'虽无最低身高，仍需独立保持稳定坐姿，儿童陪同依官方规定。',tip:'它不是惊魂古塔那种自由落体，但怕高的孩子仍可能不适。'},
+    {id:240,no:'101',name:'河豚气球竞赛',short:'河豚气球',en:'Blowfish Balloon Race',aliases:'Blowfish 河豚 气球',area:'mermaid',x:1810,y:1015,kind:'旋转升降 · 室内',intensity:1,height:0,duration:'约 1.5 分钟',indoor:true,description:'坐进贝壳吊篮，跟着河豚气球升到空中，围绕中心旋转。',fit:'喜欢旋转设施、想体验室内项目的游客。',caution:'有旋转和高度变化，不适合对旋转很敏感的人。',tip:'同在室内海底王国，可与水母、爱丽儿游乐场一起了解。'},
+    {id:241,no:'103',name:'旋转海藻杯',short:'海藻杯',en:'The Whirlpool',aliases:'Whirlpool 咖啡杯 海藻杯',area:'mermaid',x:1810,y:1015,kind:'旋转杯 · 室内',intensity:2,height:0,duration:null,indoor:true,description:'坐入海藻杯，在漩涡般的轨道上旋转，感受类似旋转茶杯的乐趣。',fit:'喜欢转圈、对晕动不敏感的游客。',caution:'旋转感较明显，刺激程度为本导览的主观提示。',tip:'吃饭后不必立刻玩旋转类项目，可以先安排散步或温和的乘船体验。'},
+    {id:221,no:'102',name:'美人鱼礁湖剧场',short:'美人鱼剧场',en:'Mermaid Lagoon Theater',aliases:'Mermaid Theater 小美人鱼 剧场',area:'mermaid',x:1810,y:1015,kind:'室内剧场',intensity:1,height:0,duration:null,indoor:true,description:'位于川顿王海底王国的剧场设施。保留位置，方便理解园区地图。',fit:'了解园区布局的游客。',caution:'官方目前列为暂停运营，恢复日期待定。',tip:'不要把它排进必玩行程；这里的停运不代表整个美人鱼礁湖关闭。',closures:[['2020-07-01',null]]}
   ]
 };
 
@@ -119,7 +120,7 @@ window.DISNEY_DATA.attractions.forEach(item => {
     delta:'M1560 745 1660 660 1740 585 1870 540 2020 565 2180 645 2220 760 2190 850 2070 910 1950 895 1840 915 1720 860 1600 900 1510 850Z',
     fantasy:'M2220 760 2270 660 2300 520 2380 410 2440 285 2520 280 2610 330 2730 315 2850 325 2920 400 2900 530 2790 600 2730 690 2590 730 2450 760Z',
     arabian:'M2190 850 2290 770 2380 805 2370 935 2300 1040 2250 1130 2180 1220 2070 1230 1995 1170 2030 1060 2070 990 2070 910Z',
-    mermaid:'M1840 915 1950 895 2070 910 2070 990 2030 1060 1995 1170 1870 1170 1740 1090 1710 1010 1750 945Z M2198 1502H2718V1980H2198Z',
+    mermaid:'M1840 915 1950 895 2070 910 2070 990 2030 1060 1995 1170 1870 1170 1740 1090 1710 1010 1750 945Z',
     mysterious:'M1460 1030 1600 900 1720 860 1840 915 1750 945 1710 1010 1740 1090 1870 1170 1800 1255 1550 1290 1480 1220 1450 1180 1350 1150 1320 1100Z'
   };
   window.DISNEY_DATA.areas.forEach(area => { area.boundary = boundaries[area.id]; });
@@ -151,6 +152,13 @@ window.DISNEY_DATA.attractions.forEach(item => {
     {id:30002,type:'restaurant',name:'纽约美味房',short:'纽约美味房',en:'New York Deli',meal:'晚餐',area:'american',x:1158,y:1545,oneLine:'玩完惊魂古塔后，在美国海滨这家熟食餐厅吃晚餐，再返回海港；可使用官方 App 移动点餐。',image:'assets/dining/dinner.jpg',url:'https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/',closures:[]}
   ];
 }
+
+window.DISNEY_DATA.indoorArea = {
+  id:40001,type:'group',name:'美人鱼礁湖 · 室内区',short:'美人鱼礁湖 · 室内区',area:'mermaid',x:1810,y:1015,
+  oneLine:'在《小美人鱼》的海底世界里，选择想玩的室内项目。',
+  image:'assets/attractions/202.jpg',imageAlt:'美人鱼礁湖室内的游乐空间',
+  url:window.DISNEY_DATA.sources.attractions,closures:[],items:[202,239,240,241,221]
+};
 
 {
  const officialNames={"230": "威尼斯贡多拉游船", "219": "翱翔：梦幻奇航", "227": "迪士尼海洋渡轮航线（地中海港湾）", "244": "要塞探险", "245": "要塞探险“挑战李奥纳多”", "246": "龟龟漫谈", "243": "惊魂古塔", "232": "迪士尼海洋电气化铁路（美国海滨）", "228": "迪士尼海洋渡轮航线（美国海滨）", "218": "玩具总动员疯狂游戏屋", "233": "大都会交通工具", "231": "迪士尼海洋电气化铁路（发现港）", "247": "海底巡游艇：尼莫和好友的海洋世界", "222": "印第安纳琼斯冒险旅程：水晶骷髅头魔宫", "229": "迪士尼海洋渡轮航线（失落河三角洲）", "242": "忿怒双神", "255": "安娜与艾莎的冰雪之旅", "257": "小飞侠梦幻岛历险记", "258": "奇妙仙子妙妙小车", "256": "乐佩公主天灯盛会", "236": "沙漠商队旋转木马", "220": "茉莉公主的飞天魔毯", "235": "辛巴达传奇之旅", "226": "神灯剧场", "202": "爱丽儿游乐场", "239": "跳跃水母", "238": "史卡托的寄居蟹", "237": "小胖的飞鱼云霄飞车", "240": "河豚气球竞赛", "221": "美人鱼礁湖剧场", "241": "旋转海藻杯", "224": "海底两万里", "223": "地心探险之旅"};

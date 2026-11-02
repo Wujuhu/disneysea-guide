@@ -6,7 +6,10 @@
   const icons = name => `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
   const escapeHTML = text => String(text).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const catalogue=[...D.coreIds.map(id=>D.attractions.find(item=>item.id===id)),...D.shows,...D.attractions.filter(item=>!D.coreIds.includes(item.id))];
-  const byId = new Map([...catalogue,...D.dining].map(item => [item.id, item]));
+  const indoorIds = new Set(D.indoorArea.items);
+  const mapItemId = id => indoorIds.has(id) ? D.indoorArea.id : id;
+  const mapCatalogue = [...catalogue.filter(item=>!indoorIds.has(item.id)),D.indoorArea];
+  const byId = new Map([...catalogue,...D.dining,D.indoorArea].map(item => [item.id, item]));
   const P=window.GuidePlanner;
   const areas = new Map(D.areas.map(area => [area.id, area]));
   const STORAGE_KEY = 'disneysea-guide:v1';
@@ -52,7 +55,7 @@
     const q = state.query.normalize('NFKC').toLowerCase().replace(/\s+/g,'');
     return catalogue.filter(item => {
       if (state.area !== 'all' && item.area !== state.area) return false;
-      if (q && !`${item.name}${item.short}${item.en}${item.aliases}${areas.get(item.area).name}`.normalize('NFKC').toLowerCase().replace(/\s+/g,'').includes(q)) return false;
+      if (q && !`${item.name}${item.short}${item.en}${item.aliases}${areas.get(item.area).name}${indoorIds.has(item.id)?D.indoorArea.name:''}`.normalize('NFKC').toLowerCase().replace(/\s+/g,'').includes(q)) return false;
       if (state.filter === 'recommended' && !D.coreIds.includes(item.id)) return false;
       if (state.filter === 'gentle' && item.intensity !== 1) return false;
       if (state.filter === 'thrill' && item.intensity !== 3) return false;
@@ -75,8 +78,8 @@
       const area=areas.get(item.area), closed=closureOn(item),stop=activePlan?.stops.find(stop=>stop.id===item.id);
       return `<article class="attraction-row ${state.selected===item.id?'selected':''}" style="--area-color:${area.color}"><button class="attraction-open" data-select="${item.id}" aria-label="查看${escapeHTML(item.name)}详情"><div class="list-photo"><img src="${item.image}" alt="" loading="lazy" width="80" height="70">${stop?`<span class="list-order">${stop.order}</span>`:''}</div><span class="list-copy"><strong>${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</strong><span class="row-tags"><span>${item.playType}</span>${closed?'<span class="tag closed">检修</span>':''}</span></span></button></article>`;
     }).join('') : `<div class="empty-state">${icons('search')}<h3>没有找到匹配项目</h3><p>试试项目的中文名、英文名，或放宽筛选。</p><button class="outline-button" data-action="clear-filters">查看全部项目</button></div>`;
-    const ids=new Set(currentResults.map(item=>item.id));
-    $$('.map-pin').forEach(pin => { pin.hidden=!ids.has(Number(pin.dataset.select)); pin.classList.toggle('is-selected',Number(pin.dataset.select)===state.selected); pin.classList.toggle('is-closed',Boolean(closureOn(byId.get(Number(pin.dataset.select))))); });
+    const ids=new Set(currentResults.map(item=>mapItemId(item.id)));
+    $$('.map-pin').forEach(pin => { pin.hidden=!ids.has(Number(pin.dataset.select)); pin.classList.toggle('is-selected',Number(pin.dataset.select)===mapItemId(state.selected)); pin.classList.toggle('is-closed',Boolean(closureOn(byId.get(Number(pin.dataset.select))))); });
     $$('.dining-pin').forEach(pin=>pin.classList.toggle('is-selected',Number(pin.dataset.select)===state.selected));
     $$('.area-boundary').forEach(region=>{const active=region.dataset.area===state.area;region.classList.toggle('area-active',active);region.setAttribute('aria-pressed',String(active));});
     $('.map-caption strong').textContent=state.area==='all'?'全园导览':areas.get(state.area).name;
@@ -97,7 +100,7 @@
       previousDetailFocus={node:origin,selector:container&&originId?`${container} [data-select="${originId}"]`:null,itemId:id};
     }
     state.selected=id;
-    if(item.type!=='restaurant'&&!currentResults.some(entry=>entry.id===id)){ clearFilters(); }
+    if(item.type!=='restaurant'&&!currentResults.some(entry=>item.type==='group'?indoorIds.has(entry.id):entry.id===id)){ clearFilters(); }
     $('#workspace').classList.remove('mobile-list');
     updateMobileButtons('map');
     renderDetail(item);renderResults();
@@ -107,13 +110,18 @@
   function showTimeText(item){if(closureOn(item))return '所选日期已公布停演';const times=P.showTimes(item.id,dateForStatus());return times===null?'场次待公布':times.length?times.join(' / '):'所选日期暂无场次';}
   function renderDetail(item) {
     const area=areas.get(item.area),closure=closureOn(item),panel=$('#detail-panel');panel.hidden=false;
+    const isGroup=item.type==='group';panel.classList.toggle('is-indoor-area',isGroup);
     const status=closure?`<span class="detail-status closed">${formatDate(closure[0])} — ${closure[1]?formatDate(closure[1]):'待定'} 暂不安排</span>`:item.type==='show'?`<div class="detail-show-times"><strong>${showTimeText(item)}</strong><span>约 ${item.durationMinutes} 分钟 · 日本时间</span></div>`:item.type==='restaurant'?`<span class="detail-status">${item.snack?'¥'+number(item.price):'可移动点餐'}</span>`:hasDPA(item)?`<span class="detail-status">DPA ¥${number(item.dpa)} / 人 / 次</span>`:'';
-    panel.innerHTML=`<div class="detail-photo"><img src="${item.image}" alt="${escapeHTML(item.imageAlt||item.name)}" width="800" height="450"><button class="detail-close icon-button" data-action="close-detail" aria-label="关闭项目详情">${icons('close')}</button></div><div class="detail-content"><h2>${item.name}${D.coreIds.includes(item.id)?icons('star'):''}</h2><p class="detail-description">${item.oneLine}</p>${status}</div><div class="detail-footer"><button class="primary-button" data-action="go-route">${icons('route')}查看一日时间表</button><a class="detail-official" href="${item.type==='show'?item.scheduleUrl:item.url}" target="_blank" rel="noopener noreferrer">${item.type==='show'?'官方场次':'官方详情'} ${icons('external')}</a></div>`;panel.scrollTop=0;
+    const back=indoorIds.has(item.id)?`<button class="detail-back" data-select="${D.indoorArea.id}">${icons('arrow')}返回室内区</button>`:'';
+    const children=item.type==='group'?`<ul class="indoor-projects" aria-label="室内项目">${item.items.map(id=>{const child=byId.get(id);return `<li><button class="indoor-project" data-select="${id}" aria-label="查看${escapeHTML(child.name)}详情"><img src="${child.image}" alt="" width="48" height="48" loading="lazy"><span class="indoor-project-copy"><strong>${child.name}</strong><small>${child.playType}${closureOn(child)?'<span class="tag closed">暂停运营</span>':''}</small></span>${icons('arrow')}</button></li>`;}).join('')}</ul>`:'';
+    const close=`<button class="detail-close icon-button" data-action="close-detail" aria-label="关闭项目详情">${icons('close')}</button>`;
+    const title=`<h2>${item.name}${D.coreIds.includes(item.id)?icons('star'):''}</h2>`;
+    panel.innerHTML=`${isGroup?'':`<div class="detail-photo"><img src="${item.image}" alt="${escapeHTML(item.imageAlt||item.name)}" width="800" height="450">${close}</div>`}<div class="detail-content">${back}${isGroup?`<div class="detail-group-heading">${title}${close}</div>`:title+`<p class="detail-description">${item.oneLine}</p>`}${status}${children}</div><div class="detail-footer"><button class="primary-button" data-action="go-route">${icons('route')}查看一日时间表</button><a class="detail-official" href="${item.type==='show'?item.scheduleUrl:item.url}" target="_blank" rel="noopener noreferrer">${item.type==='group'?'官方项目目录':item.type==='show'?'官方场次':'官方详情'} ${icons('external')}</a></div>`;panel.scrollTop=0;
   }
   function closeDetail(returnFocus=true) {
     state.selected=null;$('#detail-panel').hidden=true;renderResults();setHash('#map');
     if(returnFocus&&previousDetailFocus) {
-      const candidates=[previousDetailFocus.selector?$(previousDetailFocus.selector):null,previousDetailFocus.node,$(`#map-pins [data-select="${previousDetailFocus.itemId}"]`),$(`#map-dining [data-select="${previousDetailFocus.itemId}"]`),$('#search'),viewport];
+      const candidates=[previousDetailFocus.selector?$(previousDetailFocus.selector):null,previousDetailFocus.node,$(`#map-pins [data-select="${mapItemId(previousDetailFocus.itemId)}"]`),$(`#map-dining [data-select="${previousDetailFocus.itemId}"]`),$('#search'),viewport];
       const target=candidates.find(node=>node?.isConnected&&node.getClientRects().length&&getComputedStyle(node).visibility!=='hidden');
       target?.focus({preventScroll:true});
     }
@@ -157,7 +165,7 @@
     $('#route-visible').checked=state.showRoute;$('#map-route').hidden=!state.showRoute;
     $('#map-legend').innerHTML=`<span class="legend-order">1</span>游玩顺序 <i class="legend-dot"></i>其他项目 ${icons('star')}重点 ${icons('food')}吃饭`;
     const stops=activePlan.stops;
-    $$('.map-pin').forEach(pin=>{const item=byId.get(Number(pin.dataset.select)),stop=stops.find(stop=>stop.id===item.id);pin.classList.toggle('is-route-stop',Boolean(stop));pin.classList.toggle('other-pin',!stop);$('.pin-core',pin).innerHTML=stop?`<span class="pin-value">${stop.order}</span>`:item.type==='show'?icons(item.id===20001?'boat':'moon'):'';pin.setAttribute('aria-label',`${stop?'第 '+stop.order+' 站，':''}${item.name}，${areas.get(item.area).name}`);});
+    $$('.map-pin').forEach(pin=>{const item=byId.get(Number(pin.dataset.select)),stop=stops.find(stop=>mapItemId(stop.id)===item.id);pin.classList.toggle('is-route-stop',Boolean(stop));pin.classList.toggle('other-pin',!stop);$('.pin-core',pin).innerHTML=stop?`<span class="pin-value">${stop.order}</span>`:item.type==='show'?icons(item.id===20001?'boat':'moon'):'';pin.setAttribute('aria-label',`${stop?'第 '+stop.order+' 站，':''}${item.name}，${areas.get(item.area).name}`);});
     queueMapLayout();
   }
   function exportRoute(){
@@ -189,10 +197,10 @@
     if(!width||!height||!activePlan)return;
     const viewportRect=viewport.getBoundingClientRect(),controlRect=$('.map-controls').getBoundingClientRect();
     const controls={x:controlRect.left-viewportRect.left-4,y:controlRect.top-viewportRect.top-4,w:controlRect.width+8,h:controlRect.height+8};
-    const routeIds=new Set(activePlan.stops.map(item=>item.id));
+    const routeIds=new Set(activePlan.stops.map(item=>mapItemId(item.id)));
     const visible=mapNodes.filter(node=>!node.button.hidden).map(node=>{
       const p=point(node.item),isRoute=routeIds.has(node.item.id),star=D.coreIds.includes(node.item.id),r=node.item.type==='show'?24:isRoute?18:node.item.type==='restaurant'?15:9;
-      return {...node,p,x:view.x+p.x*view.scale,y:view.y+p.y*view.scale,l:r,r:star?Math.max(r,25):r,t:star?Math.max(r,26):r,b:r,isRoute,priority:node.item.id===state.selected?-1:isRoute?0:node.item.type==='restaurant'?1:star?2:3};
+      return {...node,p,x:view.x+p.x*view.scale,y:view.y+p.y*view.scale,l:r,r:star?Math.max(r,25):r,t:star?Math.max(r,26):r,b:r,isRoute,priority:node.item.id===mapItemId(state.selected)?-1:isRoute?0:node.item.type==='restaurant'?1:star?2:3};
     }).sort((a,b)=>a.priority-b.priority||a.item.id-b.item.id);
     const placed=[],offsets=[[0,0]];
     for(const radius of [16,28,40,52])for(const [x,y] of [[0,-1],[1,0],[0,1],[-1,0],[.707,-.707],[.707,.707],[-.707,.707],[-.707,-.707]])offsets.push([x*radius,y*radius]);
@@ -214,10 +222,10 @@
       placed.push(best.box);positionMap.set(node.item.id,node);
       if(Math.hypot(best.dx,best.dy)>2)leaders.push(`<path d="M${node.p.x} ${node.p.y}L${node.stageX} ${node.stageY}"/>`);
     }
-    const routePoints=activePlan.routePoints.map(item=>positionMap.get(item.id)||{stageX:point(item).x,stageY:point(item).y});
+    const routePoints=activePlan.routePoints.map(item=>positionMap.get(mapItemId(item.id))||{stageX:point(item).x,stageY:point(item).y});
     $('#map-route').innerHTML=`<svg class="route-lines" viewBox="0 0 ${MAP_W} ${MAP_H}" xmlns="http://www.w3.org/2000/svg"><defs><marker id="route-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#ac175f" stroke="none"/></marker></defs>${routePoints.slice(1).map((to,index)=>{const from=routePoints[index],d=`M${from.stageX} ${from.stageY}L${to.stageX} ${to.stageY}`;return `<path class="route-halo" d="${d}"/><path class="route-segment" d="${d}" marker-end="url(#route-arrow)"/>`;}).join('')}</svg>`;
     mapNodes.forEach(node=>node.label.classList.remove('is-visible'));
-    const fixedLabels=$$('.entry-label,.indoor-label',stage).map(element=>{const r=element.getBoundingClientRect();return {x:r.left-viewportRect.left-3,y:r.top-viewportRect.top-3,w:r.width+6,h:r.height+6};});
+    const fixedLabels=$$('.entry-label',stage).map(element=>{const r=element.getBoundingClientRect();return {x:r.left-viewportRect.left-3,y:r.top-viewportRect.top-3,w:r.width+6,h:r.height+6};});
     const occupied=[...placed,controls,...fixedLabels];
     const panel=$('#detail-panel');
     if(!panel.hidden){const r=panel.getBoundingClientRect();occupied.push({x:r.left-viewportRect.left,y:r.top-viewportRect.top,w:r.width,h:r.height});}
@@ -286,10 +294,10 @@
     view.x=viewport.clientWidth/2-(left+right)/2*view.scale;view.y=viewport.clientHeight/2-(top+bottom)/2*view.scale;drawMap();
   }
   function renderMap() {
-    $('#map-pins').innerHTML=catalogue.map(item=>{const p=point(item),special=item.type==='show';return `<button class="map-pin ${special?'show-pin show-'+item.id:''}" style="left:${p.x}px;top:${p.y}px;--pin-color:${areas.get(item.area).color}" data-select="${item.id}" aria-label="${item.name}，${areas.get(item.area).name}"><span class="pin-core"></span><span class="pin-label">${item.short}</span>${D.coreIds.includes(item.id)?`<span class="pin-star">${icons('star')}</span>`:''}</button>`;}).join('');
+    $('#map-pins').innerHTML=mapCatalogue.map(item=>{const p=point(item),special=item.type==='show';return `<button class="map-pin ${special?'show-pin show-'+item.id:''}" style="left:${p.x}px;top:${p.y}px;--pin-color:${areas.get(item.area).color}" data-select="${item.id}" aria-label="${item.name}，${areas.get(item.area).name}"><span class="pin-core"></span><span class="pin-label">${item.short}</span>${D.coreIds.includes(item.id)?`<span class="pin-star">${icons('star')}</span>`:''}</button>`;}).join('');
     $('#map-dining').innerHTML=D.dining.map(item=>{const p=point(item);return `<button class="dining-pin ${item.snack?'snack-pin':''}" style="left:${p.x}px;top:${p.y}px" data-select="${item.id}" aria-label="${item.meal}：${item.name}"><span class="dining-core">${icons('food')}</span><span class="pin-label">${item.snack?item.short:item.meal+' · '+item.short}</span></button>`;}).join('');
-    $('#map-labels').innerHTML=[...catalogue,...D.dining].map(item=>`<span class="map-name" data-label-for="${item.id}">${escapeHTML(item.type==='restaurant'?(item.snack?item.short:item.name):item.short)}</span>`).join('');
-    mapNodes=[...catalogue,...D.dining].map(item=>({item,button:$(`[data-select="${item.id}"]`,item.type==='restaurant'?$('#map-dining'):$('#map-pins')),label:$(`[data-label-for="${item.id}"]`)}));
+    $('#map-labels').innerHTML=[...mapCatalogue,...D.dining].map(item=>`<span class="map-name" data-label-for="${item.id}">${escapeHTML(item.type==='restaurant'?(item.snack?item.short:item.name):item.short)}</span>`).join('');
+    mapNodes=[...mapCatalogue,...D.dining].map(item=>({item,button:$(`[data-select="${item.id}"]`,item.type==='restaurant'?$('#map-dining'):$('#map-pins')),label:$(`[data-label-for="${item.id}"]`)}));
     for(const node of mapNodes){
       node.button.addEventListener('pointerenter',()=>{hoveredMarker=node.item.id;queueMapLayout();});
       node.button.addEventListener('pointermove',()=>{if(!pointers.size&&hoveredMarker!==node.item.id){hoveredMarker=node.item.id;queueMapLayout();}});

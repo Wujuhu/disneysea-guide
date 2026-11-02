@@ -70,8 +70,8 @@
           <div class="map-topbar"><div class="map-caption"><span class="status-dot"></span><strong>全园导览</strong><span class="map-total">32 个项目 · 2 场水上演出</span></div><label class="route-toggle form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="route-visible" checked><span class="form-check-label">连线</span></label><button class="text-button" data-action="help"><svg><use href="#i-info"/></svg><span>怎么看地图</span></button></div>
           <div class="map-viewport" id="map-viewport" tabindex="0" role="region" aria-label="可缩放和拖动的园区地图；也可使用左侧项目清单。方向键平移，加减键缩放，0 键查看全图。">
             <div class="map-stage" id="map-stage">
-              <svg class="map-art" viewBox="580 40 2450 2100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="东京迪士尼海洋官方园区地图，主入口在图下方，梦幻泉乡在右上方，美人鱼礁湖室内详图位于右下方。">
-                <defs><clipPath id="park-clip"><path d="M2480 60H2880L2925 155 2985 240 2940 330 2940 480 2810 550 2760 625 2710 690 2590 724 2380 770 2390 860 2325 945 2310 1030 2250 1120 2180 1198 2070 1215 1980 1280 2025 1365 2000 1510 2100 1800 2125 1900 2000 1970 1910 2050 1700 2125H910L850 2030 820 1900 750 1750 670 1625 620 1450 665 1330 680 1250 790 1200 865 1100 925 1000 990 925 1050 850 1160 780 1230 703 1330 646 1450 650 1560 700 1640 650 1730 570 1860 525 1950 540 2070 510 2210 355 2380 170Z"/><rect x="2198" y="1502" width="520" height="478" rx="16"/></clipPath></defs>
+              <svg class="map-art" viewBox="580 40 2450 2100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="东京迪士尼海洋官方园区地图，主入口在图下方，梦幻泉乡在右上方，美人鱼礁湖室内项目标在主图对应区域。">
+                <defs><clipPath id="park-clip"><path d="M2480 60H2880L2925 155 2985 240 2940 330 2940 480 2810 550 2760 625 2710 690 2590 724 2380 770 2390 860 2325 945 2310 1030 2250 1120 2180 1198 2070 1215 1980 1280 2025 1365 2000 1510 2100 1800 2125 1900 2000 1970 1910 2050 1700 2125H910L850 2030 820 1900 750 1750 670 1625 620 1450 665 1330 680 1250 790 1200 865 1100 925 1000 990 925 1050 850 1160 780 1230 703 1330 646 1450 650 1560 700 1640 650 1730 570 1860 525 1950 540 2070 510 2210 355 2380 170Z"/></clipPath></defs>
                 <image href="assets/official-map.jpg" x="0" y="0" width="3776" height="2670" clip-path="url(#park-clip)"/>
               </svg>
               <div class="map-areas" id="map-areas"></div>
@@ -79,7 +79,6 @@
               <div class="map-route" id="map-route" aria-hidden="true"></div>
               <div class="map-labels" id="map-labels" aria-hidden="true"></div>
               <div class="map-pins" id="map-pins"></div><div class="map-dining" id="map-dining"></div>
-              <div class="indoor-label">室内项目放大图</div>
               <div class="entry-label"><svg><use href="#i-arrow"/></svg><span>主入口 · 从这里出发</span></div>
             </div>
             <div class="map-error" id="map-error" hidden>地图暂时无法加载。你仍可通过项目清单查看全部详情。<button class="text-button" id="retry-map">重新加载地图</button></div>
