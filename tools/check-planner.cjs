@@ -10,8 +10,24 @@ const all=new Map([...D.attractions,...D.shows,...D.dining].map(item=>[item.id,i
 assert.equal(D.attractions.length,32);
 assert.equal(D.shows.length,2);
 assert(!all.has(246));
+assert.equal(D.party.adults,2);
+assert.equal(D.party.children,0);
+assert.equal(P.nextDpaTime(600,995),660,'a later entry window unlocks another attraction after 60 minutes');
+assert.equal(P.nextDpaTime(600,630),630,'an earlier entry window unlocks another attraction before 60 minutes');
+function checkDPA(date,plan){
+  for(const [index,action] of plan.dpaActions.entries()){
+    const item=all.get(action.dpaItemId);
+    assert(item.dpa&&(!item.dpaFrom||date>=item.dpaFrom),`${date}: DPA not offered for this attraction/date`);
+    assert(plan.rows.some(row=>row.kind==='ride'&&row.itemId===item.id),`${date}: DPA reminder targets an unscheduled ride`);
+    assert(action.targetStart>=action.start+5&&action.targetStart<plan.closing,`${date}: unusable target window`);
+    if(index)assert(action.start>=plan.dpaActions[index-1].nextEligible,`${date}: next purchase is too early`);
+    assert.equal(action.pairPrice,item.dpa*2);
+  }
+  assert.equal(plan.dpaExampleCost,plan.dpaActions.reduce((sum,action)=>sum+action.pairPrice,0));
+}
 for(let day=1;day<=30;day++){
   const date=`2026-11-${String(day).padStart(2,'0')}`,plan=P.plan(date);
+  checkDPA(date,plan);
   let previous=-Infinity;
   for(const row of plan.rows){
     assert(row.start>=previous,`${date}: overlapping ${row.title}`);
@@ -43,6 +59,7 @@ assert.equal(P.showTimes(20001,'2027-01-12'),null);
 assert(!future.stops.some(item=>item.id===223));
 for(let day=1;day<=28;day++){
   const date=`2027-02-${String(day).padStart(2,'0')}`,plan=P.plan(date);
+  checkDPA(date,plan);
   assert(plan.knownHours);
   let previous=-Infinity;
   for(const row of plan.rows){assert(row.start>=previous&&row.end>=row.start&&row.end<=plan.closing,date);previous=row.end;if(row.itemId)assert(!P.isClosed(all.get(row.itemId),date));if(row.kind==='show'){assert(row.tentative);assert.equal(row.showStart,null);}}
@@ -55,8 +72,13 @@ assert(!feb5.stops.some(item=>item.id===20002));
 assert.equal(feb6.rows.filter(row=>row.kind==='show'&&row.tentative).length,2);
 assert.equal(feb6.dpaBudget,0);
 assert(!feb6.rows.find(row=>row.kind==='ride').dpa);
-const dpaCheck=feb6.rows.find(row=>row.kind==='dpa-check');
-assert(dpaCheck && dpaCheck.start>=10*60 && dpaCheck.start<=11*60);
-assert.equal(feb6.rows.filter(row=>row.kind==='dpa-check').length,1);
-console.log('PASS: 58 daily plans; no overlaps, closed rides or invented showtimes; early closing and February replacements verified.');
-console.log(JSON.stringify({reference:'2027-02-06',dpaBudget:feb6.dpaBudget,route:feb6.rows.map(row=>({time:row.tentative?'场次待公布（已留预算）':P.clock(row.start)+'-'+P.clock(row.end),title:row.title}))},null,2));
+assert.equal(feb6.dpaActions.length,3);
+assert.equal(feb6.dpaActions[0].start,10*60);
+assert.equal(feb6.dpaExampleCost,9000);
+const distance=points=>points.slice(1).reduce((sum,item,index)=>sum+Math.hypot(item.x-points[index].x,item.y-points[index].y),0);
+const oldRoute=[219,224,20001,30001,222,242,243,30002,20002].map(id=>all.get(id));
+assert(distance(feb6.routePoints)<distance(oldRoute),'the revised loop should reduce geographic backtracking');
+assert(feb6.stops.findIndex(item=>item.id===20001)<feb6.stops.findIndex(item=>item.id===224),'finish the harbor show before heading into the park');
+assert(feb6.stops.findIndex(item=>item.id===242)<feb6.stops.findIndex(item=>item.id===222),'cross Lost River Delta from east to west');
+console.log('PASS: 58 daily plans; no overlaps, closed rides or invented showtimes; adult route, less backtracking and DPA purchase eligibility verified.');
+console.log(JSON.stringify({reference:'2027-02-06',dpaExampleCostForTwo:feb6.dpaExampleCost,route:feb6.rows.map(row=>({time:row.tentative?'场次待公布（已留预算）':P.clock(row.start)+'-'+P.clock(row.end),title:row.title})),dpa:feb6.dpaActions.map(action=>({buy:P.clock(action.start),target:P.clock(action.targetStart),next:P.clock(action.nextEligible),title:action.title}))},null,2));

@@ -1,6 +1,7 @@
 /* Official facts checked 2026-11-01. Editorial intensity and tips are suggestions. */
 window.DISNEY_DATA = {
   checked: '2026-11-01',
+  party:{adults:2,children:0},
   sources: {
     map: 'https://www.tokyodisneyresort.jp/sc/tds/map.html',
     pdf: 'https://media2.tokyodisneyresort.jp/home/download/map/TDS_map_sc.pdf',

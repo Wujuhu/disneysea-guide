@@ -2,6 +2,8 @@
 
 所有事实核对日期：2026-11-01。以下均为东京迪士尼度假区官方资料；项目逐条来源保存在 `research/sources.json`。
 
+2026-11-02 补核：[迪士尼尊享卡官方规则](https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/disneypremieraccess.html)中的再次购买资格、同行人员选票、当前价格与取消限制。时间表中的购买时点和目标体验时间是本项目为两位成人编排的示例，不是官方放票时刻或已取得的预约。
+
 ## 1. 地图与项目
 
 - [官方园区地图](https://www.tokyodisneyresort.jp/en/tds/map.html)

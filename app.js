@@ -79,9 +79,9 @@
       return `<article class="attraction-row ${state.selected===item.id?'selected':''}" style="--area-color:${area.color}"><button class="attraction-open" data-select="${item.id}" aria-label="查看${escapeHTML(item.name)}详情"><div class="list-photo"><img src="${item.image}" alt="" loading="lazy" width="80" height="70">${stop?`<span class="list-order">${stop.order}</span>`:''}</div><span class="list-copy"><strong>${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</strong><span class="row-tags"><span>${item.playType}</span>${closed?'<span class="tag closed">检修</span>':''}</span></span></button></article>`;
     }).join('') : `<div class="empty-state">${icons('search')}<h3>没有找到匹配项目</h3><p>试试项目的中文名、英文名，或放宽筛选。</p><button class="outline-button" data-action="clear-filters">查看全部项目</button></div>`;
     const ids=new Set(currentResults.map(item=>mapItemId(item.id)));
-    $$('.map-pin').forEach(pin => { pin.hidden=!ids.has(Number(pin.dataset.select)); pin.classList.toggle('is-selected',Number(pin.dataset.select)===mapItemId(state.selected)); pin.classList.toggle('is-closed',Boolean(closureOn(byId.get(Number(pin.dataset.select))))); });
+    $$('.map-pin').forEach(pin => { pin.hidden=false; pin.classList.toggle('is-filtered-out',!ids.has(Number(pin.dataset.select))); pin.classList.toggle('is-selected',Number(pin.dataset.select)===mapItemId(state.selected)); pin.classList.toggle('is-closed',Boolean(closureOn(byId.get(Number(pin.dataset.select))))); });
     $$('.dining-pin').forEach(pin=>pin.classList.toggle('is-selected',Number(pin.dataset.select)===state.selected));
-    $$('.area-boundary').forEach(region=>{const active=region.dataset.area===state.area;region.classList.toggle('area-active',active);region.setAttribute('aria-pressed',String(active));});
+    $$('.area-boundary').forEach(region=>region.classList.toggle('area-active',region.dataset.area===state.area));
     $('.map-caption strong').textContent=state.area==='all'?'全园导览':areas.get(state.area).name;
     $('.map-total').textContent=count===catalogue.length?'32 个项目 · 2 场水上演出':`${count} 个结果`;
     renderRouteOverlay();
@@ -145,18 +145,21 @@
     const ordered=[...D.coreIds.map(id=>byId.get(id)),...D.attractions.filter(item=>item.dpa&&!D.coreIds.includes(item.id))];
     $('#dpa-table-body').innerHTML=ordered.map(item=>`<tr><td><button data-select="${item.id}">${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</button>${closureOn(item)?'<span class="table-closed">检修</span>':''}</td><td>¥${number(item.dpa)}</td></tr>`).join('');
     $('#show-dpa-list').innerHTML=D.dpaShows.map(item=>`<p class="show-dpa-row"><span>${item.name}</span><strong>¥${number(item.price)}</strong></p>`).join('')+'<p>白天花船无 DPA；夜间水上秀也有免费观赏区。</p>';
+    $('#dpa-plan-cost').textContent=activePlan.dpaActions.length?`当前时间表的 ${activePlan.dpaActions.length} 项示例若全部购买，${D.party.adults} 位成人合计约 ${number(activePlan.dpaExampleCost)} 日元。可按等待时间和预算只买其中几项；这不是已购票。`:'';
   }
+  const itineraryRows=()=>[...activePlan.rows,...activePlan.dpaActions].sort((a,b)=>a.start-b.start);
   function renderRoute() {
     activePlan=P.plan(dateForStatus());
+    $('#route-profile').textContent=`${D.party.adults} 位成人 · 无儿童｜${activePlan.routeSummary}`;
     const changes=[...activePlan.substitutions.map(change=>`${change.from.short}检修 → ${change.to.short}`),...activePlan.unavailable.map(item=>`${item.short}本次未排入，保留演出与回程时间。`)];
     $('#route-changes').hidden=!changes.length;$('#route-change-list').textContent=changes.join('；');
     const relative=value=>{const delta=value-activePlan.opening;return delta<0?`开园前 ${-delta} 分钟`:`开园后 ${Math.floor(delta/60)}:${String(delta%60).padStart(2,'0')}`;};
-    $('#route-timeline').innerHTML=activePlan.rows.filter(row=>!['walk','free','exit'].includes(row.kind)).map(row=>{
-      const item=row.itemId||row.restaurantId?byId.get(row.itemId||row.restaurantId):null,order=row.itemId?activePlan.stops.find(stop=>stop.id===row.itemId)?.order:null;
+    $('#route-timeline').innerHTML=itineraryRows().filter(row=>!['walk','free','exit'].includes(row.kind)).map(row=>{
+      const item=row.itemId||row.restaurantId||row.dpaItemId?byId.get(row.itemId||row.restaurantId||row.dpaItemId):null,order=row.itemId?activePlan.stops.find(stop=>stop.id===row.itemId)?.order:null;
       const time=row.tentative?`<time class="relative-time">${row.itemId===20001?'午前':'晚间'}</time>`:activePlan.knownHours?`<time>${P.clock(row.start)}</time>`:`<time class="relative-time">${relative(row.start)}</time>`;
-      const facts=row.kind==='ride'?`体验 ${row.ride} 分钟 <span>·</span> 排队预算 ${row.queue} 分钟`:row.kind==='show'?`${row.tentative?'场次待公布':P.clock(row.showStart)+' 开演'} <span>·</span> 表演 ${row.ride} 分钟`:'';
-      const title=item?(row.kind==='show'?item.name:row.kind==='meal'?`${item.meal} · ${item.name}`:item.short):row.title;
-      return `<article class="timed-stop ${row.kind}"><div class="stop-time">${time}</div><div class="stop-body"><div class="stop-title">${order?`<span class="stop-number">${order}</span>`:icons(row.kind==='meal'?'food':row.kind==='dpa-check'?'ticket':'route')}${item?`<button data-select="${item.id}">${title}${D.coreIds.includes(item.id)?icons('star'):''}</button>`:`<h3>${title}</h3>`}</div>${facts?`<div class="step-facts">${facts}</div>`:''}</div></article>`;
+      const facts=row.kind==='ride'?`体验 ${row.ride} 分钟 <span>·</span> 排队预算 ${row.queue} 分钟 <span>·</span> 步行约 ${row.walk} 分钟`:row.kind==='show'?`${row.tentative?'场次待公布':P.clock(row.showStart)+' 开演'} <span>·</span> 表演 ${row.ride} 分钟`:row.kind==='dpa-check'?`目标 ${activePlan.knownHours?P.clock(row.targetStart):relative(row.targetStart)} 前后体验 <span>·</span> ${D.party.adults} 人 ${number(row.pairPrice)} 日元`:'';
+      const title=item?(row.kind==='show'?item.name:row.kind==='meal'?`${item.meal} · ${item.name}`:row.kind==='dpa-check'?row.title:item.short):row.title;
+      return `<article class="timed-stop ${row.kind}"><div class="stop-time">${time}</div><div class="stop-body"><div class="stop-title">${order?`<span class="stop-number">${order}</span>`:icons(row.kind==='meal'?'food':row.kind==='dpa-check'?'ticket':'route')}${item?`<button data-select="${item.id}">${title}${D.coreIds.includes(item.id)?icons('star'):''}</button>`:`<h3>${title}</h3>`}</div>${facts?`<div class="step-facts">${facts}</div>`:''}${row.description?`<p class="step-note">${escapeHTML(row.description)}</p>`:''}</div></article>`;
     }).join('')+activePlan.unresolvedShows.map(item=>`<article class="timed-stop"><div class="stop-time">待定</div><div class="stop-body"><div class="stop-title"><button data-select="${item.id}">${item.short}${icons('arrow')}</button></div><p>该日期场次尚未收录，确认后再插入路线。</p></div></article>`).join('');
     renderShows();renderDPA();renderDining();renderRouteOverlay();
   }
@@ -169,10 +172,20 @@
     queueMapLayout();
   }
   function exportRoute(){
-    const text=['东京迪士尼海洋 · 五大项目 + 花船',`参考日期：${dateForStatus()}`,activePlan.knownHours?`营业时间：${P.clock(activePlan.opening)}–${P.clock(activePlan.closing)}（日本时间）`:'未收录该日营业时间；下列为开园后的预算顺序。','排队与步行为估算；按实际 DPA 预约及官方演出安排调整。','DPA 按需购买；约 10–11 点评估，必玩项目先查余量。','',...activePlan.rows.map(row=>`${row.tentative?(row.itemId===20001?'午前预留':'晚间预留'):activePlan.knownHours?P.clock(row.start)+'–'+P.clock(row.end):'开园后 '+(row.start-activePlan.opening)+' 分钟'}  ${row.title}${row.kind==='ride'?`
-  体验约${row.ride}分钟；排队预算${row.queue}分钟${row.dpa?'（DPA）':''}；步行约${row.walk}分钟。`:row.kind==='show'?`
-  ${row.tentative?'具体场次待公布':'官方开演'+P.clock(row.showStart)}；演出${row.ride}分钟；预留${row.prepare}分钟找位置。`:row.description?`\n  ${row.description}`:''}`),'',...activePlan.substitutions.map(change=>`${change.from.name}检修 → ${change.to.name}`),D.sources.calendar,D.sources.dpa].join('\n');
-    const blob=new Blob(['\ufeff'+text],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`迪士尼海洋时间表-${dateForStatus()}.txt`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('时间表已导出。');
+    const time=value=>activePlan.knownHours?P.clock(value):`开园后 ${value-activePlan.opening} 分钟`;
+    const lines=['东京迪士尼海洋 · 两位成人一日计划',`参考日期：${dateForStatus()}`,activePlan.knownHours?`营业时间：${P.clock(activePlan.opening)}–${P.clock(activePlan.closing)}（日本时间）`:'未收录该日营业时间；下列为开园后的预算顺序。',activePlan.routeSummary,'排队、步行与用餐均为预算。DPA 目标时段是示例，按实际库存、预约和官方演出安排调整。','下一张其他项目 DPA：付款满 60 分钟或当前卡的体验时段开始，取较早；以 App 提示为准。',''];
+    for(const row of itineraryRows()){
+      const when=row.tentative?(row.itemId===20001?'午前预留':'晚间预留'):time(row.start)+(row.end>row.start?'–'+time(row.end):'');
+      lines.push(`${when}  ${row.title}`);
+      if(row.kind==='ride')lines.push(`  体验约 ${row.ride} 分钟；排队预算 ${row.queue} 分钟；步行约 ${row.walk} 分钟。`);
+      if(row.kind==='show')lines.push(`  ${row.tentative?'具体场次待公布':'官方开演 '+P.clock(row.showStart)}；表演 ${row.ride} 分钟；提前预留 ${row.prepare} 分钟找位置。`);
+      if(row.dpaItemId)lines.push(`  目标 ${time(row.targetStart)} 前后体验；${D.party.adults} 位成人 ${number(row.pairPrice)} 日元。`);
+      if(row.description)lines.push('  '+row.description);
+      lines.push('');
+    }
+    if(activePlan.dpaActions.length)lines.push(`DPA 示例全部购买：${D.party.adults} 位成人合计约 ${number(activePlan.dpaExampleCost)} 日元；未预订，可按需只买几项。`);
+    lines.push(...activePlan.substitutions.map(change=>`${change.from.name}检修 → ${change.to.name}`),...activePlan.unavailable.map(item=>`${item.short}本次未排入，请结合 DPA 和现场队列重新取舍。`),D.sources.calendar,D.sources.dpa);
+    const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`迪士尼海洋时间表-${dateForStatus()}.txt`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('时间表已导出。');
   }
 
   // Map coordinates refer to the official source image rendered in a 3776 × 2670 coordinate space.
@@ -195,12 +208,16 @@
   function layoutMapMarkers(){
     const width=viewport.clientWidth,height=viewport.clientHeight;
     if(!width||!height||!activePlan)return;
+    const entry=$('.entry-label',viewport);entry.style.left=`${view.x+475*view.scale}px`;entry.style.top=`${view.y+1020*view.scale}px`;
     const viewportRect=viewport.getBoundingClientRect(),controlRect=$('.map-controls').getBoundingClientRect();
     const controls={x:controlRect.left-viewportRect.left-4,y:controlRect.top-viewportRect.top-4,w:controlRect.width+8,h:controlRect.height+8};
     const routeIds=new Set(activePlan.stops.map(item=>mapItemId(item.id)));
     const visible=mapNodes.filter(node=>!node.button.hidden).map(node=>{
-      const p=point(node.item),isRoute=routeIds.has(node.item.id),star=D.coreIds.includes(node.item.id),r=node.item.type==='show'?24:isRoute?18:node.item.type==='restaurant'?15:9;
-      return {...node,p,x:view.x+p.x*view.scale,y:view.y+p.y*view.scale,l:r,r:star?Math.max(r,25):r,t:star?Math.max(r,26):r,b:r,isRoute,priority:node.item.id===mapItemId(state.selected)?-1:isRoute?0:node.item.type==='restaurant'?1:star?2:3};
+      const p=point(node.item),isRoute=routeIds.has(node.item.id),star=D.coreIds.includes(node.item.id),core=$('.pin-core,.dining-core',node.button).getBoundingClientRect();
+      const cx=core.left+core.width/2,cy=core.top+core.height/2,bounds={l:core.width/2,r:core.width/2,t:core.height/2,b:core.height/2};
+      const starBox=$('.pin-star',node.button)?.getBoundingClientRect();
+      if(starBox?.width){bounds.l=Math.max(bounds.l,cx-starBox.left);bounds.r=Math.max(bounds.r,starBox.right-cx);bounds.t=Math.max(bounds.t,cy-starBox.top);bounds.b=Math.max(bounds.b,starBox.bottom-cy);}
+      return {...node,p,x:view.x+p.x*view.scale,y:view.y+p.y*view.scale,...bounds,isRoute,priority:node.item.id===mapItemId(state.selected)?-1:isRoute?0:node.item.type==='restaurant'?1:star?2:3};
     }).sort((a,b)=>a.priority-b.priority||a.item.id-b.item.id);
     const placed=[],offsets=[[0,0]];
     for(const radius of [16,28,40,52])for(const [x,y] of [[0,-1],[1,0],[0,1],[-1,0],[.707,-.707],[.707,.707],[-.707,.707],[-.707,-.707]])offsets.push([x*radius,y*radius]);
@@ -217,15 +234,15 @@
         if(cost===0)break;
       }
       node.x+=best.dx;node.y+=best.dy;node.stageX=node.p.x+best.dx/view.scale;node.stageY=node.p.y+best.dy/view.scale;
-      node.button.style.left=`${node.stageX}px`;node.button.style.top=`${node.stageY}px`;
+      node.button.style.left=`${node.x}px`;node.button.style.top=`${node.y}px`;
       node.button.classList.toggle('is-pointer-hovered',node.item.id===hoveredMarker);
       placed.push(best.box);positionMap.set(node.item.id,node);
-      if(Math.hypot(best.dx,best.dy)>2)leaders.push(`<path d="M${node.p.x} ${node.p.y}L${node.stageX} ${node.stageY}"/>`);
+      if(Math.hypot(best.dx,best.dy)>2)leaders.push(`<path d="M${view.x+node.p.x*view.scale} ${view.y+node.p.y*view.scale}L${node.x} ${node.y}"/>`);
     }
     const routePoints=activePlan.routePoints.map(item=>positionMap.get(mapItemId(item.id))||{stageX:point(item).x,stageY:point(item).y});
     $('#map-route').innerHTML=`<svg class="route-lines" viewBox="0 0 ${MAP_W} ${MAP_H}" xmlns="http://www.w3.org/2000/svg"><defs><marker id="route-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#ac175f" stroke="none"/></marker></defs>${routePoints.slice(1).map((to,index)=>{const from=routePoints[index],d=`M${from.stageX} ${from.stageY}L${to.stageX} ${to.stageY}`;return `<path class="route-halo" d="${d}"/><path class="route-segment" d="${d}" marker-end="url(#route-arrow)"/>`;}).join('')}</svg>`;
     mapNodes.forEach(node=>node.label.classList.remove('is-visible'));
-    const fixedLabels=$$('.entry-label',stage).map(element=>{const r=element.getBoundingClientRect();return {x:r.left-viewportRect.left-3,y:r.top-viewportRect.top-3,w:r.width+6,h:r.height+6};});
+    const fixedLabels=$$('.entry-label',viewport).map(element=>{const r=element.getBoundingClientRect();return {x:r.left-viewportRect.left-3,y:r.top-viewportRect.top-3,w:r.width+6,h:r.height+6};});
     const occupied=[...placed,controls,...fixedLabels];
     const panel=$('#detail-panel');
     if(!panel.hidden){const r=panel.getBoundingClientRect();occupied.push({x:r.left-viewportRect.left,y:r.top-viewportRect.top,w:r.width,h:r.height});}
@@ -243,12 +260,12 @@
         for(const rect of occupied)cost+=overlap(box,rect)*25;
         if(!best||cost<best.cost)best={x,y,box,cost};
       }
-      node.label.style.left=`${(best.x-view.x)/view.scale}px`;node.label.style.top=`${(best.y-view.y)/view.scale}px`;
+      node.label.style.left=`${best.x}px`;node.label.style.top=`${best.y}px`;
       node.label.classList.add('is-visible');occupied.push(best.box);
       const edgeX=Math.max(best.x,Math.min(best.x+best.box.w,node.x)),edgeY=Math.max(best.y,Math.min(best.y+best.box.h,node.y));
-      if(Math.hypot(edgeX-node.x,edgeY-node.y)>28)leaders.push(`<path class="name-leader" d="M${node.stageX} ${node.stageY}L${(edgeX-view.x)/view.scale} ${(edgeY-view.y)/view.scale}"/>`);
+      if(Math.hypot(edgeX-node.x,edgeY-node.y)>28)leaders.push(`<path class="name-leader" d="M${node.x} ${node.y}L${edgeX} ${edgeY}"/>`);
     }
-    $('#map-leaders').innerHTML=`<svg viewBox="0 0 ${MAP_W} ${MAP_H}">${leaders.join('')}</svg>`;
+    $('#map-leaders').innerHTML=`<svg viewBox="0 0 ${width} ${height}">${leaders.join('')}</svg>`;
   }
   function constrainPan() {
     const w=viewport.clientWidth,h=viewport.clientHeight,pad=65;
@@ -304,7 +321,7 @@
       node.button.addEventListener('pointerleave',()=>{if(hoveredMarker===node.item.id)hoveredMarker=null;queueMapLayout();});
       node.button.addEventListener('focus',()=>ensureFocusedMarker(node));node.button.addEventListener('blur',queueMapLayout);
     }
-    $('#map-areas').innerHTML=`<svg class="region-boundaries" viewBox="580 40 2450 2100" xmlns="http://www.w3.org/2000/svg" aria-label="点击分区查看项目">${D.areas.map(area=>`<path class="region-halo" d="${area.boundary}"/><path class="area-boundary" d="${area.boundary}" data-area="${area.id}" style="--area-color:${area.color}" role="button" tabindex="0" aria-label="查看${area.name}的项目" aria-pressed="false"/>`).join('')}</svg>`;
+    $('#map-areas').innerHTML=`<svg class="region-boundaries" viewBox="580 40 2450 2100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">${D.areas.map(area=>`<path class="region-halo" d="${area.boundary}"/><path class="area-boundary" d="${area.boundary}" data-area="${area.id}" style="--area-color:${area.color}"/>`).join('')}</svg>`;
     const checkImage=new Image();checkImage.onload=()=>{$('#map-error').hidden=true;};checkImage.onerror=()=>{$('#map-error').hidden=false;};checkImage.src='assets/official-map.jpg';
   }
   const pointers=new Map();let drag=null;let pinch=null;let suppressClick=false;
@@ -380,7 +397,6 @@
   $('#route-visible').addEventListener('change',event=>{state.showRoute=event.target.checked;persist();renderRouteOverlay();});
   $('#export-route').addEventListener('click',exportRoute);
   document.addEventListener('keydown',event=>{
-    if(event.target.matches('.area-boundary')&&['Enter',' '].includes(event.key)){event.preventDefault();selectArea(event.target.dataset.area);return;}
     if(event.key==='Escape'&&state.selected&&!$$('dialog').some(d=>d.open))closeDetail();
     if(event.key==='/'&&!event.ctrlKey&&!event.metaKey&&!/input|textarea|select/i.test(event.target.tagName)&&!$$('dialog').some(d=>d.open)){event.preventDefault();setView('map');$('#workspace').classList.add('mobile-list');updateMobileButtons('list');$('#search').focus();}
   });

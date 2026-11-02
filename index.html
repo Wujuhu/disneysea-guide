@@ -75,8 +75,10 @@
                 <image href="assets/official-map.jpg" x="0" y="0" width="3776" height="2670" clip-path="url(#park-clip)"/>
               </svg>
               <div class="map-areas" id="map-areas"></div>
-              <div class="map-leaders" id="map-leaders" aria-hidden="true"></div>
               <div class="map-route" id="map-route" aria-hidden="true"></div>
+            </div>
+            <div class="map-overlay" id="map-overlay">
+              <div class="map-leaders" id="map-leaders" aria-hidden="true"></div>
               <div class="map-labels" id="map-labels" aria-hidden="true"></div>
               <div class="map-pins" id="map-pins"></div><div class="map-dining" id="map-dining"></div>
               <div class="entry-label"><svg><use href="#i-arrow"/></svg><span>主入口 · 从这里出发</span></div>
@@ -104,6 +106,8 @@
       <div class="tab-content guide-content">
         <section class="tab-pane show active" id="day-route" role="tabpanel" aria-labelledby="plan-tab" tabindex="0">
           <div class="plan-topline"><div id="route-changes" class="plan-change" hidden><div id="route-change-list"></div></div><div class="route-actions"><button class="btn btn-primary btn-sm" id="route-to-map">看地图</button><button class="btn btn-outline-secondary btn-sm" id="export-route">导出</button></div></div>
+          <p class="route-profile" id="route-profile"></p>
+          <p class="route-assumptions">DPA 行是按需购买的时点示例，目标体验时间不代表仍有库存。买不到就按普通排队预算走；买到后按实际时段调整，下一张可购时间看 App。</p>
           <div class="route-timeline" id="route-timeline"></div>
           <div class="accordion accordion-flush compact-accordion" id="plan-more">
             <div class="accordion-item" id="shows-guide"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#show-information" aria-expanded="false" aria-controls="show-information">花船与夜秀场次</button></h2><div class="accordion-collapse collapse" id="show-information"><div class="accordion-body" id="show-cards"></div></div></div>
@@ -111,11 +115,12 @@
           </div>
         </section>
         <section class="tab-pane" id="dpa-guide" role="tabpanel" aria-labelledby="dpa-tab" tabindex="0">
-          <p class="section-intro">早上短队先玩，约 10–11 点再看是否需要 DPA。必玩项目先确认余量，DPA 可能提前售完。</p>
-          <ol class="simple-steps"><li>入园后，在 App 的 Disney Premier Access 选择门票、项目和时段。</li><li>队列较长时再考虑购买，按买到的时段调整路线。</li><li>下一张何时能买，直接看 App 提示。</li></ol>
+          <p class="section-intro">两位成人把两张门票加入同一 App 群组，购买时一起勾选，确认相同体验时段。晨间短队先玩；库存紧的必玩项目应在入园后先查。</p>
+          <ol class="simple-steps"><li>时间表在 10 点、11 点、12 点左右插入查票示例，可在排队、等花船或吃饭时操作。</li><li>购买另一游乐项目：付款满 60 分钟，或上一张卡的体验时段开始，哪个先到就按哪个。</li><li>例如 10:00 买了 16:35 开始的古塔，11:00 就能买其他项目，无需先玩完古塔；实际看 App 的下一次可购时间。</li></ol>
+          <p class="dpa-plan-cost" id="dpa-plan-cost"></p>
           <table class="table price-table"><thead><tr><th scope="col">项目</th><th scope="col">日元 / 人 / 次</th></tr></thead><tbody id="dpa-table-body"></tbody></table>
           <div class="accordion accordion-flush compact-accordion">
-            <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dpa-how" aria-expanded="false" aria-controls="dpa-how">购买规则</button></h2><div class="accordion-collapse collapse" id="dpa-how"><div class="accordion-body"><p>按现行规则，常规当日 DPA 在入园后购买。另一项目通常在购卡后 60 分钟，或首张入场时段开始时可买，以较早者为准。</p><p>早上也可能排长队；晚买不保证还有名额。若某项一定要玩，应结合库存决定是否提前购买。</p><a href="https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/disneypremieraccess.html" target="_blank" rel="noopener noreferrer">官方价格与规则 ↗</a></div></div></div>
+            <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dpa-how" aria-expanded="false" aria-controls="dpa-how">购买规则</button></h2><div class="accordion-collapse collapse" id="dpa-how"><div class="accordion-body"><p>例如 10:00 付款、10:30 即可使用，下一张其他项目在 10:30 就可买，不必等到 11:00。重复买同一个项目，则要等本张用完或体验时段结束。</p><p>游乐设施与演出 DPA 可同时持有，各自计算下一次可购时间。确认两张成人票、使用时段和总价后再付款；付款后一般不能主动改时或取消。</p><a href="https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/disneypremieraccess.html" target="_blank" rel="noopener noreferrer">官方价格与规则 ↗</a></div></div></div>
             <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#show-dpa" aria-expanded="false" aria-controls="show-dpa">演出 DPA</button></h2><div class="accordion-collapse collapse" id="show-dpa"><div class="accordion-body" id="show-dpa-list"></div></div></div>
           </div>
         </section>
