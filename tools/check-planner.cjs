@@ -87,16 +87,18 @@ const comparedIds=new Set(oldRoute.map(item=>item.id));
 assert(distance(feb6.routePoints.filter(item=>comparedIds.has(item.id)))<distance(oldRoute),'the core route should reduce geographic backtracking');
 assert(feb6.stops.findIndex(item=>item.id===20001)<feb6.stops.findIndex(item=>item.id===224),'finish the harbor show before heading into the park');
 assert(feb6.stops.findIndex(item=>item.id===242)<feb6.stops.findIndex(item=>item.id===222),'visit adjacent Lost River Delta stops consecutively before heading to American Waterfront');
-const filtered=P.plan('2027-02-06',{hideClosedDuringWindow:true});
-assert(P.closedDuringWindow(all.get(223))&&P.closedDuringWindow(all.get(20002)));
-assert(!P.isClosed(all.get(20002),'2027-02-06'),'period filtering must not rewrite actual day-specific closure facts');
+const filtered=P.plan('2027-02-01');
+assert(P.isClosed(all.get(223),'2027-02-01')&&P.isClosed(all.get(20002),'2027-02-01'));
+assert(!P.isClosed(all.get(20002),'2027-02-06'),'only confirmed closure dates count as stopped');
+assert.equal(P.showTimes(20002,'2027-02-06'),null);
+assert(feb6.stops.some(item=>item.id===20002&&item.tentative),'unpublished show times must remain available as tentative items');
 assert(!filtered.stops.some(item=>item.id===20002));
 assert(filtered.stops.some(item=>item.id===230)&&filtered.stops.some(item=>item.id===244),'fill the morning with nearby activities');
 assert(filtered.stops.some(item=>item.id===218),'use the evening for Toy Story when no night show is selected');
 assert.equal(filtered.dpaActions.length,4);
 assert.equal(filtered.dpaExampleCost,13000);
-checkDPA('2027-02-06',filtered);
+checkDPA('2027-02-01',filtered);
 assert(filtered.dpaActions.find(action=>action.dpaItemId===218).start>=filtered.rows.find(row=>row.itemId===224).end,'operate after getting off the submarine');
-for(let day=1;day<=6;day++){const date=`2027-02-0${day}`,plan=P.plan(date,{hideClosedDuringWindow:true});checkDPA(date,plan);for(const row of plan.rows)if(row.itemId)assert(!P.closedDuringWindow(all.get(row.itemId)));}
-console.log('PASS: continuous daily plans, adult morning activities, interval closures, recoverable exclusions, durations and parallel DPA eligibility verified.');
+for(let day=1;day<=6;day++){const date=`2027-02-0${day}`,plan=P.plan(date);checkDPA(date,plan);for(const row of plan.rows)if(row.itemId)assert(!P.isClosed(all.get(row.itemId),date));}
+console.log('PASS: continuous plans, confirmed daily closures, retained unpublished shows, durations and parallel DPA eligibility verified.');
 console.log(JSON.stringify({reference:'2027-02-06',dpaExampleCostForTwo:feb6.dpaExampleCost,route:feb6.rows.map(row=>({time:row.tentative?'场次待公布（已留预算）':P.clock(row.start)+'-'+P.clock(row.end),title:row.title})),dpa:feb6.dpaActions.map(action=>({buy:P.clock(action.start),target:P.clock(action.targetStart),next:P.clock(action.nextEligible),title:action.title}))},null,2));

@@ -6,7 +6,6 @@
   const clock=value=>`${String(Math.floor(value/60)).padStart(2,'0')}:${String(Math.round(value%60)).padStart(2,'0')}`;
   const nextDpaTime=(purchasedAt,entryStart)=>Math.min(purchasedAt+60,entryStart);
   const isClosed=(item,date)=>item.closures.some(([start,end])=>date>=start&&(!end||date<=end));
-  const closedDuringWindow=item=>(item.closures||[]).some(([start,end])=>start<=D.planningWindow.end&&(!end||end>=D.planningWindow.start));
   function hours(date){const calendar=D.parkCalendars[date.slice(0,7)],day=Number(date.slice(8));return calendar&&day>=1&&day<=calendar.days?{...(calendar.exceptions[date]||{open:calendar.open,close:calendar.close}),url:calendar.url}:null;}
   function showTimes(id,date){if(isClosed(all.get(id),date))return [];return D.showSchedule[date]?.[id]??null;}
   const budgets={
@@ -49,10 +48,10 @@
     }
     return actions;
   }
-  function plan(date,{hideClosedDuringWindow=false}={}){
+  function plan(date){
     const park=hours(date),knownHours=Boolean(park),opening=minute(park?.open||'09:00'),closing=minute(park?.close||'21:00');
     const rows=[],substitutions=[],unavailable=[],used=new Set(),rides=[];
-    const unavailableForPlan=item=>isClosed(item,date)||(hideClosedDuringWindow&&closedDuringWindow(item));
+    const unavailableForPlan=item=>isClosed(item,date);
     for(const coreId of D.coreIds){
       const core=all.get(coreId);
       let item=core;
@@ -116,5 +115,5 @@
     const routeAreas=routePoints.map(item=>item.area).filter((area,index,list)=>area!==list[index-1]);
     return {date,knownHours,opening,closing,rows,stops,routePoints,substitutions,unavailable,unresolvedShows,dpaActions,party:D.party,routeSummary:routeAreas.map(area=>areaNames.get(area)).join(' → '),dpaExampleCost:dpaActions.reduce((sum,action)=>sum+action.pairPrice,0),dpaBudget:0};
   }
-  window.GuidePlanner={plan,hours,showTimes,clock,isClosed,closedDuringWindow,nextDpaTime};
+  window.GuidePlanner={plan,hours,showTimes,clock,isClosed,nextDpaTime};
 })();

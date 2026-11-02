@@ -8,11 +8,11 @@
   <title>海洋漫游 · 东京迪士尼海洋新手指南</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css?v=20261102-north-layout">
+  <link rel="stylesheet" href="styles.css?v=20261102-map-controls-en">
   <script src="assets/vendor/bootstrap/bootstrap.min.js" defer></script>
-  <script src="data.js?v=20261102-north-layout" defer></script>
-  <script src="planner.js?v=20261102-north-layout" defer></script>
-  <script src="app.js?v=20261102-north-layout" defer></script>
+  <script src="data.js?v=20261102-map-controls-en" defer></script>
+  <script src="planner.js?v=20261102-map-controls-en" defer></script>
+  <script src="app.js?v=20261102-map-controls-en" defer></script>
 </head>
 <body>
   <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -45,31 +45,32 @@
     <symbol id="i-star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></symbol>
   </defs></svg>
   <a class="skip-link" href="#main">跳到主要内容</a>
-  <header class="site-header app-sidebar">
+  <header class="site-header app-sidebar" id="app-navigation">
     <a class="brand" href="#map" aria-label="海洋漫游首页"><span class="brand-mark"><svg><use href="#i-compass"/></svg></span><span><strong>海洋漫游</strong></span></a>
     <nav class="primary-nav" id="side-nav" aria-label="主要导航">
-      <button class="nav-item active" data-view="map" aria-current="page"><svg><use href="#i-map"/></svg><span>探索地图</span></button>
-      <button class="nav-item" id="plan-tab" data-section="#day-route"><svg><use href="#i-route"/></svg><span>时间表</span></button>
-      <button class="nav-item" id="dpa-tab" data-section="#dpa-guide"><svg><use href="#i-ticket"/></svg><span>DPA</span></button>
-      <button class="nav-item" id="food-tab" data-section="#dining-guide"><svg><use href="#i-food"/></svg><span>吃饭</span></button>
+      <button class="nav-item active" data-view="map" aria-current="page" aria-label="探索地图" title="探索地图"><svg><use href="#i-map"/></svg><span>探索地图</span></button>
+      <button class="nav-item" id="plan-tab" data-section="#day-route" aria-label="时间表" title="时间表"><svg><use href="#i-route"/></svg><span>时间表</span></button>
+      <button class="nav-item" id="dpa-tab" data-section="#dpa-guide" aria-label="DPA" title="DPA"><svg><use href="#i-ticket"/></svg><span>DPA</span></button>
+      <button class="nav-item" id="food-tab" data-section="#dining-guide" aria-label="吃饭" title="吃饭"><svg><use href="#i-food"/></svg><span>吃饭</span></button>
     </nav>
+    <button class="navigation-toggle" id="toggle-navigation" type="button" aria-label="收起导航栏" title="收起导航栏" aria-expanded="true" aria-controls="side-nav"><svg aria-hidden="true"><use href="#i-arrow"/></svg><span>收起导航</span></button>
   </header>
   <main id="main">
     <section id="map-view" aria-label="园区交互地图">
       <h1 class="visually-hidden">东京迪士尼海洋</h1>
       <div class="map-workspace" id="workspace">
-        <aside class="explorer" aria-label="查找游乐项目">
+        <aside class="explorer" id="project-explorer" aria-label="查找游乐项目">
           <div class="explorer-head">
             <label class="search-box"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索项目" aria-label="搜索项目中文名、英文名或别名" autocomplete="off"></label>
             <div class="filter-chips btn-group" id="filters" role="group" aria-label="项目筛选"><button class="chip btn btn-sm active" data-filter="all" aria-pressed="true">全部</button><button class="chip btn btn-sm" data-filter="recommended" aria-pressed="false">星标</button><button class="chip btn btn-sm" data-filter="dpa" aria-pressed="false">DPA</button><button class="chip btn btn-sm" data-filter="show" aria-pressed="false">演出</button></div>
             <div class="filter-selects"><select class="form-select form-select-sm" id="area-filter" aria-label="按主题海港筛选"><option value="all">全部园区</option></select><select class="form-select form-select-sm" id="extra-filter" aria-label="更多项目类型"><option value="all">全部类型</option><option value="gentle">温和体验</option><option value="thrill">刺激冒险</option><option value="indoor">室内项目</option></select></div>
-            <label class="closed-filter"><input class="form-check-input" id="hide-closed" type="checkbox" checked><span>隐藏出行期停运<small>2 月 1–6 日内有检修或停演记录</small></span></label>
+            <label class="closed-filter"><input class="form-check-input" id="hide-closed" type="checkbox" checked><span>隐藏官方停运<small id="closure-filter-note">按所选日期判断，未公布场次仍保留</small></span></label>
           </div>
           <div class="list-heading"><h2 id="list-title">探索全部项目</h2><span id="result-count" aria-live="polite">32 个</span><button class="reset-link" id="clear-filter" hidden>重置</button></div>
           <div class="attraction-list" id="attraction-list" aria-label="项目搜索结果"></div>
         </aside>
         <div class="map-panel">
-          <div class="map-topbar"><div class="map-caption"><span class="status-dot"></span><strong>东京迪士尼海洋</strong><span class="map-total"></span></div><div class="map-actions"><label class="route-toggle form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="route-visible" checked><span class="form-check-label">连线</span></label><span class="north-indicator" aria-label="正北朝上，左西右东"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg><span>北</span></span></div></div>
+          <div class="map-topbar"><div class="map-caption"><button class="map-panel-toggle" id="toggle-project-list" type="button" aria-label="收起项目列表" title="收起项目列表" aria-expanded="true" aria-controls="project-explorer"><svg aria-hidden="true"><use href="#i-list"/></svg></button><span class="status-dot"></span><strong>东京迪士尼海洋</strong><span class="map-total"></span></div><div class="map-actions"><button class="orientation-toggle" id="toggle-orientation" type="button" aria-pressed="true" title="切换为官方方向"><svg aria-hidden="true"><use href="#i-compass"/></svg><span>北向朝上</span></button><label class="route-toggle form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="route-visible" checked><span class="form-check-label">连线</span></label><span class="north-indicator" aria-label="正北朝上，左西右东"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg><span>北</span></span></div></div>
           <div class="map-viewport" id="map-viewport" tabindex="0" role="region" aria-label="可缩放和拖动的园区地图；也可使用左侧项目清单。方向键平移，加减键缩放，0 键查看全图。">
             <div class="map-stage" id="map-stage">
               <div class="map-geography" id="map-geography">

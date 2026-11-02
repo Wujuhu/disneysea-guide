@@ -156,7 +156,7 @@ window.DISNEY_DATA.attractions.forEach(item => {
 }
 
 window.DISNEY_DATA.indoorArea = {
-  id:40001,type:'group',name:'美人鱼礁湖 · 室内区',short:'美人鱼礁湖 · 室内区',area:'mermaid',x:1810,y:1015,
+  id:40001,type:'group',name:'美人鱼礁湖 · 室内区',short:'美人鱼礁湖 · 室内区',en:"Triton's Kingdom",area:'mermaid',x:1810,y:1015,
   oneLine:'在《小美人鱼》的海底世界里，选择想玩的室内项目。',
   image:'assets/attractions/202.jpg',imageAlt:'美人鱼礁湖室内的游乐空间',
   url:window.DISNEY_DATA.sources.attractions,closures:[],items:[202,239,240,241,221]
@@ -168,7 +168,7 @@ window.DISNEY_DATA.indoorArea = {
  window.DISNEY_DATA.attractions.forEach(item=>{item.aliases+=' '+item.name+' '+item.short;item.name=officialNames[item.id]||item.name;item.short=shortNames[item.id]||item.name;item.url=`https://www.tokyodisneyresort.jp/sc/tds/attraction/detail/${item.id}/`;});
  const day=window.DISNEY_DATA.shows.find(item=>item.id===20001);day.name='闪耀欢腾庆典';day.short=day.name;day.aliases+=' 白天花船 25周年水上迎宾';day.url='https://www.tokyodisneyresort.jp/sc/tds/show/detail/7404/';
  const night=window.DISNEY_DATA.shows.find(item=>item.id===20002);night.name='坚信！～梦想之海～';night.short=night.name;night.aliases+=' Believe 夜间水上秀';night.url='https://www.tokyodisneyresort.jp/sc/tds/show/detail/967/';
- window.DISNEY_DATA.dpaShows=[{name:'坚信！～梦想之海～',price:2500},{name:'舞动全球！',price:2500},{name:'梦想起飞',price:2500}];
+ window.DISNEY_DATA.dpaShows=[{name:'坚信！～梦想之海～',en:'Believe! Sea of Dreams',price:2500},{name:'舞动全球！',en:'Dance the Globe!',price:2500},{name:'梦想起飞',en:'Dreams Take Flight',price:2500}];
  window.DISNEY_DATA.dining.push(
   {id:30003,type:'restaurant',snack:true,name:'烟熏火鸡腿',short:'火鸡腿',en:'Smoked Turkey Leg',meal:'小吃',venue:'充电小站',price:1200,area:'harbor',x:1458,y:1204,oneLine:'在要塞探险附近的小吃店“充电小站”（Refrescos）购买。',image:'assets/dining/turkey.jpg',url:'https://www.tokyodisneyresort.jp/en/food/128/',closures:[]},
   {id:30004,type:'restaurant',snack:true,name:'辣味熏鸡腿',short:'鸡腿',en:'Spicy Smoked Chicken Leg',meal:'小吃',venue:'失落河小厨',price:800,area:'delta',x:2068,y:799,oneLine:'在“失落河小厨”购买，靠近忿怒双神；这是鸡腿，不是火鸡腿。',image:'assets/dining/chicken.jpg',imageAlt:'失落河小厨外观',url:'https://www.tokyodisneyresort.jp/en/tds/restaurant/food/461/',closures:[]}

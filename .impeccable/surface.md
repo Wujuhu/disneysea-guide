@@ -10,7 +10,7 @@ OWN-WORLD: White and mist blue surfaces, deep marine ink, teal active controls, 
 
 STORY: Recognise regions, locate an attraction, understand it in one sentence, then follow a dated five-attraction and boat-show plan.
 
-FIRST VIEWPORT: Full-height application shell with a persistent side rail for map, timetable, DPA, and dining. Searchable attraction index beside a north-up official map, fitted to the remaining viewport. Faint region tint, numbered route pins, fixed stars, dark ordinary dots, and smaller dining icons. Route names stay visible; other names appear on hover/focus. Default trip-window closure filtering and reversible excluded-item visibility affect both index and map. The timetable contains continuous physical activities, with DPA notes connected in a parallel lane; mobile indents those notes below the related activity.
+FIRST VIEWPORT: Full-height shell with a collapsible side rail and independently collapsible attraction index. Map orientation toggles between north-up and official artwork direction; pins and routes follow, bilingual names remain upright. Green rings mark date-eligible DPA facilities. Only confirmed closures for the selected date hide entries; unpublished show times remain visible. Route names stay visible, other names appear on hover/focus. The timetable contains continuous physical activities, with DPA notes connected in a parallel lane; mobile indents notes below the related activity. Orientation and panel preferences persist locally.
 
 FORM: Harbour visitor centre, grounded candidate 6; seed 10af17ef. Precise index-to-map correspondence from catalog discipline; explicit dates from departure-board discipline. Code-first implementation follows the user's request to begin an HTML project.
 
