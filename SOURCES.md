@@ -4,6 +4,12 @@
 
 2026-11-02 补核：[迪士尼尊享卡官方规则](https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/disneypremieraccess.html)中的再次购买资格、同行人员选票、当前价格与取消限制。时间表中的购买时点和目标体验时间是本项目为两位成人编排的示例，不是官方放票时刻或已取得的预约。
 
+同日逐项核对 30 个固定乘骑／剧场体验时长，记录于 `research/experience-facts.json`；3 个自由探索类项目使用明确标注的导览建议停留范围。中文玩法为本项目重新概括，不沿用营销形容。
+
+[2027 年 2 月 6 日官方日历](https://www.tokyodisneyresort.jp/en/tds/daily/calendar/20270206/)仍显示演出场次未确定；[花船月度安排](https://www.tokyodisneyresort.jp/en/tds/show/schedule/7404/)与[夜秀月度安排](https://www.tokyodisneyresort.jp/en/tds/show/schedule/967/)目前公布十一月场次，并说明下月安排通常在前月 8 日左右发布。
+
+地图朝向依据同一份官方 PDF 底图中的指北针校准：蓝色北针朝原图右下约 15°，因此渲染时逆时针约 105°，使北朝上、东朝右。原始图片与原始点位数据保留，变换在代码中完成；网页项目文字保持正向，底图自带的小字随图片旋转。
+
 ## 1. 地图与项目
 
 - [官方园区地图](https://www.tokyodisneyresort.jp/en/tds/map.html)

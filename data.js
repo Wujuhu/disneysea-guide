@@ -107,7 +107,8 @@ window.DISNEY_DATA.attractions.forEach(item => {
   window.DISNEY_DATA.attractions.forEach(item => {
     [item.playType,item.oneLine] = simple[item.id];
   });
-  window.DISNEY_DATA.excluded = [{id:246,name:'龟龟漫谈',reason:'主要是日语聊天互动，已从地图和路线排除。'}];
+  window.DISNEY_DATA.excluded = [{id:246,name:'龟龟漫谈',reason:'主要是日语聊天互动，默认排除，可按需显示。'}];
+  window.DISNEY_DATA.excludedAttractions = window.DISNEY_DATA.attractions.filter(item => window.DISNEY_DATA.excluded.some(excluded => excluded.id === item.id));
   window.DISNEY_DATA.attractions = window.DISNEY_DATA.attractions.filter(item => !window.DISNEY_DATA.excluded.some(excluded => excluded.id === item.id));
   window.DISNEY_DATA.hours = {
     month:'2026-11', open:'09:00', close:'21:00',
@@ -172,4 +173,51 @@ window.DISNEY_DATA.indoorArea = {
   {id:30003,type:'restaurant',snack:true,name:'烟熏火鸡腿',short:'火鸡腿',en:'Smoked Turkey Leg',meal:'小吃',venue:'充电小站',price:1200,area:'harbor',x:1458,y:1204,oneLine:'在要塞探险附近的小吃店“充电小站”（Refrescos）购买。',image:'assets/dining/turkey.jpg',url:'https://www.tokyodisneyresort.jp/en/food/128/',closures:[]},
   {id:30004,type:'restaurant',snack:true,name:'辣味熏鸡腿',short:'鸡腿',en:'Spicy Smoked Chicken Leg',meal:'小吃',venue:'失落河小厨',price:800,area:'delta',x:2068,y:799,oneLine:'在“失落河小厨”购买，靠近忿怒双神；这是鸡腿，不是火鸡腿。',image:'assets/dining/chicken.jpg',imageAlt:'失落河小厨外观',url:'https://www.tokyodisneyresort.jp/en/tds/restaurant/food/461/',closures:[]}
  );
+}
+
+// Plain-language activity descriptions and experience duration; queues are separate.
+{
+  const D=window.DISNEY_DATA;
+  const durations={"218":7,"219":5,"220":1.5,"221":14,"222":3,"223":3,"224":5,"226":23,"227":7,"228":13,"229":6,"230":11.5,"231":2.5,"232":2.5,"233":10,"235":10,"236":2.5,"237":1,"238":1.5,"239":1,"240":1.5,"241":1.5,"242":1.5,"243":2,"246":30,"247":5,"255":6.5,"256":5,"257":6,"258":2};
+  const estimates={"202":[20,30],"244":[20,30],"245":[20,40]};
+  const descriptions={
+  "202": "在室内游乐场自由走动，探索洞穴、房间和不同的游玩装置。",
+  "218": "戴 3D 眼镜坐小车，用发射器打靶计分，可以和同行者比得分。",
+  "219": "坐在悬空座椅上看巨幕模拟飞行，座椅配合移动，还会有风和气味。",
+  "220": "坐飞毯绕圈飞行，可以操纵载具升降和前后倾斜。",
+  "221": "坐在室内剧场看《小美人鱼》主题表演；目前暂停运营。",
+  "222": "坐越野探险车穿过遗迹布景，途中会颠簸、急转，并遇到机关和惊吓。",
+  "223": "坐探险车看地底洞穴，后半段突然加速，并冲出火山下坡。",
+  "224": "坐小型潜水艇看窗外的海底布景，配合灯光和音效模拟下潜探险。",
+  "226": "坐在剧场里看真人魔术与神灯精灵的 3D 影像，主要对白是日语。",
+  "227": "坐小轮船从地中海港湾前往失落河三角洲，沿途看园区水道。",
+  "228": "坐小轮船从美国海滨出发环游园区水道，适合坐着看风景。",
+  "229": "坐小轮船从失落河三角洲沿水道返回地中海港湾。",
+  "230": "坐船夫撑的贡多拉慢慢游过运河，看两岸建筑和桥下的水道。",
+  "231": "坐高架小火车，从发现港返回美国海滨。",
+  "232": "坐高架小火车，从美国海滨前往发现港，沿途俯瞰街景。",
+  "233": "坐复古汽车在美国海滨的街道上慢慢绕行，主要是观光。",
+  "235": "坐船经过一段段人偶和布景，听音乐看辛巴达的故事，节奏比较平缓。",
+  "236": "在双层旋转木马上，骑骆驼、神灯精灵等造型的坐骑绕圈。",
+  "237": "坐飞鱼造型的小过山车，经过短轨道上的转弯、起伏和下坡。",
+  "238": "坐寄居蟹造型的小车绕圈，车身还会转向，有时倒着走。",
+  "239": "坐在水母下的贝壳座椅里，缓缓升高，再降下来。",
+  "240": "坐在河豚气球下的吊篮里，升到半空后绕圈旋转。",
+  "241": "坐进海藻造型的杯子里连续转圈，玩法类似旋转咖啡杯。",
+  "242": "坐高速过山车经过急弯和起伏，中途有一次 360° 倒转。",
+  "243": "坐在电梯里随剧情突然升起和下坠，有明显失重、黑暗和惊吓。",
+  "244": "自己步行探索海边要塞和帆船，爬楼梯、看房间和航海互动装置。",
+  "245": "拿日文任务地图，在要塞里找线索、做解谜任务，需要看懂日文说明。",
+  "246": "隔着屏幕和海龟 Crush 用日语聊天，角色会现场回答观众。",
+  "247": "坐在会摇晃的座椅上看尼莫和多莉的海底影片，座椅动作跟着画面走。",
+  "255": "坐船经过《冰雪奇缘》的故事场景，听歌曲，途中有倒退和滑落。",
+  "256": "坐船看《魔发奇缘》的故事，最后进入布满天灯的室内场景。",
+  "257": "戴 3D 眼镜坐会摇晃、转向的小船，跟着小飞侠的故事在画面中飞行。",
+  "258": "坐小车穿过仙子花园，沿途看场景，小车会旋转和转向。"
+};
+  for(const item of [...D.attractions,...D.excludedAttractions]){
+    item.oneLine=descriptions[item.id];
+    if(durations[item.id]!=null){const minutes=durations[item.id],whole=Math.floor(minutes),seconds=Math.round((minutes-whole)*60);item.durationMinutes=minutes;item.durationIsEstimate=false;item.durationLabel=seconds?`约 ${whole} 分 ${seconds} 秒`:`约 ${whole} 分钟`;}
+    else {const range=estimates[item.id];item.durationIsEstimate=true;item.durationLabel=`建议 ${range[0]}–${range[1]} 分钟`;}
+  }
 }

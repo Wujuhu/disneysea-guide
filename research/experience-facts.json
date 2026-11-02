@@ -1,0 +1,259 @@
+[
+  {
+    "id": 230,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/230/",
+    "checked": "2026-11-02",
+    "minutes": 11.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 219,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/219/",
+    "checked": "2026-11-02",
+    "minutes": 5,
+    "sourceType": "official"
+  },
+  {
+    "id": 227,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/227/",
+    "checked": "2026-11-02",
+    "minutes": 7,
+    "sourceType": "official"
+  },
+  {
+    "id": 244,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/244/",
+    "checked": "2026-11-02",
+    "minutes": null,
+    "sourceType": "guide_estimate",
+    "visitRangeMinutes": [
+      20,
+      30
+    ]
+  },
+  {
+    "id": 245,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/245/",
+    "checked": "2026-11-02",
+    "minutes": null,
+    "sourceType": "guide_estimate",
+    "visitRangeMinutes": [
+      20,
+      40
+    ]
+  },
+  {
+    "id": 246,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/246/",
+    "checked": "2026-11-02",
+    "minutes": 30,
+    "sourceType": "official"
+  },
+  {
+    "id": 243,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/243/",
+    "checked": "2026-11-02",
+    "minutes": 2,
+    "sourceType": "official"
+  },
+  {
+    "id": 232,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/232/",
+    "checked": "2026-11-02",
+    "minutes": 2.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 228,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/228/",
+    "checked": "2026-11-02",
+    "minutes": 13,
+    "sourceType": "official"
+  },
+  {
+    "id": 218,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/218/",
+    "checked": "2026-11-02",
+    "minutes": 7,
+    "sourceType": "official"
+  },
+  {
+    "id": 233,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/233/",
+    "checked": "2026-11-02",
+    "minutes": 10,
+    "sourceType": "official"
+  },
+  {
+    "id": 231,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/231/",
+    "checked": "2026-11-02",
+    "minutes": 2.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 247,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/247/",
+    "checked": "2026-11-02",
+    "minutes": 5,
+    "sourceType": "official"
+  },
+  {
+    "id": 222,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/222/",
+    "checked": "2026-11-02",
+    "minutes": 3,
+    "sourceType": "official"
+  },
+  {
+    "id": 229,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/229/",
+    "checked": "2026-11-02",
+    "minutes": 6,
+    "sourceType": "official"
+  },
+  {
+    "id": 242,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/242/",
+    "checked": "2026-11-02",
+    "minutes": 1.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 255,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/255/",
+    "checked": "2026-11-02",
+    "minutes": 6.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 257,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/257/",
+    "checked": "2026-11-02",
+    "minutes": 6,
+    "sourceType": "official"
+  },
+  {
+    "id": 258,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/258/",
+    "checked": "2026-11-02",
+    "minutes": 2,
+    "sourceType": "official"
+  },
+  {
+    "id": 256,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/256/",
+    "checked": "2026-11-02",
+    "minutes": 5,
+    "sourceType": "official"
+  },
+  {
+    "id": 236,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/236/",
+    "checked": "2026-11-02",
+    "minutes": 2.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 220,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/220/",
+    "checked": "2026-11-02",
+    "minutes": 1.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 235,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/235/",
+    "checked": "2026-11-02",
+    "minutes": 10,
+    "sourceType": "official"
+  },
+  {
+    "id": 226,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/226/",
+    "checked": "2026-11-02",
+    "minutes": 23,
+    "sourceType": "official"
+  },
+  {
+    "id": 202,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/202/",
+    "checked": "2026-11-02",
+    "minutes": null,
+    "sourceType": "guide_estimate",
+    "visitRangeMinutes": [
+      20,
+      30
+    ]
+  },
+  {
+    "id": 239,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/239/",
+    "checked": "2026-11-02",
+    "minutes": 1,
+    "sourceType": "official"
+  },
+  {
+    "id": 238,
+    "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/238/",
+    "checked": "2026-11-02",
+    "minutes": 1.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 237,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/237/",
+    "checked": "2026-11-02",
+    "minutes": 1,
+    "sourceType": "official"
+  },
+  {
+    "id": 240,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/240/",
+    "checked": "2026-11-02",
+    "minutes": 1.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 221,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/221/",
+    "checked": "2026-11-02",
+    "minutes": 14,
+    "sourceType": "official"
+  },
+  {
+    "id": 241,
+    "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/241/",
+    "checked": "2026-11-02",
+    "minutes": 1.5,
+    "sourceType": "official"
+  },
+  {
+    "id": 224,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/224/",
+    "checked": "2026-11-02",
+    "minutes": 5,
+    "sourceType": "official"
+  },
+  {
+    "id": 223,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/223/",
+    "checked": "2026-11-02",
+    "minutes": 3,
+    "sourceType": "official"
+  },
+  {
+    "id": 20001,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/show/schedule/7404/",
+    "checked": "2026-11-02",
+    "minutes": 15,
+    "sourceType": "official"
+  },
+  {
+    "id": 20002,
+    "url": "https://www.tokyodisneyresort.jp/en/tds/show/schedule/967/",
+    "checked": "2026-11-02",
+    "minutes": 30,
+    "sourceType": "official"
+  }
+]

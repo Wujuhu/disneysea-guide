@@ -10,6 +10,10 @@ const all=new Map([...D.attractions,...D.shows,...D.dining].map(item=>[item.id,i
 assert.equal(D.attractions.length,32);
 assert.equal(D.shows.length,2);
 assert(!all.has(246));
+assert.equal(D.excludedAttractions.length,1);
+assert.equal(D.excludedAttractions[0].id,246);
+for(const item of [...D.attractions,...D.excludedAttractions]){assert(item.oneLine&&item.durationLabel,`missing plain description or duration: ${item.id}`);assert(!item.oneLine.includes('\ufffd'));}
+assert(D.attractions.find(item=>item.id===242).oneLine.includes('360°'));
 assert.equal(D.party.adults,2);
 assert.equal(D.party.children,0);
 assert.equal(P.nextDpaTime(600,995),660,'a later entry window unlocks another attraction after 60 minutes');
@@ -22,15 +26,17 @@ function checkDPA(date,plan){
     assert(action.targetStart>=action.start+5&&action.targetStart<plan.closing,`${date}: unusable target window`);
     if(index)assert(action.start>=plan.dpaActions[index-1].nextEligible,`${date}: next purchase is too early`);
     assert.equal(action.pairPrice,item.dpa*2);
+    const anchor=plan.rows[action.anchorRowIndex];assert(anchor&&action.start>=anchor.start&&action.start<=anchor.end,`${date}: DPA note is not attached to its current activity`);
   }
   assert.equal(plan.dpaExampleCost,plan.dpaActions.reduce((sum,action)=>sum+action.pairPrice,0));
 }
 for(let day=1;day<=30;day++){
   const date=`2026-11-${String(day).padStart(2,'0')}`,plan=P.plan(date);
   checkDPA(date,plan);
-  let previous=-Infinity;
+  let previous=plan.rows[0].start;
   for(const row of plan.rows){
     assert(row.start>=previous,`${date}: overlapping ${row.title}`);
+    assert.equal(row.start,previous,`${date}: unexplained gap before ${row.title}`);
     assert(row.end>=row.start,`${date}: negative duration`);
     assert(row.end<=plan.closing,`${date}: exceeds closing time`);
     previous=row.end;
@@ -73,12 +79,24 @@ assert.equal(feb6.rows.filter(row=>row.kind==='show'&&row.tentative).length,2);
 assert.equal(feb6.dpaBudget,0);
 assert(!feb6.rows.find(row=>row.kind==='ride').dpa);
 assert.equal(feb6.dpaActions.length,3);
-assert.equal(feb6.dpaActions[0].start,10*60);
+assert.equal(feb6.dpaActions[0].start,10*60+10);
 assert.equal(feb6.dpaExampleCost,9000);
 const distance=points=>points.slice(1).reduce((sum,item,index)=>sum+Math.hypot(item.x-points[index].x,item.y-points[index].y),0);
 const oldRoute=[219,224,20001,30001,222,242,243,30002,20002].map(id=>all.get(id));
-assert(distance(feb6.routePoints)<distance(oldRoute),'the revised loop should reduce geographic backtracking');
+const comparedIds=new Set(oldRoute.map(item=>item.id));
+assert(distance(feb6.routePoints.filter(item=>comparedIds.has(item.id)))<distance(oldRoute),'the core route should reduce geographic backtracking');
 assert(feb6.stops.findIndex(item=>item.id===20001)<feb6.stops.findIndex(item=>item.id===224),'finish the harbor show before heading into the park');
-assert(feb6.stops.findIndex(item=>item.id===242)<feb6.stops.findIndex(item=>item.id===222),'cross Lost River Delta from east to west');
-console.log('PASS: 58 daily plans; no overlaps, closed rides or invented showtimes; adult route, less backtracking and DPA purchase eligibility verified.');
+assert(feb6.stops.findIndex(item=>item.id===242)<feb6.stops.findIndex(item=>item.id===222),'visit adjacent Lost River Delta stops consecutively before heading to American Waterfront');
+const filtered=P.plan('2027-02-06',{hideClosedDuringWindow:true});
+assert(P.closedDuringWindow(all.get(223))&&P.closedDuringWindow(all.get(20002)));
+assert(!P.isClosed(all.get(20002),'2027-02-06'),'period filtering must not rewrite actual day-specific closure facts');
+assert(!filtered.stops.some(item=>item.id===20002));
+assert(filtered.stops.some(item=>item.id===230)&&filtered.stops.some(item=>item.id===244),'fill the morning with nearby activities');
+assert(filtered.stops.some(item=>item.id===218),'use the evening for Toy Story when no night show is selected');
+assert.equal(filtered.dpaActions.length,4);
+assert.equal(filtered.dpaExampleCost,13000);
+checkDPA('2027-02-06',filtered);
+assert(filtered.dpaActions.find(action=>action.dpaItemId===218).start>=filtered.rows.find(row=>row.itemId===224).end,'operate after getting off the submarine');
+for(let day=1;day<=6;day++){const date=`2027-02-0${day}`,plan=P.plan(date,{hideClosedDuringWindow:true});checkDPA(date,plan);for(const row of plan.rows)if(row.itemId)assert(!P.closedDuringWindow(all.get(row.itemId)));}
+console.log('PASS: continuous daily plans, adult morning activities, interval closures, recoverable exclusions, durations and parallel DPA eligibility verified.');
 console.log(JSON.stringify({reference:'2027-02-06',dpaExampleCostForTwo:feb6.dpaExampleCost,route:feb6.rows.map(row=>({time:row.tentative?'场次待公布（已留预算）':P.clock(row.start)+'-'+P.clock(row.end),title:row.title})),dpa:feb6.dpaActions.map(action=>({buy:P.clock(action.start),target:P.clock(action.targetStart),next:P.clock(action.nextEligible),title:action.title}))},null,2));
