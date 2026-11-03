@@ -46,13 +46,13 @@
   const eligible=item=>state.showHidden||hiddenReasons(item).length===0;
   const mapEligible=item=>item.id===D.indoorArea.id?item.items.some(id=>eligible(byId.get(id))):eligible(item);
   const durationText=item=>item.durationLabel||(item.durationMinutes?`约 ${item.durationMinutes} 分钟`:item.duration||'按现场体验安排');
-  const diningMethod=item=>({seating:'建议提前订座','mobile-required':'须先手机点餐',counter:item.mobileOrder?'无需订座 · 可手机点餐':'无需订座 · 现场选餐',snack:item.mobileOrder?'路边小吃 · 可手机点餐':'路边小吃 · 直接排队'})[item.service];
+  const diningMethod=item=>item.service==='seating'?'可预约座位':`无需预约${item.mobileOrder?item.service==='mobile-required'?' · 须手机点餐':' · 可手机点餐':''}`;
   const diningIcon=item=>item.stall?'stall':'food';
   function seatingTimingText(){
     const [year,month,day]=dateForStatus().split('-').map(Number),priorMonth=month===1?12:month-1,priorDays=new Date(Date.UTC(year,month-1,0)).getUTCDate();
-    return day<=priorDays?`${month} 月 ${day} 日用餐：${priorMonth} 月 ${day} 日日本时间 10:00（北京时间 09:00）起可订。当天网上补位从日本时间 09:00（北京时间 08:00）开始。`:'提前一个月开放订座；上月没有同一天时，以官方预约页显示的开放日为准。';
+    return day<=priorDays?`${month} 月 ${day} 日用餐：${priorMonth} 月 ${day} 日日本时间 10:00（北京时间 09:00）起可订。`:'提前一个月开放订座；上月没有同一天时，以官方预约页显示的开放日为准。';
   }
-  const diningAdvice=item=>item.service==='seating'?'这家提供订座，先选好用餐时间，再按时到店等带位。若提前没订到，当天日本时间 09:00 先查网上名额，10:00 起可到门口问剩余位；有空位才受理。':item.service==='mobile-required'?'入园后就先在 App 选餐厅、取餐时段并点餐。选在你抵达梦幻泉乡附近的时间；到店后再点 I\'m Here，等通知取餐。':item.showDiningUrl?'普通用餐区无需订座，可直接排队或先手机点餐。要边吃边看达菲演出，则须另订餐饮秀。':item.mobileOrder?'无需提前订座。可以先在 App 选取餐时段和餐点，到店再取；普通柜台与座位按当天现场安排。':'无需预约，走到店前排队购买。若有用餐座位，按现场安排使用。';
+  const mobileOrderHTML=item=>`<section class="detail-booking">${item?'<h3>手机点餐怎么点？</h3>':'<h2 class="reading-subtitle">手机点餐怎么点？</h2>'}<p>使用东京迪士尼度假区官方 App（<span lang="en">Tokyo Disney Resort App</span>，英文版），登录 MyDisney，入园后操作：</p><ol><li>打开 <span lang="en">My Plan → Disney Mobile Order</span>，${item?`选择“${escapeHTML(item.name)}”`:'选择餐厅'}。</li><li>选择来店时段、餐点和数量，点 <span lang="en">Add to Cart</span>（加入购物车）。</li><li>选择付款方式，核对后点 <span lang="en">Place Order</span>（确认订单）。</li><li>在所选时段到店后，打开订单点 <span lang="en">I'm Here</span>（我已到店），再按 App 显示的取餐号码取餐。</li></ol><a class="source-link" href="${D.sources.mobileOrder}" target="_blank" rel="noopener noreferrer">官方 App 下载与点餐步骤 ${icons('external')}</a></section>`;
   const mapName=item=>item.type==='show'?'演出':({219:'翱翔',223:'地心探险',255:'冰雪奇缘',256:'长发公主',257:'小飞侠',230:'贡多拉',247:'尼莫',231:'小火车',232:'小火车',227:'渡轮',228:'渡轮',229:'渡轮',40001:'室内区'})[item.id]||item.short;
   const englishLine=item=>{const name=escapeHTML(item?.en||'');return name?`<small class="detail-original" lang="en">${name}</small>`:'';};
 
@@ -102,8 +102,7 @@
       if (state.filter === 'indoor' && !item.indoor) return false;
       if (state.filter === 'show' && item.type!=='show') return false;
       if (state.filter === 'seating' && item.service!=='seating') return false;
-      if (state.filter === 'mobile-required' && item.service!=='mobile-required') return false;
-      if (state.filter === 'walk-in' && !['counter','snack'].includes(item.service)) return false;
+      if (state.filter === 'walk-in' && (item.type!=='restaurant'||item.service==='seating')) return false;
       if (state.filter === 'official-hidden' && !reasons.some(reason=>reason.kind==='official')) return false;
       if (state.filter === 'user-hidden' && !reasons.some(reason=>reason.kind==='user')) return false;
       return true;
@@ -113,9 +112,9 @@
     currentResults = matchedItems();
     const count = currentResults.length;
     $('#result-count').textContent = `${count} 个`;
-    const labels = {all:state.category==='all'?'探索全园':state.category==='hidden'?'隐藏项目与原因':categoryNames[state.category],recommended:'星标项目',gentle:'温和体验',thrill:'刺激冒险',dpa:'DPA 适用',indoor:'室内项目',show:'花船与水上秀',seating:'建议提前订座', 'mobile-required':'须先手机点餐','walk-in':'无需订座','official-hidden':'官方停运','user-hidden':'用户主动隐藏'};
+    const labels = {all:state.category==='all'?'探索全园':state.category==='hidden'?'隐藏项目与原因':categoryNames[state.category],recommended:'星标项目',gentle:'温和体验',thrill:'刺激冒险',dpa:'DPA 适用',indoor:'室内项目',show:'花船与水上秀',seating:'可预约座位','walk-in':'无需预约','official-hidden':'官方停运','user-hidden':'用户主动隐藏'};
     $('#list-title').textContent = state.query ? '搜索结果' : state.area !== 'all' ? areas.get(state.area).name : labels[state.filter];
-    const extraOptions=state.category==='hidden'?[['all','全部隐藏原因'],['official-hidden','官方停运'],['user-hidden','用户主动隐藏']]:state.category==='restaurant'?[['all','全部用餐方式'],['seating','建议提前订座'],['mobile-required','须先手机点餐'],['walk-in','无需订座']]:[['all','全部类型'],['recommended','星标项目'],['dpa','DPA 适用'],['gentle','温和体验'],['thrill','刺激冒险'],['indoor','室内项目']];
+    const extraOptions=state.category==='hidden'?[['all','全部隐藏原因'],['official-hidden','官方停运'],['user-hidden','用户主动隐藏']]:state.category==='restaurant'?[['all','全部餐厅'],['seating','可预约座位'],['walk-in','无需预约']]:[['all','全部类型'],['recommended','星标项目'],['dpa','DPA 适用'],['gentle','温和体验'],['thrill','刺激冒险'],['indoor','室内项目']];
     $('#extra-filter').innerHTML=extraOptions.map(([value,label])=>`<option value="${value}">${label}</option>`).join('');$('#extra-filter').value=state.filter;
     $('#show-hidden').checked=state.showHidden;
     $('#hidden-filter-note').textContent=`${formatDate(dateForStatus())} · 未公布场次保留`;
@@ -171,8 +170,8 @@
     const isGroup=item.type==='group',hasPhoto=!isGroup&&Boolean(item.image);panel.classList.toggle('is-indoor-area',isGroup);
     const status=closure?'':item.type==='restaurant'?`<span class="detail-status">${diningMethod(item)}${item.price?' · ¥'+number(item.price):''}</span>`:hasDPA(item)?`<span class="detail-status">DPA ¥${number(item.dpa)} / 人 / 次</span>`:'';
     const reasons=hiddenReasons(item),hiddenDetails=reasons.length?`<section class="detail-hidden"><h3>隐藏原因</h3>${reasons.map(reason=>`<p>${escapeHTML(reason.text)}</p>`).join('')}${!state.showHidden?'<button class="inline-guide-link" data-action="show-hidden">在地图和普通清单中显示隐藏项目</button>':''}</section>`:'';
-    const booking=item.service==='seating'?`<section class="detail-booking"><h3>提前订座怎么做？</h3><p>${seatingTimingText()}</p><ol><li>提前注册并登录 MyDisney，打开官方订座页。</li><li>选择用餐日期、${D.party.adults} 位成人、餐厅和想吃的时段，再找空位。</li><li>核对并确认预约，保存结果；按约定时间到店等带位。</li></ol><a class="source-link" href="${D.sources.restaurantBooking}" target="_blank" rel="noopener noreferrer">打开官方订座页 ${icons('external')}</a></section>`:'';
-    const diningDetails=item.type==='restaurant'?`<section class="detail-dining"><h3>${item.stall?'路边小摊':'餐厅'} · 什么时候处理？</h3><p>${diningAdvice(item)}</p>${booking}${item.mapLocationNote?`<p class="quiet-note">${item.mapLocationNote}</p>`:''}${item.showDiningUrl?`<a class="source-link" href="${item.showDiningUrl}" target="_blank" rel="noopener noreferrer">演出用餐区的预约说明 ${icons('external')}</a>`:''}<small>餐饮方式核对：${D.serviceChecked} · 日本时间</small></section>`:'';
+    const booking=item.service==='seating'?`<section class="detail-booking"><h3>如何提前预约座位？</h3><p>${seatingTimingText()}</p><ol><li>打开官方订座网页，注册或登录 MyDisney。</li><li>选择用餐日期、${D.party.adults} 位成人、“${escapeHTML(item.name)}”和用餐时段，查询空位。</li><li>核对信息，确认预约并保存结果。</li></ol><a class="source-link" href="${D.sources.restaurantBooking}" target="_blank" rel="noopener noreferrer">打开官方订座页 ${icons('external')}</a></section>`:'';
+    const diningDetails=item.type==='restaurant'?`${booking}${item.mobileOrder?mobileOrderHTML(item):''}${item.mapLocationNote?`<p class="quiet-note">${item.mapLocationNote}</p>`:''}`:'';
     const timing=!isGroup&&item.type!=='restaurant'?`<p class="detail-duration">${durationText(item)}<small>${item.durationIsEstimate?'导览建议，不含排队':'体验时长，不含排队'}</small></p>`:'';
     const times=item.type==='show'?P.showTimes(item.id,dateForStatus()):null;
     const showSchedule=item.type==='show'?`<section class="detail-schedule"><h3>${formatDate(dateForStatus())} 演出时间</h3>${times===null?'<p>该日场次尚未公布。官方通常在前一个月 8 日左右公布下月安排。</p>':times.length?`<ul class="show-time-list">${times.map(time=>`<li><time>${time}</time></li>`).join('')}</ul><small>日本时间</small>`:'<p>该日停演。</p>'}</section>${showReferenceHTML(item)}`:'';
@@ -203,13 +202,11 @@
     const foodRow=item=>`<button class="food-row" data-select="${item.id}">${icons(diningIcon(item))}<span>${item.name}<small>${areas.get(item.area).name} · ${diningMethod(item)}${item.venue?' · '+item.venue:''}${item.showDiningUrl?' · 演出区另订':''}</small>${hiddenReasons(item).length?`<small class="row-hidden-reason">${hiddenReasons(item).map(reason=>escapeHTML(reason.text)).join('；')}</small>`:''}</span>${item.price?`<b>¥${number(item.price)}</b>`:''}${icons('arrow')}</button>`;
     const dining=D.dining.filter(eligible);
     $('#seating-options').innerHTML=dining.filter(item=>item.service==='seating').map(foodRow).join('');
-    $('#dining-options').innerHTML=dining.filter(item=>item.service==='mobile-required').map(foodRow).join('');
-    $('#walkin-options').innerHTML=dining.filter(item=>item.service==='counter'&&!item.stall).map(foodRow).join('');
-    $('#snack-options').innerHTML=dining.filter(item=>item.stall).map(foodRow).join('');
+    $('#walkin-options').innerHTML=dining.filter(item=>item.service!=='seating'&&!item.stall).map(foodRow).join('');
+    $('#snack-options').innerHTML=dining.filter(item=>item.service!=='seating'&&item.stall).map(foodRow).join('');
     $('#dining-closure-note').textContent=D.dining.filter(item=>closureOn(item)).map(item=>`${item.name}：${formatDate(closureOn(item)[0])}–${formatDate(closureOn(item)[1])} 停运。`).join(' ');
     $('#booking-example').textContent=seatingTimingText();
-    const fantasyRow=activePlan.rows.find(row=>byId.get(row.itemId)?.area==='fantasy');
-    $('#mobile-order-example').textContent=activePlan.knownHours?`按本日草案，${P.clock(activePlan.opening)} 入园后就先看想吃的餐厅与可取餐时段。${fantasyRow?`梦幻泉乡约 ${P.clock(fantasyRow.start)}–${P.clock(fantasyRow.end)} 游玩，若想在那里吃，把餐单选在附近时段，并相应挪动午餐。`:''}这是操作建议，实际可选时段以 App 为准。`:'入园后先看想吃的餐厅与可取餐时段；按实际到达该区的时间选择。';
+    $('#mobile-order-instructions').innerHTML=mobileOrderHTML();
   }
   function renderDPA(){
     const ordered=[...D.coreIds.map(id=>byId.get(id)),...allAttractions.filter(item=>item.dpa&&!D.coreIds.includes(item.id))].filter(eligible);
@@ -277,7 +274,7 @@
       lines.push('');
     }
     if(activePlan.dpaActions.length){lines.push('DPA 并行操作（在主行程的排队、等场或用餐间隙进行）');for(const action of activePlan.dpaActions)lines.push(`${time(action.start)}  ${action.title}；争取 ${time(action.targetStart)} 前后体验；下一张最早 ${time(action.nextEligible)}；${D.party.adults} 人 ${number(action.pairPrice)} 日元。`, '  '+action.description);lines.push(`示例全部购买：${D.party.adults} 位成人合计约 ${number(activePlan.dpaExampleCost)} 日元；未预订，可按需只买几项。`);}
-    lines.push($('#route-dpa-budget').textContent,'餐厅不接入路线，午晚餐就近自选。',$('#booking-example').textContent,$('#mobile-order-example').textContent,...activePlan.substitutions.map(change=>`${change.from.name}检修 → ${change.to.name}`),...activePlan.unavailable.map(item=>`${item.short}本次未排入，请结合 DPA 和现场队列重新取舍。`),D.sources.calendar,D.sources.dpa,D.sources.dining,D.sources.mobileOrder);
+    lines.push($('#route-dpa-budget').textContent,'餐厅不接入路线，午晚餐就近自选。',$('#booking-example').textContent,...activePlan.substitutions.map(change=>`${change.from.name}检修 → ${change.to.name}`),...activePlan.unavailable.map(item=>`${item.short}本次未排入，请结合 DPA 和现场队列重新取舍。`),D.sources.calendar,D.sources.dpa,D.sources.dining,D.sources.mobileOrder);
     const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`迪士尼海洋时间表-${dateForStatus()}.txt`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('时间表已导出。');
   }
 

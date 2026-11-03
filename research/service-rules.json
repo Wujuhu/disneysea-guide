@@ -19,6 +19,21 @@
       409,
       413,
       414
+    ],
+    "app": "Tokyo Disney Resort App (English)",
+    "entry": "My Plan > Disney Mobile Order",
+    "actions": [
+      "Select restaurant, arrival time, menu items and quantities",
+      "Add to Cart",
+      "Check details and payment method, then Place Order",
+      "At the restaurant during the selected time, tap I'm Here and use the displayed pick-up number"
     ]
+  },
+  "diningDisplay": {
+    "groups": [
+      "reservable-seating",
+      "no-seating-reservation"
+    ],
+    "rule": "Seating service venues are reservable; counter, required-mobile-order and snack venues share the no-seating-reservation group. Mobile ordering and marker type remain independent attributes."
   }
 }

@@ -101,3 +101,5 @@ planner.js 的排队、步行与机动时长是编辑预算，只有实际体验
 演出参考沿用 2026-11-01 核对时保留的官方场次快照：白天花船 11:30／14:00／16:00，Believe! 19:15（日本时间）。当前[白天官方场次](https://www.tokyodisneyresort.jp/en/tds/show/schedule/7404/)和[夜秀官方场次](https://www.tokyodisneyresort.jp/en/tds/show/schedule/967/)中的 2026-11-03 行与这些时段一致。记录见 research/show-references.json。旧日历会随日期滚动；界面将其独立标成历史参考，绝不写入未来所选日期场次或规划器。
 
 [官方优先入座规则](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/)中的 Book Now 指向[官方订座搜索](https://reserve.tokyodisneyresort.jp/en/restaurant/search/)。本导览只提供操作说明与入口，不代为登录或预约。棚顶／餐具是导览的显示分组，订座、移动点餐和现场排队仍由独立 service 字段判断；不会因使用餐具图标就推断必须订座。
+
+本次餐饮界面改为“可预约座位／无需预约”两类，手机点餐和小摊均可属于无需预约。手机点餐步骤再次对照[官方移动点餐说明](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/mobileorder.html)：使用 Tokyo Disney Resort App（英文版），My Plan → Disney Mobile Order，选择餐厅、来店时段、餐点和数量，Add to Cart 后核对付款方式并点 Place Order；到店后在 App 点 I'm Here，再按号码取餐。界面只保留游客需要操作的步骤，不列餐厅内部处理或现场安排。

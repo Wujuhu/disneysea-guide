@@ -343,9 +343,8 @@ body.nav-collapsed{--sidebar-width:48px}
 .list-symbol{display:grid;place-items:center;background:var(--teal-light);color:var(--teal)}
 .list-symbol>svg{width:26px;height:26px;stroke-width:1.5}
 .dining-pin.is-filtered-out{opacity:.22}.dining-pin.is-selected,.dining-pin:focus-visible{opacity:1}
-.detail-dining{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
-.detail-dining h3{font-size:15px;margin:0 0 10px}.detail-dining p{font-size:14px;line-height:1.9;margin:0 0 12px}
-.detail-dining small{display:block;font-size:11px;color:var(--secondary);margin-top:12px}
+.detail-content .detail-booking{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.detail-booking h3{font-size:15px;line-height:1.5;margin:0 0 10px;font-weight:600}.detail-content .detail-booking p{font-size:14px;line-height:1.9;margin:0 0 12px}
 #filters{display:flex;gap:0}#filters .chip{flex:1;min-width:0;padding-inline:5px}
 .dining-tabs{flex-wrap:wrap}
 .hidden-type-note{flex-shrink:0;padding:10px 18px;margin:0;border-bottom:1px solid var(--line);font-size:12px;line-height:1.8;color:var(--secondary)}
