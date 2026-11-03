@@ -254,3 +254,1458 @@ window.DISNEY_DATA.indoorArea = {
   D.showReferences=Object.fromEntries(D.shows.map(item=>[item.id,{date:'2026-11-01',times:[...D.showSchedule['2026-11-01'][item.id]],sourceUrl:item.scheduleUrl,checked:'2026-11-01',corroboratedDate:'2026-11-03'}]));
   D.serviceChecked='2026-11-03';
 }
+
+// Official photo galleries; full source and asset provenance: research/gallery-sources.json.
+{
+  const D=window.DISNEY_DATA;
+  const galleries={
+  "255": [
+    {
+      "src": "assets/gallery/255-1.webp",
+      "alt": "安娜与艾莎的冰雪之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/255/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/255-2.webp",
+      "alt": "安娜与艾莎的冰雪之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/255/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/255-3.webp",
+      "alt": "安娜与艾莎的冰雪之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/255/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "219": [
+    {
+      "src": "assets/gallery/219-1.webp",
+      "alt": "翱翔：梦幻奇航 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/219/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/219-2.webp",
+      "alt": "翱翔：梦幻奇航 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/219/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/219-3.webp",
+      "alt": "翱翔：梦幻奇航 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/219/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "256": [
+    {
+      "src": "assets/gallery/256-1.webp",
+      "alt": "乐佩公主天灯盛会 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/256/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/256-2.webp",
+      "alt": "乐佩公主天灯盛会 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/256/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/256-3.webp",
+      "alt": "乐佩公主天灯盛会 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/256/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "223": [
+    {
+      "src": "assets/gallery/223-1.webp",
+      "alt": "地心探险之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/223/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/223-2.webp",
+      "alt": "地心探险之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/223/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/223-3.webp",
+      "alt": "地心探险之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/223/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "218": [
+    {
+      "src": "assets/gallery/218-1.webp",
+      "alt": "玩具总动员疯狂游戏屋 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/218/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/218-2.webp",
+      "alt": "玩具总动员疯狂游戏屋 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/218/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/218-3.webp",
+      "alt": "玩具总动员疯狂游戏屋 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/218/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "243": [
+    {
+      "src": "assets/gallery/243-1.webp",
+      "alt": "惊魂古塔 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/243/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/243-2.webp",
+      "alt": "惊魂古塔 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/243/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/243-3.webp",
+      "alt": "惊魂古塔 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/243/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "222": [
+    {
+      "src": "assets/gallery/222-1.webp",
+      "alt": "印第安纳琼斯冒险旅程：水晶骷髅头魔宫 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/222/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/222-2.webp",
+      "alt": "印第安纳琼斯冒险旅程：水晶骷髅头魔宫 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/222/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/222-3.webp",
+      "alt": "印第安纳琼斯冒险旅程：水晶骷髅头魔宫 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/222/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "242": [
+    {
+      "src": "assets/gallery/242-1.webp",
+      "alt": "忿怒双神 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/242/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/242-2.webp",
+      "alt": "忿怒双神 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/242/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/242-3.webp",
+      "alt": "忿怒双神 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/242/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "235": [
+    {
+      "src": "assets/gallery/235-1.webp",
+      "alt": "辛巴达传奇之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/235/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/235-2.webp",
+      "alt": "辛巴达传奇之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/235/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/235-3.webp",
+      "alt": "辛巴达传奇之旅 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/235/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "224": [
+    {
+      "src": "assets/gallery/224-1.webp",
+      "alt": "海底两万里 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/224/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/224-2.webp",
+      "alt": "海底两万里 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/224/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/224-3.webp",
+      "alt": "海底两万里 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/224/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "230": [
+    {
+      "src": "assets/gallery/230-1.webp",
+      "alt": "威尼斯贡多拉游船 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/230/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/230-2.webp",
+      "alt": "威尼斯贡多拉游船 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/230/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/230-3.webp",
+      "alt": "威尼斯贡多拉游船 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/230/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "258": [
+    {
+      "src": "assets/gallery/258-1.webp",
+      "alt": "奇妙仙子妙妙小车 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/258/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/258-2.webp",
+      "alt": "奇妙仙子妙妙小车 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/258/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/258-3.webp",
+      "alt": "奇妙仙子妙妙小车 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/258/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "247": [
+    {
+      "src": "assets/gallery/247-1.webp",
+      "alt": "海底巡游艇：尼莫和好友的海洋世界 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/247/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/247-2.webp",
+      "alt": "海底巡游艇：尼莫和好友的海洋世界 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/247/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/247-3.webp",
+      "alt": "海底巡游艇：尼莫和好友的海洋世界 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/247/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "244": [
+    {
+      "src": "assets/gallery/244-1.webp",
+      "alt": "要塞探险 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/244/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/244-2.webp",
+      "alt": "要塞探险 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/244/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/244-3.webp",
+      "alt": "要塞探险 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/244/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "245": [
+    {
+      "src": "assets/gallery/245-1.webp",
+      "alt": "要塞探险“挑战李奥纳多” · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/245/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/245-2.webp",
+      "alt": "要塞探险“挑战李奥纳多” · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/245/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/245-3.webp",
+      "alt": "要塞探险“挑战李奥纳多” · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/245/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "233": [
+    {
+      "src": "assets/gallery/233-1.webp",
+      "alt": "大都会交通工具 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/233/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/233-2.webp",
+      "alt": "大都会交通工具 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/233/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/233-3.webp",
+      "alt": "大都会交通工具 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/233/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "232": [
+    {
+      "src": "assets/gallery/232-1.webp",
+      "alt": "迪士尼海洋电气化铁路（美国海滨） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/232/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/232-2.webp",
+      "alt": "迪士尼海洋电气化铁路（美国海滨） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/232/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "231": [
+    {
+      "src": "assets/gallery/231-1.webp",
+      "alt": "迪士尼海洋电气化铁路（发现港） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/231/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/231-2.webp",
+      "alt": "迪士尼海洋电气化铁路（发现港） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/231/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/231-3.webp",
+      "alt": "迪士尼海洋电气化铁路（发现港） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/231/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "227": [
+    {
+      "src": "assets/gallery/227-1.webp",
+      "alt": "迪士尼海洋渡轮航线（地中海港湾） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/227/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/227-2.webp",
+      "alt": "迪士尼海洋渡轮航线（地中海港湾） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/227/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/227-3.webp",
+      "alt": "迪士尼海洋渡轮航线（地中海港湾） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/227/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "228": [
+    {
+      "src": "assets/gallery/228-1.webp",
+      "alt": "迪士尼海洋渡轮航线（美国海滨） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/228/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/228-2.webp",
+      "alt": "迪士尼海洋渡轮航线（美国海滨） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/228/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "229": [
+    {
+      "src": "assets/gallery/229-1.webp",
+      "alt": "迪士尼海洋渡轮航线（失落河三角洲） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/229/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/229-2.webp",
+      "alt": "迪士尼海洋渡轮航线（失落河三角洲） · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/229/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "236": [
+    {
+      "src": "assets/gallery/236-1.webp",
+      "alt": "沙漠商队旋转木马 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/236/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/236-2.webp",
+      "alt": "沙漠商队旋转木马 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/236/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/236-3.webp",
+      "alt": "沙漠商队旋转木马 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/236/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "220": [
+    {
+      "src": "assets/gallery/220-1.webp",
+      "alt": "茉莉公主的飞天魔毯 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/220/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/220-2.webp",
+      "alt": "茉莉公主的飞天魔毯 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/220/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/220-3.webp",
+      "alt": "茉莉公主的飞天魔毯 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/220/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "226": [
+    {
+      "src": "assets/gallery/226-1.webp",
+      "alt": "神灯剧场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/226/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/226-2.webp",
+      "alt": "神灯剧场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/226/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/226-3.webp",
+      "alt": "神灯剧场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/226/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "237": [
+    {
+      "src": "assets/gallery/237-1.webp",
+      "alt": "小胖的飞鱼云霄飞车 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/237/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/237-2.webp",
+      "alt": "小胖的飞鱼云霄飞车 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/237/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/237-3.webp",
+      "alt": "小胖的飞鱼云霄飞车 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/237/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "238": [
+    {
+      "src": "assets/gallery/238-1.webp",
+      "alt": "史卡托的寄居蟹 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/238/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/238-2.webp",
+      "alt": "史卡托的寄居蟹 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/238/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "202": [
+    {
+      "src": "assets/gallery/202-1.webp",
+      "alt": "爱丽儿游乐场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/202/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/202-2.webp",
+      "alt": "爱丽儿游乐场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/202/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/202-3.webp",
+      "alt": "爱丽儿游乐场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/202/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "239": [
+    {
+      "src": "assets/gallery/239-1.webp",
+      "alt": "跳跃水母 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/239/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/239-2.webp",
+      "alt": "跳跃水母 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/239/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/239-3.webp",
+      "alt": "跳跃水母 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/239/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "240": [
+    {
+      "src": "assets/gallery/240-1.webp",
+      "alt": "河豚气球竞赛 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/240/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/240-2.webp",
+      "alt": "河豚气球竞赛 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/240/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/240-3.webp",
+      "alt": "河豚气球竞赛 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/240/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "241": [
+    {
+      "src": "assets/gallery/241-1.webp",
+      "alt": "旋转海藻杯 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/241/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/241-2.webp",
+      "alt": "旋转海藻杯 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/241/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/241-3.webp",
+      "alt": "旋转海藻杯 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/241/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "221": [
+    {
+      "src": "assets/gallery/221-1.webp",
+      "alt": "美人鱼礁湖剧场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/221/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/221-2.webp",
+      "alt": "美人鱼礁湖剧场 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/221/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "257": [
+    {
+      "src": "assets/gallery/257-1.webp",
+      "alt": "小飞侠梦幻岛历险记 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/257/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/257-2.webp",
+      "alt": "小飞侠梦幻岛历险记 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/257/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/257-3.webp",
+      "alt": "小飞侠梦幻岛历险记 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/257/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "246": [
+    {
+      "src": "assets/gallery/246-1.webp",
+      "alt": "龟龟漫谈 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/246/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/246-2.webp",
+      "alt": "龟龟漫谈 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/246/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/246-3.webp",
+      "alt": "龟龟漫谈 · 项目图片",
+      "caption": "项目图片",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/attraction/detail/246/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30001": [
+    {
+      "src": "assets/gallery/30001-1.webp",
+      "alt": "尚比尼兄弟餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/403/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30001-2.webp",
+      "alt": "尚比尼兄弟餐厅 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/2695/",
+      "width": 860,
+      "height": 645
+    }
+  ],
+  "30002": [
+    {
+      "src": "assets/gallery/30002-1.webp",
+      "alt": "纽约美味房 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30002-2.webp",
+      "alt": "纽约美味房 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/2219/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30002-3.webp",
+      "alt": "纽约美味房 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30003": [
+    {
+      "src": "assets/gallery/30003-1.webp",
+      "alt": "烟熏火鸡腿 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/128/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30003-2.webp",
+      "alt": "烟熏火鸡腿 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/416/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30003-3.webp",
+      "alt": "烟熏火鸡腿 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/416/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30004": [
+    {
+      "src": "assets/gallery/30004-1.webp",
+      "alt": "辣味熏鸡腿 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/29/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30004-2.webp",
+      "alt": "辣味熏鸡腿 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/461/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30004-3.webp",
+      "alt": "辣味熏鸡腿 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/461/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30412": [
+    {
+      "src": "assets/gallery/30412-1.webp",
+      "alt": "麦哲伦 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/412/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30412-2.webp",
+      "alt": "麦哲伦 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/3688/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30412-3.webp",
+      "alt": "麦哲伦 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/412/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30412-4.webp",
+      "alt": "麦哲伦 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/412/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30408": [
+    {
+      "src": "assets/gallery/30408-1.webp",
+      "alt": "卡纳雷托餐馆 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/408/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30408-2.webp",
+      "alt": "卡纳雷托餐馆 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/1167/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30408-3.webp",
+      "alt": "卡纳雷托餐馆 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/408/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30408-4.webp",
+      "alt": "卡纳雷托餐馆 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/408/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30425": [
+    {
+      "src": "assets/gallery/30425-1.webp",
+      "alt": "S.S.哥伦比亚餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/425/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30425-2.webp",
+      "alt": "S.S.哥伦比亚餐厅 · 餐点示例 · 2026 圣诞季",
+      "caption": "餐点示例 · 2026 圣诞季",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/4987/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30425-3.webp",
+      "alt": "S.S.哥伦比亚餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/425/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30425-4.webp",
+      "alt": "S.S.哥伦比亚餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/425/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30429": [
+    {
+      "src": "assets/gallery/30429-1.webp",
+      "alt": "泰迪罗斯福欢饮厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/429/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30429-2.webp",
+      "alt": "泰迪罗斯福欢饮厅 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/1919/",
+      "width": 860,
+      "height": 495
+    },
+    {
+      "src": "assets/gallery/30429-3.webp",
+      "alt": "泰迪罗斯福欢饮厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/429/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30432": [
+    {
+      "src": "assets/gallery/30432-1.webp",
+      "alt": "樱花餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/432/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30432-2.webp",
+      "alt": "樱花餐厅 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/4799/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30432-3.webp",
+      "alt": "樱花餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/432/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30451": [
+    {
+      "src": "assets/gallery/30451-1.webp",
+      "alt": "水平线海湾餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/451/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30451-2.webp",
+      "alt": "水平线海湾餐厅 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/3382/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30451-3.webp",
+      "alt": "水平线海湾餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/451/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30409": [
+    {
+      "src": "assets/gallery/30409-1.webp",
+      "alt": "阿伦黛尔皇家宴会厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/409/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30409-2.webp",
+      "alt": "阿伦黛尔皇家宴会厅 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/4446/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30409-3.webp",
+      "alt": "阿伦黛尔皇家宴会厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/409/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30409-4.webp",
+      "alt": "阿伦黛尔皇家宴会厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/409/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30413": [
+    {
+      "src": "assets/gallery/30413-1.webp",
+      "alt": "可爱小鸭餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/413/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30413-2.webp",
+      "alt": "可爱小鸭餐厅 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/3113/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30413-3.webp",
+      "alt": "可爱小鸭餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/413/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30413-4.webp",
+      "alt": "可爱小鸭餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/413/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30414": [
+    {
+      "src": "assets/gallery/30414-1.webp",
+      "alt": "瞭望台野餐 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/414/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30414-2.webp",
+      "alt": "瞭望台野餐 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/3128/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30414-3.webp",
+      "alt": "瞭望台野餐 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/414/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30414-4.webp",
+      "alt": "瞭望台野餐 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/414/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30446": [
+    {
+      "src": "assets/gallery/30446-1.webp",
+      "alt": "鳕鱼岬锦标美食 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/446/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30446-2.webp",
+      "alt": "鳕鱼岬锦标美食 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/446/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30456": [
+    {
+      "src": "assets/gallery/30456-1.webp",
+      "alt": "米格勒黄金国快餐中心 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/456/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30456-2.webp",
+      "alt": "米格勒黄金国快餐中心 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/2724/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30456-3.webp",
+      "alt": "米格勒黄金国快餐中心 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/456/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30459": [
+    {
+      "src": "assets/gallery/30459-1.webp",
+      "alt": "犹加敦基地营烧烤 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/459/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30459-2.webp",
+      "alt": "犹加敦基地营烧烤 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/4583/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30459-3.webp",
+      "alt": "犹加敦基地营烧烤 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/459/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30463": [
+    {
+      "src": "assets/gallery/30463-1.webp",
+      "alt": "凯兹堡餐饮广场 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/463/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30463-2.webp",
+      "alt": "凯兹堡餐饮广场 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/4465/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30463-3.webp",
+      "alt": "凯兹堡餐饮广场 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/463/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30463-4.webp",
+      "alt": "凯兹堡餐饮广场 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/463/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30468": [
+    {
+      "src": "assets/gallery/30468-1.webp",
+      "alt": "赛巴斯丁加力骚厨房 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/468/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30468-2.webp",
+      "alt": "赛巴斯丁加力骚厨房 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/3978/",
+      "width": 860,
+      "height": 645
+    }
+  ],
+  "30418": [
+    {
+      "src": "assets/gallery/30418-1.webp",
+      "alt": "火山餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/418/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30418-2.webp",
+      "alt": "火山餐厅 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/40/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30418-3.webp",
+      "alt": "火山餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/418/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30418-4.webp",
+      "alt": "火山餐厅 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/418/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30410": [
+    {
+      "src": "assets/gallery/30410-1.webp",
+      "alt": "奥肯好食 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/410/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30410-2.webp",
+      "alt": "奥肯好食 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/410/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30465": [
+    {
+      "src": "assets/gallery/30465-1.webp",
+      "alt": "芝麻开门 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/465/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30465-2.webp",
+      "alt": "芝麻开门 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/5014/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30465-3.webp",
+      "alt": "芝麻开门 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/465/",
+      "width": 860,
+      "height": 400
+    }
+  ],
+  "30450": [
+    {
+      "src": "assets/gallery/30450-1.webp",
+      "alt": "海边小吃 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/450/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30450-2.webp",
+      "alt": "海边小吃 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/4597/",
+      "width": 860,
+      "height": 645
+    }
+  ],
+  "30421": [
+    {
+      "src": "assets/gallery/30421-1.webp",
+      "alt": "鹦鹉螺号小厨 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/421/",
+      "width": 860,
+      "height": 400
+    },
+    {
+      "src": "assets/gallery/30421-2.webp",
+      "alt": "鹦鹉螺号小厨 · 餐点示例",
+      "caption": "餐点示例",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/food/101/",
+      "width": 860,
+      "height": 645
+    },
+    {
+      "src": "assets/gallery/30421-3.webp",
+      "alt": "鹦鹉螺号小厨 · 店铺环境",
+      "caption": "店铺环境",
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/421/",
+      "width": 860,
+      "height": 400
+    }
+  ]
+};
+  for(const item of [...D.attractions,...D.excludedAttractions,...D.dining]){
+    if(!galleries[item.id])continue;
+    item.images=galleries[item.id];item.image=item.images[0].src;item.imageAlt=item.images[0].alt;
+  }
+  const indoor=D.attractions.find(item=>item.id===202);
+  D.indoorArea.images=indoor.images.map(photo=>({...photo,caption:indoor.name+'图片',alt:indoor.name+'（美人鱼礁湖室内区）'}));
+  D.indoorArea.image=D.indoorArea.images[0].src;
+  D.imageChecked='2026-11-03';
+}

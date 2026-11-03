@@ -43,7 +43,7 @@
 
 ## 4. 图片与字体
 
-园区地图与项目照片来自官方公开页面，版权属于 Disney、Disney/Pixar 及相关权利人。此项目是本地使用的非官方导览，引用和存储不代表取得图片的再许可；未来公开发布前应确认相应素材使用条件。网页已保留版权署名和官方来源入口，每张交付 JPG 也嵌入了来源元数据。
+园区地图与项目照片来自官方公开页面，版权属于 Disney、Disney/Pixar 及相关权利人。此项目是本地使用的非官方导览，引用和存储不代表取得图片的再许可；未来公开发布前应确认相应素材使用条件。网页已保留版权署名和官方来源入口，交付 JPEG 与 WebP 均嵌入了来源元数据。
 
 字体为 [Noto Sans SC](https://fonts.google.com/noto/specimen/Noto+Sans+SC)，通过 Google Fonts 获取后按页面字符制作 WOFF2 子集。SIL Open Font License 1.1 原文保存在 `assets/FONT-LICENSE.txt`。SVG 图标与站点标识为本项目的简洁几何图形。
 
@@ -103,3 +103,12 @@ planner.js 的排队、步行与机动时长是编辑预算，只有实际体验
 [官方优先入座规则](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/)中的 Book Now 指向[官方订座搜索](https://reserve.tokyodisneyresort.jp/en/restaurant/search/)。本导览只提供操作说明与入口，不代为登录或预约。棚顶／餐具是导览的显示分组，订座、移动点餐和现场排队仍由独立 service 字段判断；不会因使用餐具图标就推断必须订座。
 
 本次餐饮界面改为“可预约座位／无需预约”两类，手机点餐和小摊均可属于无需预约。手机点餐步骤再次对照[官方移动点餐说明](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/mobileorder.html)：使用 Tokyo Disney Resort App（英文版），My Plan → Disney Mobile Order，选择餐厅、来店时段、餐点和数量，Add to Cart 后核对付款方式并点 Place Order；到店后在 App 点 I'm Here，再按号码取餐。界面只保留游客需要操作的步骤，不列餐厅内部处理或现场安排。
+
+
+## 10. 项目与餐饮图册（2026-11-03）
+
+新增 166 张对应官方图片，覆盖 33 个项目和 23 条餐饮记录，每条 2–4 张。图像与所属项目／店铺逐一对应，来源以各自官方详情相册和店铺菜单链接为准；如[麦哲伦环境](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/412/)、[麦哲伦餐点](https://www.tokyodisneyresort.jp/en/food/3688/)、[阿伦黛尔环境](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/409/)及[阿伦黛尔肉丸饭](https://www.tokyodisneyresort.jp/en/food/4446/)。鳕鱼岬与奥肯本轮使用已核对的环境图；其他 21 条餐饮记录另配各店菜单中的餐点示例。S.S.哥伦比亚的季节套餐图片明确标注为 2026 圣诞季，不作为二月菜单承诺。
+
+完整逐图来源、原图 URL、相应菜单页、核对日期、尺寸和文件哈希见 research/gallery-sources.json。额外的电气化铁路（美国海滨）与大都会交通工具照片沿用已核对封面的官方媒体组，下载后逐图核对；无法识别的第三张铁路候选图未收录。全部 166 张新素材已通过图片联系表核对，无跨店或跨项目混用。WebP 只做等比例缩小和压缩，最长边 1280px，合计约 14.9 MB；每张嵌入来源网页、原图 URL、检索日期和权利人说明。图片保留原权利归属，不因收录而获得开放再许可。
+
+详情不自动轮播，用户可前后切换、点击缩略图、使用键盘方向键或在手机上滑动；主图可打开大图，图下注明逐图来源。图片以完整显示为原则，不用裁切填满主图；餐点图只作示例，实际菜品以所选日期的官方菜单为准。原有演出照片继续沿用既有来源。

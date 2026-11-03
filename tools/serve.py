@@ -6,6 +6,7 @@ import argparse
 
 ROOT = Path(__file__).resolve().parents[1]
 class Handler(SimpleHTTPRequestHandler):
+    extensions_map = {**SimpleHTTPRequestHandler.extensions_map, '.webp': 'image/webp'}
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
     def do_GET(self):

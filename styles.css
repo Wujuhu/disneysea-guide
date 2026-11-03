@@ -366,3 +366,24 @@ body.nav-collapsed{--sidebar-width:48px}
 .show-reference-note strong{font-weight:600;color:var(--ink)}
 .detail-booking{margin:18px 0}.detail-booking ol{padding-left:20px;margin:10px 0 14px;font-size:14px;line-height:1.9}.detail-booking li+li{margin-top:6px}
 .booking-steps{padding-left:22px;margin:20px 0;font-size:15px;line-height:1.9}.booking-steps li+li{margin-top:6px}
+.detail-gallery{position:relative;background:#f3f7f5;outline-offset:-3px}
+.detail-gallery .carousel-item{margin-bottom:0}
+.detail-gallery .detail-photo{display:block;width:100%;height:auto;aspect-ratio:8/5;background:#eef3f1}
+.detail-gallery .detail-photo img{display:block;width:100%;height:100%;object-fit:contain}
+.detail-photo-caption{display:flex;align-items:center;gap:8px;min-height:34px;padding:8px 12px;font-size:11px;line-height:1.5;color:var(--secondary);background:#fff}
+.detail-photo-caption>span:first-child{flex:1;min-width:0}
+.detail-photo-count{font-variant-numeric:tabular-nums;white-space:nowrap}
+.detail-photo-caption a{display:inline-flex;align-items:center;gap:3px;flex-shrink:0;color:var(--teal);text-underline-offset:3px}
+.detail-photo-caption a svg{width:11px;height:11px}
+.detail-photo-controls{display:flex;align-items:center;justify-content:center;gap:8px;padding:0 10px 10px;background:white}
+.detail-photo-arrow{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--teal)}
+.detail-photo-arrow:hover{background:var(--teal-light)}
+.detail-photo-arrow svg{width:18px;height:18px}
+.detail-photo-arrow[data-bs-slide="prev"] svg{transform:rotate(180deg)}
+#detail-gallery .detail-photo-thumbs{position:static;display:flex;gap:6px;justify-content:center;margin:0;padding:3px;min-width:0;overflow-x:auto}
+#detail-gallery .detail-photo-thumbs [data-bs-target]{flex:0 0 44px;width:44px;height:34px;margin:0;padding:0;border:0;border-radius:4px;overflow:hidden;text-indent:0;background:#eef3f1;opacity:.5}
+#detail-gallery .detail-photo-thumbs .active{opacity:1;outline:2px solid var(--teal);outline-offset:1px}
+#detail-gallery .detail-photo-thumbs button:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+.detail-photo-thumbs img{display:block;width:100%;height:100%;object-fit:cover}
+.detail-gallery .detail-close{z-index:3}
+@media(max-width:760px){.detail-photo-arrow{flex-basis:44px;width:44px;height:44px}#detail-gallery .detail-photo-thumbs [data-bs-target]{height:44px}.detail-photo-caption{padding-inline:10px}}
