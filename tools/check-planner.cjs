@@ -31,7 +31,8 @@ function checkPlan(date){
   assert.equal(new Set(plan.stops.map(item=>item.id)).size,plan.stops.length);
   assert(plan.stops.every((stop,index)=>stop.order===index+1));
   assert.equal(plan.routePoints.length,plan.stops.length);
-  assert(plan.routePoints.every(item=>item.type!=='restaurant'&&item.id!==257));
+  assert(plan.routePoints.every(item=>item.type!=='restaurant'&&item.type!=='show'&&item.id!==257));
+  assert.equal(plan.stops.length,plan.rows.filter(row=>row.itemId&&['ride','explore'].includes(row.kind)).length,'only play activities receive route numbers');
   assert(plan.rows.filter(row=>row.kind==='meal').every(row=>!row.itemId&&!row.restaurantId));
   for(const [index,action] of plan.dpaActions.entries()){
     const item=all.get(action.dpaItemId),anchor=plan.rows[action.anchorRowIndex];
@@ -55,19 +56,19 @@ for(let day=1;day<=6;day++){
   const plan=P.plan(`2027-02-0${day}`),order=id=>plan.stops.findIndex(item=>item.id===id);
   for(const id of [219,224,242,255,222,243])assert(order(id)>=0,`missing required loop stop: ${id}`);
   assert(order(224)<order(242)&&order(242)<order(255)&&order(255)<order(222)&&order(222)<order(243),'loop must visit Fantasy Springs between Raging Spirits and Indiana Jones');
-  assert(order(20001)<order(224),'watch the harbor show before going into the park');
+  assert(plan.rows.findIndex(row=>row.itemId===20001)<plan.rows.findIndex(row=>row.itemId===224),'the show reservation stays in the itinerary without becoming a route stop');
   assert.equal(plan.dpaActions[0].dpaItemId,255,'check Frozen immediately after entering');
   assert.equal(plan.dpaActions[0].start,plan.opening+1);
 }
 const full=P.plan('2026-11-30');assert.equal(full.substitutions.length,0);assert(D.coreIds.every(id=>full.stops.some(item=>item.id===id)));
 const feb5=P.plan('2027-02-05'),feb6=P.plan('2027-02-06');
-assert.equal(P.clock(feb5.closing),'18:30');assert(!feb5.stops.some(item=>item.id===20002));
+assert.equal(P.clock(feb5.closing),'18:30');assert(!feb5.rows.some(row=>row.itemId===20002));
 assert.equal(feb6.rows.filter(row=>row.kind==='show'&&row.tentative).length,2);
 assert.equal(feb5.dpaBudget,11000);assert.equal(feb6.dpaBudget,8000);assert.equal(feb6.dpaExampleCost,14000);
 assert(!feb6.rows.find(row=>row.kind==='ride').usesDpa);
 assert(P.isClosed(all.get(20002),'2027-02-05'));assert(!P.isClosed(all.get(20002),'2027-02-06'));
 assert.equal(P.showTimes(20002,'2027-02-06'),null);
-assert(feb6.stops.some(item=>item.id===20002&&item.tentative),'unpublished shows must remain visible');
+assert(feb6.rows.some(row=>row.itemId===20002&&row.tentative),'unpublished shows must remain in the itinerary without joining the route');
 const future=P.plan('2027-01-12');assert.equal(future.knownHours,false);assert.equal(P.showTimes(20001,'2027-01-12'),null);
 console.log('PASS: 58 daily plans, restaurant-free route, Fantasy Springs loop, confirmed closures, unpublished shows and DPA purchase eligibility.');
 console.log(JSON.stringify({date:feb6.date,budgetForTwo:feb6.dpaBudget,route:feb6.rows.map(row=>({time:row.tentative?'场次待公布（已留预算）':P.clock(row.start)+'–'+P.clock(row.end),title:row.title})),dpa:feb6.dpaActions.map(action=>({buy:P.clock(action.start),target:P.clock(action.targetStart),next:P.clock(action.nextEligible),planned:action.planned,title:action.title}))},null,2));

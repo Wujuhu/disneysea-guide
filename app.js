@@ -242,14 +242,14 @@
       const title=item?(row.kind==='show'?item.name:row.kind==='meal'?`${item.meal} · ${item.name}`:item.short):row.title;
       const actions=activePlan.dpaActions.filter(action=>action.anchorRowIndex===index);
       const notes=actions.map(action=>{const target=byId.get(action.dpaItemId);return `<article class="dpa-note" data-buy="${action.start}"><div class="dpa-note-heading">${icons('ticket')}<time>${clock(action.start)}</time><span>${action.planned?'查 DPA':'可选 DPA'}</span></div><button data-select="${target.id}">${target.short}</button><p class="dpa-target">目标 ${clock(action.targetStart)} 前后使用</p><p>${D.party.adults} 人 ${number(action.pairPrice)} 日元 · 若此时付款，下张最早 ${clock(action.nextEligible)}</p><p>${escapeHTML(action.description)}</p></article>`;}).join('');
-      return `<div class="timeline-item" data-start="${row.start}" data-end="${row.end}"><article class="timed-stop ${row.kind}"><div class="stop-time">${time}</div><div class="stop-body"><div class="stop-title">${order?`<span class="stop-number">${order}</span>`:icons(row.kind==='meal'?'food':row.kind==='walk'?'arrow':'route')}${item?`<button data-select="${item.id}">${title}${D.coreIds.includes(item.id)?icons('star'):''}</button>`:`<h3>${title}</h3>`}</div>${facts?`<div class="step-facts">${facts}</div>`:''}${row.description?`<p class="step-note">${escapeHTML(row.description)}</p>`:''}</div></article><aside class="dpa-side-list" aria-label="本段 DPA 操作">${notes}</aside>${notes?'<svg class="timeline-branch" aria-hidden="true" focusable="false"></svg>':''}</div>`;
+      return `<div class="timeline-item" data-start="${row.start}" data-end="${row.end}"><article class="timed-stop ${row.kind}"><div class="stop-time">${time}</div><div class="stop-body"><div class="stop-title">${order?`<span class="stop-number">${order}</span>`:icons(row.kind==='show'?(row.itemId===20001?'boat':'moon'):row.kind==='meal'?'food':row.kind==='walk'?'arrow':'route')}${item?`<button data-select="${item.id}">${title}${D.coreIds.includes(item.id)?icons('star'):''}</button>`:`<h3>${title}</h3>`}</div>${facts?`<div class="step-facts">${facts}</div>`:''}${row.description?`<p class="step-note">${escapeHTML(row.description)}</p>`:''}</div></article><aside class="dpa-side-list" aria-label="本段 DPA 操作">${notes}</aside>${notes?'<svg class="timeline-branch" aria-hidden="true" focusable="false"></svg>':''}</div>`;
     }).join('');
     renderShows();renderDPA();renderDining();renderRouteOverlay();queueTimelineLayout();
   }
   function renderRouteOverlay(){
     if(!activePlan||!$('#map-route'))return;
     $('#route-visible').checked=state.showRoute;$('#map-route').hidden=!state.showRoute;
-    $('#map-legend').innerHTML=`<span class="legend-order">1</span>游玩顺序 <i class="legend-dot"></i>其他项目 ${icons('star')}重点 ${icons('food')}吃饭 <i class="legend-dpa" title="DPA 适用设施，实际名额以官方 App 为准"></i><span class="visually-hidden">绿色外圈：</span>DPA适用`;
+    $('#map-legend').innerHTML=`<span class="legend-order">1</span>项目顺序 <i class="legend-dot"></i>其他项目 ${icons('star')}重点 ${icons('boat')}演出 ${icons('food')}餐厅 <i class="legend-dpa" title="DPA 适用设施，实际名额以官方 App 为准"></i><span class="visually-hidden">绿色外圈：</span>DPA适用`;
     const stops=activePlan.stops;
     $$('.map-pin').forEach(pin=>{const item=byId.get(Number(pin.dataset.select)),stop=stops.find(stop=>mapItemId(stop.id)===item.id);pin.classList.toggle('is-route-stop',Boolean(stop));pin.classList.toggle('other-pin',!stop);$('.pin-core',pin).innerHTML=stop?`<span class="pin-value">${stop.order}</span>`:item.type==='show'?icons(item.id===20001?'boat':'moon'):'';pin.setAttribute('aria-label',`${stop?'第 '+stop.order+' 站，':''}${item.name}，${areas.get(item.area).name}${hasDPA(item)&&!closureOn(item)?'，DPA适用':''}`);});
     queueMapLayout();
@@ -327,7 +327,7 @@
       const cx=core.left+core.width/2,cy=core.top+core.height/2,bounds={l:core.width/2,r:core.width/2,t:core.height/2,b:core.height/2};
       const starBox=$('.pin-star',node.button)?.getBoundingClientRect();
       if(starBox?.width){bounds.l=Math.max(bounds.l,cx-starBox.left);bounds.r=Math.max(bounds.r,starBox.right-cx);bounds.t=Math.max(bounds.t,cy-starBox.top);bounds.b=Math.max(bounds.b,starBox.bottom-cy);}
-      return {...node,p,x:view.x+p.x*view.scale,y:view.y+p.y*view.scale,...bounds,isRoute,priority:node.item.id===mapItemId(state.selected)?-1:isRoute?0:node.item.type==='restaurant'?1:star?2:3};
+      return {...node,p,x:view.x+p.x*view.scale,y:view.y+p.y*view.scale,...bounds,isRoute,priority:node.item.id===mapItemId(state.selected)?-1:(isRoute||node.item.type==='show')?0:node.item.type==='restaurant'?1:star?2:3};
     }).sort((a,b)=>a.priority-b.priority||a.item.id-b.item.id);
     const placed=[],offsets=[[0,0]];
     for(const radius of [16,28,40,52])for(const [x,y] of [[0,-1],[1,0],[0,1],[-1,0],[.707,-.707],[.707,.707],[-.707,.707],[-.707,-.707]])offsets.push([x*radius,y*radius]);
@@ -356,7 +356,7 @@
     const occupied=[...placed,controls,...fixedLabels];
     const panel=$('#detail-panel');
     if(!panel.hidden){const r=panel.getBoundingClientRect();occupied.push({x:r.left-viewportRect.left,y:r.top-viewportRect.top,w:r.width,h:r.height});}
-    const labels=visible.filter(node=>node.isRoute||(!viewport.classList.contains('is-dragging')&&(node.item.id===hoveredMarker||node.button.matches(':focus-visible'))));
+    const labels=visible.filter(node=>node.isRoute||node.item.type==='show'||(!viewport.classList.contains('is-dragging')&&(node.item.id===hoveredMarker||node.button.matches(':focus-visible'))));
     labels.sort((a,b)=>(a.item.id===hoveredMarker?-1:0)-(b.item.id===hoveredMarker?-1:0)||a.priority-b.priority);
     for(const node of labels){
       if(node.x<0||node.y<0||node.x>width||node.y>height)continue;
@@ -524,6 +524,7 @@
   let lastWidth=0,lastHeight=0;
   new ResizeObserver(entries=>{const {width,height}=entries[0].contentRect;if(width&&height&&(width!==lastWidth||height!==lastHeight)){lastWidth=width;lastHeight=height;fitMap();if(state.selected)focusMap(byId.get(state.selected));}}).observe(viewport);
   new ResizeObserver(queueTimelineLayout).observe($('#route-timeline'));
+  new ResizeObserver(()=>{const footerHeight=$('.map-bottom').getBoundingClientRect().height;$('.map-panel').style.setProperty('--map-footer-height',footerHeight+'px');queueMapLayout();}).observe($('.map-bottom'));
   D.areas.forEach(area=>{const option=document.createElement('option');option.value=area.id;option.textContent=area.name;$('#area-filter').append(option);});
   applyPanelLayout();applyMapOrientation(false);renderMap();renderHours();renderRoute();renderResults();navigateHash();
   document.fonts?.ready.then(()=>{queueMapLayout();queueTimelineLayout();});

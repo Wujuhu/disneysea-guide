@@ -104,7 +104,7 @@
     }
     if(cursor<closing)add({kind:'exit',title:'海港夜景、购物后离园',start:cursor,end:closing,description:'按当前余量休息、购物或在附近加玩；不再为远处项目走回头路。'});
     const unresolvedShows=D.shows.filter(show=>showTimes(show.id,date)===null&&available(show)&&!rows.some(row=>row.itemId===show.id));
-    const stops=rows.filter(row=>row.itemId).map((row,index)=>({...all.get(row.itemId),order:index+1,tentative:Boolean(row.tentative)}));
+    const stops=rows.filter(row=>row.itemId&&['ride','explore'].includes(row.kind)).map((row,index)=>({...all.get(row.itemId),order:index+1}));
     const routePoints=stops.map(item=>({...item}));
     const dpaActions=dpaActionsFor(rows,date,opening),areaNames=new Map(D.areas.map(area=>[area.id,area.name]));
     const routeAreas=rows.flatMap(row=>[...(row.viaAreas||[]),...(row.itemId?[all.get(row.itemId).area]:[])]).filter((area,index,list)=>area!==list[index-1]);
