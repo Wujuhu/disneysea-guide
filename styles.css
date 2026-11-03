@@ -208,7 +208,7 @@ svg:has(use[href="#i-star"]){fill:#c28a16;stroke:none}
 .map-overlay{position:absolute;inset:0;z-index:3;pointer-events:none;user-select:none;-webkit-user-select:none}
 #map-pins .map-pin{width:30px;height:30px;transform:translate(-50%,-50%);visibility:visible;outline:none}
 #map-pins .map-pin .pin-core{transform:none;outline:none;transition:background-color .15s,box-shadow .15s}
-#map-pins .map-pin.other-pin:not(.show-pin) .pin-core{width:14px;height:14px}
+#map-pins .map-pin.other-pin:not(.show-pin) .pin-core{width:12px;height:12px}
 #map-pins .map-pin.is-route-stop .pin-core{width:24px;height:24px;border-radius:50%;font-size:12px;line-height:1;background:#ac175f}
 #map-pins .map-pin.show-pin .pin-core{width:17px;height:17px;transform:rotate(45deg);border-radius:5px;background:#9c6419}
 #map-pins .map-pin.show-pin .pin-core svg{width:12px;height:12px;transform:rotate(-45deg)}
@@ -219,9 +219,10 @@ svg:has(use[href="#i-star"]){fill:#c28a16;stroke:none}
 #map-pins .pin-star{top:0;right:0;width:12px;height:12px}
 #map-pins .pin-star svg{width:12px;height:12px}
 #map-dining .dining-pin{width:24px;height:24px;transform:translate(-50%,-50%);visibility:visible;outline:none}
-#map-dining .dining-core{width:20px;height:20px;border-radius:5px;outline:none}
-#map-dining .dining-core svg{width:13px;height:13px}
-#map-dining .snack-pin .dining-core{width:18px;height:18px}
+#map-dining .dining-core{width:17px;height:17px;border-radius:4px;outline:none}
+#map-dining .dining-core svg{width:11px;height:11px}
+#map-dining .stall-pin .dining-core{width:15px;height:15px;background:#875b20}
+#map-dining .stall-pin .dining-core svg{width:10px;height:10px}
 #map-dining .dining-pin:focus-visible .dining-core{outline:2px solid var(--teal);outline-offset:3px}
 .map-leaders path{stroke-width:1px;vector-effect:non-scaling-stroke}
 .area-boundary:focus,.area-boundary:focus-visible{outline:none!important}
@@ -357,3 +358,12 @@ body.nav-collapsed{--sidebar-width:48px}
 .entry-label{padding:0;border:0;background:transparent;transform:translate(-12px,-50%)}
 .entry-number{display:grid;place-items:center;flex-shrink:0;width:24px;height:24px;border:2px solid white;border-radius:50%;background:#ac175f;color:white;font-size:12px;line-height:1;font-variant-numeric:tabular-nums}
 .entry-name{padding:3px 6px;border-radius:4px;background:rgb(255 255 255 / 94%);color:#173c47;line-height:1.4;box-shadow:0 2px 6px rgb(22 57 63 / 10%)}
+.historical-schedule{padding-top:15px;border-top:1px solid var(--line)}
+.historical-schedule .show-time-list time{background:var(--gold-light);color:#795620}
+.historical-schedule .source-link{margin-top:10px}
+.show-reference-item{padding-bottom:14px;border-bottom:1px solid var(--line)}
+.show-reference-item .show-row{border-bottom:0;padding-bottom:8px}
+.show-reference-note{font-size:12px;line-height:1.8;color:var(--secondary)}
+.show-reference-note strong{font-weight:600;color:var(--ink)}
+.detail-booking{margin:18px 0}.detail-booking ol{padding-left:20px;margin:10px 0 14px;font-size:14px;line-height:1.9}.detail-booking li+li{margin-top:6px}
+.booking-steps{padding-left:22px;margin:20px 0;font-size:15px;line-height:1.9}.booking-steps li+li{margin-top:6px}

@@ -94,3 +94,10 @@ planner.js 的排队、步行与机动时长是编辑预算，只有实际体验
 - 在核对的官方说明中没有统一每小时全项目一起补票的时刻表；页面不承诺售罄后再放票。规则来源与边界见 research/service-rules.json。
 
 排队、DPA 通道等候、步行与餐饮时长仍是导览预算。环线加入冰雪奇缘后，普通营业日按冰雪奇缘、古塔 DPA 预算，两位成人约 ¥8,000；提前闭园日另加忿怒双神约 ¥3,000。并不表示已买到或保证库存。
+
+
+## 9. 演出参考与餐饮图标补充（2026-11-03）
+
+演出参考沿用 2026-11-01 核对时保留的官方场次快照：白天花船 11:30／14:00／16:00，Believe! 19:15（日本时间）。当前[白天官方场次](https://www.tokyodisneyresort.jp/en/tds/show/schedule/7404/)和[夜秀官方场次](https://www.tokyodisneyresort.jp/en/tds/show/schedule/967/)中的 2026-11-03 行与这些时段一致。记录见 research/show-references.json。旧日历会随日期滚动；界面将其独立标成历史参考，绝不写入未来所选日期场次或规划器。
+
+[官方优先入座规则](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/)中的 Book Now 指向[官方订座搜索](https://reserve.tokyodisneyresort.jp/en/restaurant/search/)。本导览只提供操作说明与入口，不代为登录或预约。棚顶／餐具是导览的显示分组，订座、移动点餐和现场排队仍由独立 service 字段判断；不会因使用餐具图标就推断必须订座。

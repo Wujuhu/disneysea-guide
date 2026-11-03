@@ -47,7 +47,12 @@
   const mapEligible=item=>item.id===D.indoorArea.id?item.items.some(id=>eligible(byId.get(id))):eligible(item);
   const durationText=item=>item.durationLabel||(item.durationMinutes?`约 ${item.durationMinutes} 分钟`:item.duration||'按现场体验安排');
   const diningMethod=item=>({seating:'建议提前订座','mobile-required':'须先手机点餐',counter:item.mobileOrder?'无需订座 · 可手机点餐':'无需订座 · 现场选餐',snack:item.mobileOrder?'路边小吃 · 可手机点餐':'路边小吃 · 直接排队'})[item.service];
-  const diningAdvice=item=>item.service==='seating'?'必吃这家：提前一个月日本时间 10:00 订用餐时间。没订到，当天 09:00 先查网上名额，10:00 起可到门口问剩余位；有空位才受理。':item.service==='mobile-required'?'入园后就先在 App 选餐厅、取餐时段并点餐。选在你抵达梦幻泉乡附近的时间；到店后再点 I\'m Here，等通知取餐。':item.showDiningUrl?'普通用餐区无需订座，可直接排队或先手机点餐。要边吃边看达菲演出，则须另订餐饮秀。':item.mobileOrder?'无需提前订座。可以先在 App 选取餐时段和餐点，到店再取；普通柜台与座位按当天现场安排。':'无需预约，走到店前排队购买。若有用餐座位，按现场安排使用。';
+  const diningIcon=item=>item.stall?'stall':'food';
+  function seatingTimingText(){
+    const [year,month,day]=dateForStatus().split('-').map(Number),priorMonth=month===1?12:month-1,priorDays=new Date(Date.UTC(year,month-1,0)).getUTCDate();
+    return day<=priorDays?`${month} 月 ${day} 日用餐：${priorMonth} 月 ${day} 日日本时间 10:00（北京时间 09:00）起可订。当天网上补位从日本时间 09:00（北京时间 08:00）开始。`:'提前一个月开放订座；上月没有同一天时，以官方预约页显示的开放日为准。';
+  }
+  const diningAdvice=item=>item.service==='seating'?'这家提供订座，先选好用餐时间，再按时到店等带位。若提前没订到，当天日本时间 09:00 先查网上名额，10:00 起可到门口问剩余位；有空位才受理。':item.service==='mobile-required'?'入园后就先在 App 选餐厅、取餐时段并点餐。选在你抵达梦幻泉乡附近的时间；到店后再点 I\'m Here，等通知取餐。':item.showDiningUrl?'普通用餐区无需订座，可直接排队或先手机点餐。要边吃边看达菲演出，则须另订餐饮秀。':item.mobileOrder?'无需提前订座。可以先在 App 选取餐时段和餐点，到店再取；普通柜台与座位按当天现场安排。':'无需预约，走到店前排队购买。若有用餐座位，按现场安排使用。';
   const mapName=item=>item.type==='show'?'演出':({219:'翱翔',223:'地心探险',255:'冰雪奇缘',256:'长发公主',257:'小飞侠',230:'贡多拉',247:'尼莫',231:'小火车',232:'小火车',227:'渡轮',228:'渡轮',229:'渡轮',40001:'室内区'})[item.id]||item.short;
   const englishLine=item=>{const name=escapeHTML(item?.en||'');return name?`<small class="detail-original" lang="en">${name}</small>`:'';};
 
@@ -119,7 +124,7 @@
     $$('#filters button').forEach(b => { const active=b.dataset.category===state.category; b.classList.toggle('active',active); b.setAttribute('aria-pressed',String(active)); });
     $('#attraction-list').innerHTML = count ? currentResults.map(item => {
       const area=areas.get(item.area),reasons=hiddenReasons(item),stop=activePlan?.stops.find(stop=>stop.id===item.id);
-      return `<article class="attraction-row ${state.selected===item.id?'selected':''}" style="--area-color:${area.color}"><button class="attraction-open" data-select="${item.id}" aria-label="查看${escapeHTML(item.name)}详情"><div class="list-photo ${item.image?'':'list-symbol'}">${item.image?`<img src="${item.image}" alt="" loading="lazy" width="80" height="70">`:icons('food')}${stop?`<span class="list-order">${stop.order}</span>`:''}</div><span class="list-copy"><strong>${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</strong><span class="row-tags"><span>${categoryNames[itemCategory(item)]}</span><span>${item.type==='restaurant'?diningMethod(item):item.playType}</span>${item.type==='restaurant'?'':`<span>${durationText(item)}</span>`}</span>${reasons.length?`<span class="row-hidden-reason">${reasons.map(reason=>escapeHTML(reason.text)).join('<br>')}</span>`:''}</span></button></article>`;
+      return `<article class="attraction-row ${state.selected===item.id?'selected':''}" style="--area-color:${area.color}"><button class="attraction-open" data-select="${item.id}" aria-label="查看${escapeHTML(item.name)}详情"><div class="list-photo ${item.image?'':'list-symbol'}">${item.image?`<img src="${item.image}" alt="" loading="lazy" width="80" height="70">`:icons(diningIcon(item))}${stop?`<span class="list-order">${stop.order}</span>`:''}</div><span class="list-copy"><strong>${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</strong><span class="row-tags"><span>${item.stall?'路边小摊':categoryNames[itemCategory(item)]}</span><span>${item.type==='restaurant'?diningMethod(item):item.playType}</span>${item.type==='restaurant'?'':`<span>${durationText(item)}</span>`}</span>${reasons.length?`<span class="row-hidden-reason">${reasons.map(reason=>escapeHTML(reason.text)).join('<br>')}</span>`:''}</span></button></article>`;
     }).join('') : `<div class="empty-state">${icons('search')}<h3>没有找到匹配项目</h3><p>试试项目的中文名、英文名，或放宽筛选。</p><button class="outline-button" data-action="clear-filters">查看全部项目</button></div>`;
     const ids=new Set(currentResults.map(item=>mapItemId(item.id)));
     $$('.map-pin').forEach(pin => { const item=byId.get(Number(pin.dataset.select));pin.hidden=!mapEligible(item); pin.classList.toggle('is-filtered-out',!ids.has(item.id)); pin.classList.toggle('is-selected',item.id===mapItemId(state.selected)); pin.classList.toggle('is-closed',Boolean(closureOn(item)));pin.classList.toggle('has-dpa',hasDPA(item)&&!closureOn(item)); });
@@ -156,15 +161,21 @@
     requestAnimationFrame(()=>{focusMap(item);if(focusDetail)$('#detail-panel').focus({preventScroll:true});});
   }
   function showTimeText(item){if(closureOn(item))return '所选日期已公布停演';const times=P.showTimes(item.id,dateForStatus());return times===null?'场次待公布':times.length?times.join(' / '):'所选日期暂无场次';}
+  function showReferenceHTML(item,compact=false){
+    const ref=D.showReferences[item.id];if(!ref)return '';
+    if(compact)return `<p class="show-reference-note"><strong>往期参考</strong> ${formatDate(ref.date)}：${ref.times.join(' / ')}<br>日本时间；仅参考，非所选日期场次。</p>`;
+    return `<section class="detail-schedule historical-schedule"><h3>往期时间参考</h3><p>${formatDate(ref.date)} · 本导览保存的排期</p><ul class="show-time-list">${ref.times.map(time=>`<li><time>${time}</time></li>`).join('')}</ul><small>日本时间；只用于了解大致时段，不代表 ${formatDate(dateForStatus())} 的演出安排。</small><a class="source-link" href="${ref.sourceUrl}" target="_blank" rel="noopener noreferrer">官方场次页 ${icons('external')}</a></section>`;
+  }
   function renderDetail(item) {
     const area=areas.get(item.area),closure=closureOn(item),panel=$('#detail-panel');panel.hidden=false;
     const isGroup=item.type==='group',hasPhoto=!isGroup&&Boolean(item.image);panel.classList.toggle('is-indoor-area',isGroup);
     const status=closure?'':item.type==='restaurant'?`<span class="detail-status">${diningMethod(item)}${item.price?' · ¥'+number(item.price):''}</span>`:hasDPA(item)?`<span class="detail-status">DPA ¥${number(item.dpa)} / 人 / 次</span>`:'';
     const reasons=hiddenReasons(item),hiddenDetails=reasons.length?`<section class="detail-hidden"><h3>隐藏原因</h3>${reasons.map(reason=>`<p>${escapeHTML(reason.text)}</p>`).join('')}${!state.showHidden?'<button class="inline-guide-link" data-action="show-hidden">在地图和普通清单中显示隐藏项目</button>':''}</section>`:'';
-    const diningDetails=item.type==='restaurant'?`<section class="detail-dining"><h3>什么时候处理？</h3><p>${diningAdvice(item)}</p>${item.mapLocationNote?`<p class="quiet-note">${item.mapLocationNote}</p>`:''}${item.showDiningUrl?`<a class="source-link" href="${item.showDiningUrl}" target="_blank" rel="noopener noreferrer">演出用餐区的预约说明 ${icons('external')}</a>`:''}<small>餐饮方式核对：${D.serviceChecked} · 日本时间</small></section>`:'';
+    const booking=item.service==='seating'?`<section class="detail-booking"><h3>提前订座怎么做？</h3><p>${seatingTimingText()}</p><ol><li>提前注册并登录 MyDisney，打开官方订座页。</li><li>选择用餐日期、${D.party.adults} 位成人、餐厅和想吃的时段，再找空位。</li><li>核对并确认预约，保存结果；按约定时间到店等带位。</li></ol><a class="source-link" href="${D.sources.restaurantBooking}" target="_blank" rel="noopener noreferrer">打开官方订座页 ${icons('external')}</a></section>`:'';
+    const diningDetails=item.type==='restaurant'?`<section class="detail-dining"><h3>${item.stall?'路边小摊':'餐厅'} · 什么时候处理？</h3><p>${diningAdvice(item)}</p>${booking}${item.mapLocationNote?`<p class="quiet-note">${item.mapLocationNote}</p>`:''}${item.showDiningUrl?`<a class="source-link" href="${item.showDiningUrl}" target="_blank" rel="noopener noreferrer">演出用餐区的预约说明 ${icons('external')}</a>`:''}<small>餐饮方式核对：${D.serviceChecked} · 日本时间</small></section>`:'';
     const timing=!isGroup&&item.type!=='restaurant'?`<p class="detail-duration">${durationText(item)}<small>${item.durationIsEstimate?'导览建议，不含排队':'体验时长，不含排队'}</small></p>`:'';
     const times=item.type==='show'?P.showTimes(item.id,dateForStatus()):null;
-    const showSchedule=item.type==='show'?`<section class="detail-schedule"><h3>${formatDate(dateForStatus())} 演出时间</h3>${times===null?'<p>该日场次尚未公布。官方通常在前一个月 8 日左右公布下月安排。</p>':times.length?`<ul class="show-time-list">${times.map(time=>`<li><time>${time}</time></li>`).join('')}</ul><small>日本时间</small>`:'<p>该日停演。</p>'}</section>`:'';
+    const showSchedule=item.type==='show'?`<section class="detail-schedule"><h3>${formatDate(dateForStatus())} 演出时间</h3>${times===null?'<p>该日场次尚未公布。官方通常在前一个月 8 日左右公布下月安排。</p>':times.length?`<ul class="show-time-list">${times.map(time=>`<li><time>${time}</time></li>`).join('')}</ul><small>日本时间</small>`:'<p>该日停演。</p>'}</section>${showReferenceHTML(item)}`:'';
     const back=indoorIds.has(item.id)?`<button class="detail-back" data-select="${D.indoorArea.id}">${icons('arrow')}返回室内区</button>`:'';
     const children=item.type==='group'?`<ul class="indoor-projects" aria-label="室内项目">${item.items.filter(id=>eligible(byId.get(id))).map(id=>{const child=byId.get(id);return `<li><button class="indoor-project" data-select="${id}" aria-label="查看${escapeHTML(child.name)}详情"><img src="${child.image}" alt="" width="48" height="48" loading="lazy"><span class="indoor-project-copy"><strong>${child.name}</strong><small>${child.playType} · ${durationText(child)}${closureOn(child)?'<span class="tag closed">暂停运营</span>':''}</small></span>${icons('arrow')}</button></li>`;}).join('')}</ul>`:'';
     const close=`<button class="detail-close icon-button" data-action="close-detail" aria-label="关闭项目详情">${icons('close')}</button>`;
@@ -186,18 +197,17 @@
     $('.hours-strip>a').href=hours?.url||D.sources.calendar;
   }
   function renderShows() {
-    $('#show-cards').innerHTML=D.shows.filter(eligible).map(item=>`<button class="show-row" data-select="${item.id}"><span>${item.name}</span><span>${showTimeText(item)} · ${item.durationMinutes} 分钟</span>${icons('arrow')}</button>`).join('')||'<p>当前停运筛选下没有可显示的演出。</p>';
+    $('#show-cards').innerHTML=D.shows.filter(eligible).map(item=>`<article class="show-reference-item"><button class="show-row" data-select="${item.id}"><span>${item.name}</span><span>${showTimeText(item)} · ${item.durationMinutes} 分钟</span>${icons('arrow')}</button>${showReferenceHTML(item,true)}</article>`).join('')||'<p>当前停运筛选下没有可显示的演出。</p>';
   }
   function renderDining() {
-    const foodRow=item=>`<button class="food-row" data-select="${item.id}">${icons('food')}<span>${item.name}<small>${areas.get(item.area).name} · ${diningMethod(item)}${item.venue?' · '+item.venue:''}${item.showDiningUrl?' · 演出区另订':''}</small>${hiddenReasons(item).length?`<small class="row-hidden-reason">${hiddenReasons(item).map(reason=>escapeHTML(reason.text)).join('；')}</small>`:''}</span>${item.price?`<b>¥${number(item.price)}</b>`:''}${icons('arrow')}</button>`;
+    const foodRow=item=>`<button class="food-row" data-select="${item.id}">${icons(diningIcon(item))}<span>${item.name}<small>${areas.get(item.area).name} · ${diningMethod(item)}${item.venue?' · '+item.venue:''}${item.showDiningUrl?' · 演出区另订':''}</small>${hiddenReasons(item).length?`<small class="row-hidden-reason">${hiddenReasons(item).map(reason=>escapeHTML(reason.text)).join('；')}</small>`:''}</span>${item.price?`<b>¥${number(item.price)}</b>`:''}${icons('arrow')}</button>`;
     const dining=D.dining.filter(eligible);
     $('#seating-options').innerHTML=dining.filter(item=>item.service==='seating').map(foodRow).join('');
     $('#dining-options').innerHTML=dining.filter(item=>item.service==='mobile-required').map(foodRow).join('');
-    $('#walkin-options').innerHTML=dining.filter(item=>item.service==='counter').map(foodRow).join('');
-    $('#snack-options').innerHTML=dining.filter(item=>item.snack).map(foodRow).join('');
+    $('#walkin-options').innerHTML=dining.filter(item=>item.service==='counter'&&!item.stall).map(foodRow).join('');
+    $('#snack-options').innerHTML=dining.filter(item=>item.stall).map(foodRow).join('');
     $('#dining-closure-note').textContent=D.dining.filter(item=>closureOn(item)).map(item=>`${item.name}：${formatDate(closureOn(item)[0])}–${formatDate(closureOn(item)[1])} 停运。`).join(' ');
-    const [year,month,day]=dateForStatus().split('-').map(Number),priorMonth=month===1?12:month-1,priorDays=new Date(Date.UTC(year,month-1,0)).getUTCDate();
-    $('#booking-example').textContent=day<=priorDays?`想在 ${month} 月 ${day} 日吃：${priorMonth} 月 ${day} 日日本时间 10:00（北京时间 09:00）开抢。当日补位从日本时间 09:00（北京时间 08:00）开始。`:'提前一个月开放订座；若上月没有同一天，以官方预约页显示的开放日为准。';
+    $('#booking-example').textContent=seatingTimingText();
     const fantasyRow=activePlan.rows.find(row=>byId.get(row.itemId)?.area==='fantasy');
     $('#mobile-order-example').textContent=activePlan.knownHours?`按本日草案，${P.clock(activePlan.opening)} 入园后就先看想吃的餐厅与可取餐时段。${fantasyRow?`梦幻泉乡约 ${P.clock(fantasyRow.start)}–${P.clock(fantasyRow.end)} 游玩，若想在那里吃，把餐单选在附近时段，并相应挪动午餐。`:''}这是操作建议，实际可选时段以 App 为准。`:'入园后先看想吃的餐厅与可取餐时段；按实际到达该区的时间选择。';
   }
@@ -249,7 +259,7 @@
   function renderRouteOverlay(){
     if(!activePlan||!$('#map-route'))return;
     $('#route-visible').checked=state.showRoute;$('#map-route').hidden=!state.showRoute;
-    $('#map-legend').innerHTML=`<span class="legend-order">1</span>项目顺序 <i class="legend-dot"></i>其他项目 ${icons('star')}重点 ${icons('boat')}演出 ${icons('food')}餐厅 <i class="legend-dpa" title="DPA 适用设施，实际名额以官方 App 为准"></i><span class="visually-hidden">绿色外圈：</span>DPA适用`;
+    $('#map-legend').innerHTML=`<span class="legend-order">1</span>项目顺序 <i class="legend-dot"></i>其他项目 ${icons('star')}重点 ${icons('boat')}演出 ${icons('food')}餐厅 ${icons('stall')}小摊 <i class="legend-dpa" title="DPA 适用设施，实际名额以官方 App 为准"></i><span class="visually-hidden">绿色外圈：</span>DPA适用`;
     const stops=activePlan.stops;
     $$('.map-pin').forEach(pin=>{const item=byId.get(Number(pin.dataset.select)),stop=stops.find(stop=>mapItemId(stop.id)===item.id);pin.classList.toggle('is-route-stop',Boolean(stop));pin.classList.toggle('other-pin',!stop);$('.pin-core',pin).innerHTML=stop?`<span class="pin-value">${stop.order}</span>`:item.type==='show'?icons(item.id===20001?'boat':'moon'):'';pin.setAttribute('aria-label',`${stop?'第 '+stop.order+' 站，':''}${item.name}，${areas.get(item.area).name}${hasDPA(item)&&!closureOn(item)?'，DPA适用':''}`);});
     queueMapLayout();
@@ -423,7 +433,7 @@
   }
   function renderMap() {
     $('#map-pins').innerHTML=mapCatalogue.map(item=>{const p=point(item),special=item.type==='show';return `<button class="map-pin ${special?'show-pin show-'+item.id:''}" style="left:${p.x}px;top:${p.y}px;--pin-color:${areas.get(item.area).color}" data-select="${item.id}" aria-label="${item.name}，${areas.get(item.area).name}"><span class="pin-core"></span><span class="pin-label">${item.short}</span>${D.coreIds.includes(item.id)?`<span class="pin-star">${icons('star')}</span>`:''}</button>`;}).join('');
-    $('#map-dining').innerHTML=D.dining.map(item=>{const p=point(item);return `<button class="dining-pin ${item.snack?'snack-pin':''}" style="left:${p.x}px;top:${p.y}px" data-select="${item.id}" aria-label="${item.meal}：${item.name}"><span class="dining-core">${icons('food')}</span><span class="pin-label">${item.snack?item.short:item.meal+' · '+item.short}</span></button>`;}).join('');
+    $('#map-dining').innerHTML=D.dining.map(item=>{const p=point(item);return `<button class="dining-pin ${item.snack?'snack-pin':''} ${item.stall?'stall-pin':''}" style="left:${p.x}px;top:${p.y}px" data-select="${item.id}" aria-label="${item.stall?'路边小摊':'餐厅'}：${item.name}"><span class="dining-core">${icons(diningIcon(item))}</span><span class="pin-label">${item.short}</span></button>`;}).join('');
     $('#map-labels').innerHTML=[...mapCatalogue,...D.dining].map(item=>`<span class="map-name" data-label-for="${item.id}">${escapeHTML(mapName(item))}</span>`).join('');
     mapNodes=[...mapCatalogue,...D.dining].map(item=>({item,button:$(`[data-select="${item.id}"]`,item.type==='restaurant'?$('#map-dining'):$('#map-pins')),label:$(`[data-label-for="${item.id}"]`)}));
     for(const node of mapNodes){

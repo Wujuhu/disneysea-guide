@@ -10,6 +10,8 @@ assert.equal(D.attractions.length,31);assert.equal(D.shows.length,2);
 assert(!all.has(246)&&!all.has(257));assert.equal(D.excludedAttractions.length,2);
 assert(D.excludedAttractions.some(item=>item.id===257),'Peter Pan is hidden by default');
 assert.equal(D.dining.length,23);assert.equal(D.dining.filter(item=>item.service==='seating').length,6);assert.equal(D.dining.filter(item=>item.service==='mobile-required').length,3);
+assert(D.dining.filter(item=>item.stall).every(item=>item.service!=='seating'&&item.service!=='mobile-required'),'stall display must not imply booking rules for seated restaurants');
+for(const show of D.shows){const ref=D.showReferences[show.id];assert(ref&&ref.date<D.planningWindow.start);assert.deepEqual(ref.times,D.showSchedule[ref.date][show.id]);assert.equal(P.showTimes(show.id,'2027-02-06'),null,'past reference must not turn into a confirmed February performance time');}
 for(const item of D.dining){assert(['seating','mobile-required','counter','snack'].includes(item.service));assert(Number.isFinite(item.x)&&Number.isFinite(item.y));assert(item.oneLine&&item.en&&item.url.startsWith('https://www.tokyodisneyresort.jp/'));}
 assert(P.isClosed(D.dining.find(item=>item.officialId===432),'2027-02-06'),'Sakura is officially closed during the trip window');
 for(const item of [...D.attractions,...D.excludedAttractions]){assert(item.oneLine&&item.durationLabel,`missing description/duration: ${item.id}`);assert(!item.oneLine.includes('\ufffd'));}

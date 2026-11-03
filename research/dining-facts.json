@@ -16,7 +16,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/403/",
       "x": 1638,
-      "y": 1404
+      "y": 1404,
+      "markerKind": "restaurant"
     },
     {
       "id": 30002,
@@ -28,7 +29,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/",
       "x": 1158,
-      "y": 1545
+      "y": 1545,
+      "markerKind": "restaurant"
     },
     {
       "id": 30003,
@@ -40,7 +42,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/en/food/128/",
       "x": 1458,
-      "y": 1204
+      "y": 1204,
+      "markerKind": "stall"
     },
     {
       "id": 30004,
@@ -52,7 +55,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/en/tds/restaurant/food/461/",
       "x": 2068,
-      "y": 799
+      "y": 799,
+      "markerKind": "stall"
     },
     {
       "id": 30412,
@@ -65,7 +69,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/412/",
       "x": 1422,
-      "y": 1243
+      "y": 1243,
+      "markerKind": "restaurant"
     },
     {
       "id": 30408,
@@ -78,7 +83,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/408/",
       "x": 1221,
-      "y": 1584
+      "y": 1584,
+      "markerKind": "restaurant"
     },
     {
       "id": 30425,
@@ -91,7 +97,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/425/",
       "x": 716,
-      "y": 1343
+      "y": 1343,
+      "markerKind": "restaurant"
     },
     {
       "id": 30429,
@@ -104,7 +111,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/429/",
       "x": 745,
-      "y": 1361
+      "y": 1361,
+      "markerKind": "restaurant"
     },
     {
       "id": 30432,
@@ -122,7 +130,8 @@
       ],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/432/",
       "x": 1075,
-      "y": 1395
+      "y": 1395,
+      "markerKind": "restaurant"
     },
     {
       "id": 30451,
@@ -135,7 +144,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/451/",
       "x": 1433,
-      "y": 966
+      "y": 966,
+      "markerKind": "restaurant"
     },
     {
       "id": 30409,
@@ -148,7 +158,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/409/",
       "x": 2678,
-      "y": 482
+      "y": 482,
+      "markerKind": "restaurant"
     },
     {
       "id": 30413,
@@ -161,7 +172,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/413/",
       "x": 2618,
-      "y": 576
+      "y": 576,
+      "markerKind": "restaurant"
     },
     {
       "id": 30414,
@@ -174,7 +186,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/414/",
       "x": 2434,
-      "y": 435
+      "y": 435,
+      "markerKind": "restaurant"
     },
     {
       "id": 30446,
@@ -188,7 +201,8 @@
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/446/",
       "x": 1159,
       "y": 1157,
-      "showDiningUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/447/"
+      "showDiningUrl": "https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/447/",
+      "markerKind": "restaurant"
     },
     {
       "id": 30456,
@@ -206,7 +220,8 @@
       ],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/456/",
       "x": 1743,
-      "y": 870
+      "y": 870,
+      "markerKind": "restaurant"
     },
     {
       "id": 30459,
@@ -219,7 +234,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/459/",
       "x": 2020,
-      "y": 795
+      "y": 795,
+      "markerKind": "restaurant"
     },
     {
       "id": 30463,
@@ -232,7 +248,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/463/",
       "x": 2178,
-      "y": 1114
+      "y": 1114,
+      "markerKind": "restaurant"
     },
     {
       "id": 30468,
@@ -245,7 +262,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/468/",
       "x": 1865,
-      "y": 1010
+      "y": 1010,
+      "markerKind": "restaurant"
     },
     {
       "id": 30418,
@@ -258,7 +276,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/418/",
       "x": 1702,
-      "y": 1166
+      "y": 1166,
+      "markerKind": "restaurant"
     },
     {
       "id": 30410,
@@ -271,7 +290,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/410/",
       "x": 2642,
-      "y": 489
+      "y": 489,
+      "markerKind": "stall"
     },
     {
       "id": 30465,
@@ -284,7 +304,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/465/",
       "x": 2195,
-      "y": 959
+      "y": 959,
+      "markerKind": "stall"
     },
     {
       "id": 30450,
@@ -297,7 +318,8 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/450/",
       "x": 1163,
-      "y": 981
+      "y": 981,
+      "markerKind": "stall"
     },
     {
       "id": 30421,
@@ -310,7 +332,9 @@
       "closures": [],
       "url": "https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/421/",
       "x": 1600,
-      "y": 1148
+      "y": 1148,
+      "markerKind": "stall"
     }
-  ]
+  ],
+  "markerKindNote": "Guide display grouping for full-meal venues versus snack counters; booking requirements remain in service, not inferred from the icon."
 }

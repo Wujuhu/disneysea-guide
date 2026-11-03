@@ -1,0 +1,31 @@
+{
+  "referenceDate": "2026-11-01",
+  "basis": "Official schedule snapshot saved during the original 2026-11-01 verification. Matching times corroborated against currently published 2026-11-03 official rows on 2026-11-03.",
+  "scope": "Reference only; not a source for selected-date showTimes or planning.",
+  "shows": [
+    {
+      "id": 20001,
+      "name": "闪耀欢腾庆典",
+      "date": "2026-11-01",
+      "times": [
+        "11:30",
+        "14:00",
+        "16:00"
+      ],
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/show/schedule/7404/",
+      "checked": "2026-11-01",
+      "corroboratedDate": "2026-11-03"
+    },
+    {
+      "id": 20002,
+      "name": "坚信！～梦想之海～",
+      "date": "2026-11-01",
+      "times": [
+        "19:15"
+      ],
+      "sourceUrl": "https://www.tokyodisneyresort.jp/en/tds/show/schedule/967/",
+      "checked": "2026-11-01",
+      "corroboratedDate": "2026-11-03"
+    }
+  ]
+}

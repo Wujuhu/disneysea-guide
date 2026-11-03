@@ -247,6 +247,10 @@ window.DISNEY_DATA.indoorArea = {
     venue(30450,450,'海边小吃','Seaside Snacks','port',1163,981,'snack','发现港的路边小吃铺，直接排队买手拿餐点，无需订座。',{snack:true}),
     venue(30421,421,'鹦鹉螺号小厨','Nautilus Galley','mysterious',1600,1148,'counter','神秘岛水边的小吃店，可买手拿餐点，无需订座，可用手机点餐。',{mobileOrder:true})
   );
-  D.dining.forEach(item=>{item.aliases=item.aliases||'';item.playType=({seating:'建议订座','mobile-required':'须先手机点餐',counter:'无需订座',snack:'路边小吃'})[item.service];});
+  D.dining.forEach(item=>{item.stall=Boolean(item.snack||item.officialId===421);item.aliases=item.aliases||'';item.playType=({seating:'建议订座','mobile-required':'须先手机点餐',counter:'无需订座',snack:'路边小吃'})[item.service];});
+  D.sources.restaurantBooking='https://reserve.tokyodisneyresort.jp/en/restaurant/search/';
+  // Past schedule snapshot saved during the 2026-11-01 official-source check.
+  // Rechecked against the currently published 2026-11-03 schedule; never used by the planner.
+  D.showReferences=Object.fromEntries(D.shows.map(item=>[item.id,{date:'2026-11-01',times:[...D.showSchedule['2026-11-01'][item.id]],sourceUrl:item.scheduleUrl,checked:'2026-11-01',corroboratedDate:'2026-11-03'}]));
   D.serviceChecked='2026-11-03';
 }

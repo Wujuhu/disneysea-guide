@@ -8,11 +8,11 @@
   <title>海洋漫游 · 东京迪士尼海洋新手指南</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css?v=20261103-entry-zero">
+  <link rel="stylesheet" href="styles.css?v=20261103-dining-icons-reference">
   <script src="assets/vendor/bootstrap/bootstrap.min.js" defer></script>
-  <script src="data.js?v=20261103-entry-zero" defer></script>
-  <script src="planner.js?v=20261103-entry-zero" defer></script>
-  <script src="app.js?v=20261103-entry-zero" defer></script>
+  <script src="data.js?v=20261103-dining-icons-reference" defer></script>
+  <script src="planner.js?v=20261103-dining-icons-reference" defer></script>
+  <script src="app.js?v=20261103-dining-icons-reference" defer></script>
 </head>
 <body>
   <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -35,6 +35,7 @@
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14m-1-9H3v16h16v-6"/></symbol>
     <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 15v6h16v-6"/></symbol>
     <symbol id="i-food" viewBox="0 0 24 24"><path d="M4 3v6a3 3 0 0 0 6 0V3M7 3v18M18 3c-4 4-4 10 1 10V3m0 10v8"/></symbol>
+    <symbol id="i-stall" viewBox="0 0 24 24"><path d="M3 9h18l-2-5H5ZM5 9v11m14-11v11M5 15h14M9 4l-1 5m7-5 1 5"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4m-3 14h2"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
@@ -133,7 +134,7 @@
           <p class="section-intro">先看餐厅采用哪种方式：<strong>订用餐时间、先手机点餐、直接排队</strong>。有桌椅不等于要预约；梦幻泉乡的三家主要餐厅有座位，却采用手机点餐。餐厅都不接入游玩路线。</p>
           <div class="nav nav-pills dining-tabs" role="tablist" aria-label="用餐方式"><button class="nav-link active" id="seating-tab" data-bs-toggle="tab" data-bs-target="#seating-panel" type="button" role="tab" aria-controls="seating-panel" aria-selected="true">提前订座</button><button class="nav-link" id="mobile-order-tab" data-bs-toggle="tab" data-bs-target="#mobile-order-panel" type="button" role="tab" aria-controls="mobile-order-panel" aria-selected="false">先手机点餐</button><button class="nav-link" id="walkin-tab" data-bs-toggle="tab" data-bs-target="#walkin-panel" type="button" role="tab" aria-controls="walkin-panel" aria-selected="false">无需订座</button></div>
           <div class="tab-content dining-content">
-            <div class="tab-pane show active" id="seating-panel" role="tabpanel" aria-labelledby="seating-tab"><h2 class="reading-subtitle">必吃某家，就在提前一个月放号时订</h2><p>以下餐厅提供订座，官方称“优先入座”。建议在用餐日前一个月的<strong>日本时间 10:00</strong> 登录网站或 App，选中午或傍晚的用餐时间；有余位时之后也能订。</p><p class="dining-timing" id="booking-example"></p><p><strong>当天先网上查，门口是补位办法。</strong>09:00 起查网上当日名额；10:00 起可到餐厅门口问剩余位，有空位才受理。早上去门口并不保证能约到中午。</p><p>订的是用餐时间，到店后等空桌带位，仍可能短等。正式桌餐建议留 60–90 分钟，并删减相应游玩内容。</p><p class="quiet-note" id="dining-closure-note"></p><div class="dining-options" id="seating-options"></div><a href="https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/" target="_blank" rel="noopener noreferrer">官方预约入口、餐厅与时点 ↗</a></div>
+            <div class="tab-pane show active" id="seating-panel" role="tabpanel" aria-labelledby="seating-tab"><h2 class="reading-subtitle">必吃某家，就在提前一个月放号时订</h2><p>以下餐厅提供订座，官方称“优先入座”。建议在用餐日前一个月的<strong>日本时间 10:00</strong> 登录网站或 App，选中午或傍晚的用餐时间；有余位时之后也能订。</p><p class="dining-timing" id="booking-example"></p><p><strong>当天先网上查，门口是补位办法。</strong>09:00 起查网上当日名额；10:00 起可到餐厅门口问剩余位，有空位才受理。早上去门口并不保证能约到中午。</p><p>订的是用餐时间，到店后等空桌带位，仍可能短等。正式桌餐建议留 60–90 分钟，并删减相应游玩内容。</p><ol class="booking-steps"><li>提前注册并登录 MyDisney，打开官方订座页。</li><li>选择用餐日、人数、餐厅与时段，再找空位。</li><li>确认并保存预约，按预约时间到店等带位。</li></ol><p><a href="https://reserve.tokyodisneyresort.jp/en/restaurant/search/" target="_blank" rel="noopener noreferrer">直接打开官方订座页 ↗</a></p><p class="quiet-note" id="dining-closure-note"></p><div class="dining-options" id="seating-options"></div><a href="https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/" target="_blank" rel="noopener noreferrer">官方预约入口、餐厅与时点 ↗</a></div>
             <div class="tab-pane" id="mobile-order-panel" role="tabpanel" aria-labelledby="mobile-order-tab"><h2 class="reading-subtitle">想吃梦幻泉乡这三家，入园就先选时段</h2><p>这三家须使用手机点餐。入园后在 App 选餐厅、取餐时段与餐点；先把餐单下好，按选定时间再去，不用先跑到餐厅门口。</p><p class="dining-timing" id="mobile-order-example"></p><p>到店后再点 <span lang="en">I'm Here</span>，等通知取餐。你选的是取餐时段，座位按现场安排。餐厅点餐和订座都不占 DPA 的购买等待时间。</p><div class="dining-options" id="dining-options"></div><a class="source-link" href="https://faq-en.tokyodisneyresort.jp/answer/6838947bb5f9218ff51a969e/" target="_blank" rel="noopener noreferrer">官方梦幻泉乡点餐规则 ↗</a></div>
             <div class="tab-pane" id="walkin-panel" role="tabpanel" aria-labelledby="walkin-tab"><h2 class="reading-subtitle">坐下吃的快餐，也有很多不用订座</h2><p>以下普通用餐区无需提前订座，按现场方式排队或选餐。有“可手机点餐”的店，可入园后先选取餐时段，少排点餐的队；手机餐单不替你保留一张桌子。</p><p class="quiet-note">简餐约留 30 分钟；若路线顺、营业时间允许，可考虑 11 点前或 17 点左右错峰。这是安排建议，队长和可取餐时段看当天 App。</p><div class="dining-options" id="walkin-options"></div><div class="snack-section"><h2>路边小铺与手拿小吃</h2><p class="quiet-note">无需订座，走到铺子前排队；标了手机点餐的，也可提前下单。</p><div id="snack-options"></div></div><a class="source-link" href="https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/mobileorder.html" target="_blank" rel="noopener noreferrer">官方移动点餐说明 ↗</a></div>
           </div>
