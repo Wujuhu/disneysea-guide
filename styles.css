@@ -316,16 +316,8 @@ body.nav-collapsed{--sidebar-width:48px}
 .map-caption strong{min-width:0;overflow:hidden;text-overflow:ellipsis}
 @media(min-width:761px){#workspace .map-panel{grid-column:2}#workspace.explorer-collapsed{grid-template-columns:0 minmax(0,1fr)}#workspace.explorer-collapsed .explorer{display:none}}
 @media(max-width:760px){.navigation-toggle>span{display:none}.navigation-toggle{min-height:44px}.orientation-toggle{padding:5px;font-size:10px;gap:3px}.orientation-toggle svg{width:14px;height:14px}.map-panel-toggle{width:25px}.map-caption{gap:5px}.map-caption .status-dot{display:none}.map-actions{gap:8px}}
-/* Original English names remain secondary to the Chinese names. */
-.project-en,.stop-en,.dpa-note-en,.detail-original{display:block;color:var(--secondary);font-weight:400;line-height:1.45}
-.project-en{margin-top:3px;font-size:11px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.detail-original{font-size:12px;margin:7px 0 0;overflow-wrap:anywhere}
-.stop-en{font-size:11px;margin-top:3px;overflow-wrap:anywhere}
-.dpa-note-en{font-size:10px;margin-top:3px;overflow-wrap:anywhere}
-.map-name strong{display:block;font-size:11px;font-weight:500;overflow:hidden;text-overflow:ellipsis}
-.map-name .map-en{display:block;margin-top:1px;color:var(--secondary);font-size:9px;font-weight:400;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.indoor-project .project-en{display:block;font-size:10px;white-space:normal;margin-top:2px}
-.price-table .project-en{white-space:normal;font-size:10px}
+/* The original English name is shown only in the selected project detail. */
+.detail-original{display:block;color:var(--secondary);font-weight:400;line-height:1.45;font-size:12px;margin:7px 0 0;overflow-wrap:anywhere}
 .show-row>span:first-child{min-width:0}
 :root{--dpa-ring:#20d65a;--dpa-ring-edge:#075331}
 #map-pins .map-pin.has-dpa .pin-core{border:3px solid var(--dpa-ring);outline:1px solid var(--dpa-ring-edge);outline-offset:-1px}
