@@ -1,0 +1,24 @@
+{
+  "checked": "2026-11-03",
+  "dpa": {
+    "afterEntry": "https://faq-en.tokyodisneyresort.jp/answer/680ba05401fdf7431bafb773/",
+    "purchaseAndStock": "https://faq-en.tokyodisneyresort.jp/answer/680ba05101fdf7431bafb6b8/",
+    "eligibilityAndPrices": "https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/disneypremieraccess.html",
+    "rule": "Another attraction: earlier of purchase + 60 minutes and use-start time. Same attraction: after use or use-window end. Attractions and shows have separate eligibility.",
+    "releaseBoundary": "The checked official pages provide no fixed all-attraction hourly replenishment schedule. Availability must be read from the app."
+  },
+  "prioritySeating": {
+    "source": "https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/",
+    "advance": "10:00 JST one month before",
+    "sameDayOnline": "09:00 JST",
+    "sameDayAtVenue": "10:00 JST subject to vacancies"
+  },
+  "mobileOrder": {
+    "source": "https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/mobileorder.html",
+    "requiredFantasySpringsVenues": [
+      409,
+      413,
+      414
+    ]
+  }
+}

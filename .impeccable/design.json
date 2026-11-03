@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T15:03:19.999Z",
+  "generatedAt": "2026-11-03",
   "title": "Design System: 海洋漫游",
   "extensions": {
     "colorMeta": {
@@ -367,6 +367,20 @@
           "oklch(83.57% 0.1359 73.78)",
           "oklch(95.00% 0.1359 73.78)"
         ]
+      },
+      "hidden-reason": {
+        "role": "secondary",
+        "displayName": "隐藏原因赭色",
+        "tonalRamp": [
+          "oklch(15.00% 0.0866 67.61)",
+          "oklch(26.43% 0.0866 67.61)",
+          "oklch(37.86% 0.0866 67.61)",
+          "oklch(49.29% 0.0866 67.61)",
+          "oklch(60.71% 0.0866 67.61)",
+          "oklch(72.14% 0.0866 67.61)",
+          "oklch(83.57% 0.0866 67.61)",
+          "oklch(95.00% 0.0866 67.61)"
+        ]
       }
     },
     "typographyMeta": {
@@ -544,8 +558,8 @@
       "name": "筛选按钮",
       "kind": "chip",
       "refersTo": "filter-chip",
-      "description": "默认与选中状态；实际页面用 aria-pressed 维护筛选选择。",
-      "html": "<div class=\"ds-chips\" aria-label=\"项目类型筛选\"><button class=\"ds-chip\" aria-pressed=\"true\">全部项目</button><button class=\"ds-chip\" aria-pressed=\"false\">五大项目</button><button class=\"ds-chip\" aria-pressed=\"false\">水上演出</button></div>",
+      "description": "六类清单；隐藏分类始终可审阅原因，统一开关控制普通清单与地图中的显示。",
+      "html": "<div class=\"ds-chips\" aria-label=\"清单类别\"><button class=\"ds-chip\" aria-pressed=\"false\">全部</button><button class=\"ds-chip\" aria-pressed=\"false\">项目</button><button class=\"ds-chip\" aria-pressed=\"false\">演出</button><button class=\"ds-chip\" aria-pressed=\"false\">餐厅</button><button class=\"ds-chip\" aria-pressed=\"false\">其他</button><button class=\"ds-chip\" aria-pressed=\"true\">隐藏</button></div>",
       "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:7px}.ds-chip{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;font-size:11px;line-height:1.65;font-weight:400;color:var(--ink,#173c47);background:none;padding:5px 10px;border:1px solid #e0e7e4;border-radius:6px;white-space:nowrap;transition:background .15s,color .15s;cursor:pointer}.ds-chip:hover{background:#eef5f2}.ds-chip[aria-pressed=true]{background:var(--ink,#173c47);color:var(--white,#fff);border-color:var(--ink,#173c47)}.ds-chip:focus-visible{outline:3px solid #d99833;outline-offset:4px;}@media(max-width:760px){.ds-chips{gap:8px}.ds-chip{padding:6px 11px}}@media(prefers-reduced-motion:reduce){.ds-chip{transition:none}}"
     },
     {
@@ -568,9 +582,17 @@
       "name": "时间表项目行",
       "kind": "custom",
       "refersTo": "timeline-number",
-      "description": "顺序编号与地图一致；时间、体验、排队预算和步行时间保持可分辨。示例是草案中的一行。",
-      "html": "<article class=\"ds-timed-stop\"><div class=\"ds-stop-time\"><time>09:15</time><small>至 10:00</small></div><div class=\"ds-stop-body\"><div class=\"ds-stop-title\"><span class=\"ds-stop-number\">1</span><button class=\"ds-stop-button\">Soaring 梦幻奇航 <svg aria-hidden=\"true\" width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 12h16m-6-6 6 6-6 6\"/></svg></button></div><div class=\"ds-step-facts\"><span>体验约 5 分钟</span><span>排队预算 10–25 分钟 · DPA</span><span>步行约 10 分钟</span></div></div></article>",
-      "css": ".ds-timed-stop{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;color:var(--ink,#173c47);display:grid;grid-template-columns:80px minmax(0,1fr);gap:18px;padding:0 0 27px;position:relative}.ds-timed-stop:after{content:'';position:absolute;left:88px;top:29px;bottom:2px;border-left:1px solid #d8e4dc}.ds-stop-time{display:flex;flex-direction:column;align-items:flex-start;font-variant-numeric:tabular-nums;line-height:1.5;padding-top:1px}.ds-stop-time time{font-size:18px;font-weight:650}.ds-stop-time small{font-size:11px;color:var(--secondary,#566f75)}.ds-stop-title{display:flex;align-items:center;gap:9px;min-height:27px}.ds-stop-button{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;display:flex;align-items:center;gap:7px;font-size:15px;font-weight:600;text-align:left;padding:0;line-height:1.6;background:none;border:0;color:var(--ink,#173c47);cursor:pointer}.ds-stop-button>svg{color:var(--teal,#126d68);flex-shrink:0}.ds-stop-button:focus-visible{outline:3px solid #d99833;outline-offset:4px;}.ds-stop-number{width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:#ac175f;color:white;font-size:11px;font-weight:600;flex-shrink:0}.ds-step-facts{display:flex;gap:5px 13px;flex-wrap:wrap;margin-top:9px;font-size:12px;color:var(--secondary,#566f75);line-height:1.8}@media(max-width:760px){.ds-timed-stop{grid-template-columns:60px minmax(0,1fr);gap:14px;padding-bottom:26px}.ds-timed-stop:after{left:66px}.ds-stop-time time{font-size:17px}.ds-stop-button{font-size:14px}.ds-stop-number{width:21px;height:21px}.ds-step-facts{gap:4px 10px}}"
+      "description": "当前草案的晨间普通排队行；完整桌面时间表最大宽940px，另含292px DPA旁栏和24px列距，手机旁注缩进至活动下方。",
+      "html": "<article class=\"ds-timed-stop\"><div class=\"ds-stop-time\"><time>09:05</time><small>至 10:00</small></div><div class=\"ds-stop-body\"><div class=\"ds-stop-title\"><span class=\"ds-stop-number\">1</span><button class=\"ds-stop-button\">翱翔：梦幻奇航 <svg aria-hidden=\"true\" width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 12h16m-6-6 6 6-6 6\"/></svg></button></div><div class=\"ds-step-facts\"><span>体验约 5 分钟</span><span>排队预算 15–35 分钟</span><span>步行约 10 分钟</span></div></div></article>",
+      "css": ".ds-timed-stop{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;color:var(--ink,#173c47);display:grid;grid-template-columns:68px minmax(0,1fr);gap:34px;padding:20px 0 22px;position:relative}.ds-timed-stop:after{content:'';position:absolute;left:88px;top:29px;bottom:2px;border-left:1px solid #d8e4dc}.ds-stop-time{display:flex;flex-direction:column;align-items:flex-start;font-variant-numeric:tabular-nums;line-height:1.5;padding-top:1px}.ds-stop-time time{font-size:18px;font-weight:650}.ds-stop-time small{font-size:11px;color:var(--secondary,#566f75)}.ds-stop-title{display:flex;align-items:center;gap:9px;min-height:27px}.ds-stop-button{font-family:'Guide Sans', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;font-synthesis:weight;display:flex;align-items:center;gap:7px;font-size:15px;font-weight:600;text-align:left;padding:0;line-height:1.6;background:none;border:0;color:var(--ink,#173c47);cursor:pointer}.ds-stop-button>svg{color:var(--teal,#126d68);flex-shrink:0}.ds-stop-button:focus-visible{outline:3px solid #d99833;outline-offset:4px;}.ds-stop-number{width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:#ac175f;color:white;font-size:11px;font-weight:600;flex-shrink:0}.ds-step-facts{display:flex;gap:5px 13px;flex-wrap:wrap;margin-top:9px;font-size:12px;color:var(--secondary,#566f75);line-height:1.8}@media(max-width:760px){.ds-timed-stop{grid-template-columns:60px minmax(0,1fr);gap:14px;padding-bottom:26px}.ds-timed-stop:after{left:66px}.ds-stop-time time{font-size:17px}.ds-stop-button{font-size:14px}.ds-stop-number{width:21px;height:21px}.ds-step-facts{gap:4px 10px}}"
+    },
+    {
+      "name": "隐藏原因",
+      "kind": "custom",
+      "refersTo": "hidden-reason",
+      "description": "官方停运带起止日期；用户主动隐藏附偏好原因。两类可同时存在。统一显示开关不会清除原因。",
+      "html": "<div class=\"ds-hidden\"><p>官方停运：2027.01.08–2027.03.08</p><p>用户主动隐藏：按你的要求隐藏小飞侠项目。</p></div>",
+      "css": ".ds-hidden{font-family:\"Guide Sans\",\"Noto Sans SC\",\"Microsoft YaHei\",sans-serif;color:#865b29;font-size:12px;line-height:1.7}.ds-hidden p{margin:7px 0}@media(max-width:760px){.ds-hidden{font-size:11px}}"
     }
   ],
   "narrative": {
@@ -615,4 +637,3 @@
     ]
   }
 }
-

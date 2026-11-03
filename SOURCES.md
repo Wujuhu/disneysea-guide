@@ -65,10 +65,10 @@
 
 planner.js 的排队、步行与机动时长是编辑预算，只有实际体验时长和已公布场次来自官方；界面及导出保留此区分。
 
-## 6. 路线对应的用餐点
+## 6. 可选用餐点（不接入路线）
 
-- [尚比尼兄弟餐厅](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/403/)：地中海港湾，支持移动点餐，作为白天花船后的午餐建议。
-- [纽约美味房](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/)：美国海滨，支持移动点餐，作为惊魂古塔后的晚餐建议。
+- [尚比尼兄弟餐厅](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/403/)：地中海港湾，支持移动点餐，为海港附近的可选简餐。
+- [纽约美味房](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/)：美国海滨，支持移动点餐，为美国海滨的可选简餐。
 
 位置对应官方中文地图中的 21、47 号设施；这些官方编号仅用于数据核对，不作为地图交互标记显示。照片分别来自官方 CDN 的 restaurant/572_main_visual_name_1.jpg、restaurant/642_main_visual_name_1.jpg，并嵌入了来源。营业和可取餐时段以当天 App 为准，不沿用园区开闭园时间推断餐厅营业。
 
@@ -81,3 +81,16 @@ planner.js 的排队、步行与机动时长是编辑预算，只有实际体验
 - [Bootstrap Icons 星标](https://icons.getbootstrap.com/icons/star-fill/)：本地 SVG 与许可保存在 assets/vendor/bootstrap-icons/。
 
 清晨等待和 DPA 购买时机是规划策略，不是官方客流保证。普通排队预算与实际库存分开表达，不把“10 点多再评估”写成库存保证。
+
+
+## 8. 餐饮分类与 DPA 规则补核（2026-11-03）
+
+- [官方优先入座](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/)：海洋列有 6 家适用餐厅；提前一个月 10:00，入园当天网上 09:00，门口当日余位 10:00 起。属于建议提前订座，现场有空位时仍可能用餐。
+- [官方梦幻泉乡 FAQ](https://faq-en.tokyodisneyresort.jp/answer/6838947bb5f9218ff51a969e/)：阿伦黛尔、可爱小鸭、瞭望台三家须用手机点餐，入园后可以下单。是否有固定座位不能决定要不要预约。
+- [官方移动点餐](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/mobileorder.html)：记录哪些店可选手机点餐；手机点餐不等于优先入座。
+- [樱花餐厅](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/432/)：2027-01-06 至 06-30 停运；[米格勒](https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/456/)：2026-11-03 至 11-12 停运。
+- 23 个餐厅／小吃记录及各自官方页面、服务类型、已知停运区间见 research/dining-facts.json。点位对照官方中文图人工标注；赛巴斯丁只标室内区入口附近。新餐厅用统一餐具图标，不复用其他餐厅照片。
+- [DPA 入园条件](https://faq-en.tokyodisneyresort.jp/answer/680ba05401fdf7431bafb773/)、[购买与余量](https://faq-en.tokyodisneyresort.jp/answer/680ba05101fdf7431bafb6b8/)、[再次购买与价格](https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/disneypremieraccess.html)：入园后购买、单项选时段、名额有限；另一项目按付款后 60 分钟／本张开始使用时间的较早值；同项目等用完或时段结束；项目和演出分开计算。
+- 在核对的官方说明中没有统一每小时全项目一起补票的时刻表；页面不承诺售罄后再放票。规则来源与边界见 research/service-rules.json。
+
+排队、DPA 通道等候、步行与餐饮时长仍是导览预算。环线加入冰雪奇缘后，普通营业日按冰雪奇缘、古塔 DPA 预算，两位成人约 ¥8,000；提前闭园日另加忿怒双神约 ¥3,000。并不表示已买到或保证库存。

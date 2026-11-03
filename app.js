@@ -6,23 +6,24 @@
   const icons = name => `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
   const escapeHTML = text => String(text).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const allAttractions=[...D.attractions,...D.excludedAttractions];
-  const catalogue=[...D.coreIds.map(id=>allAttractions.find(item=>item.id===id)),...D.shows,...allAttractions.filter(item=>!D.coreIds.includes(item.id))];
-  const excludedIds=new Set(D.excluded.map(item=>item.id));
+  const catalogue=[...D.coreIds.map(id=>allAttractions.find(item=>item.id===id)),...D.shows,...allAttractions.filter(item=>!D.coreIds.includes(item.id)),...D.dining];
+  const transportIds=new Set([227,228,229,231,232,233]);
+  const itemCategory=item=>item.type==='restaurant'?'restaurant':item.type==='show'?'show':transportIds.has(item.id)?'other':'attraction';
+  const categoryNames={all:'全部',attraction:'项目',show:'演出',restaurant:'餐厅',other:'其他',hidden:'隐藏'};
   const indoorIds = new Set(D.indoorArea.items);
   const mapItemId = id => indoorIds.has(id) ? D.indoorArea.id : id;
-  const mapCatalogue = [...catalogue.filter(item=>!indoorIds.has(item.id)),D.indoorArea];
-  const byId = new Map([...catalogue,...D.dining,D.indoorArea].map(item => [item.id, item]));
+  const mapCatalogue = [...catalogue.filter(item=>item.type!=='restaurant'&&!indoorIds.has(item.id)),D.indoorArea];
+  const byId = new Map([...catalogue,D.indoorArea].map(item => [item.id, item]));
   const P=window.GuidePlanner;
   const areas = new Map(D.areas.map(area => [area.id, area]));
   const STORAGE_KEY = 'disneysea-guide:v1';
   let persisted = {};
   try { const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); if (value && typeof value === 'object' && !Array.isArray(value)) persisted = value; } catch { /* Storage is optional, including file:// and private browsing. */ }
   const state = {
-    view: 'map', guideSection:'#day-route', filter: 'all', area: 'all', query: '', selected: null,
+    view: 'map', guideSection:'#day-route', category:'all', filter: 'all', area: 'all', query: '', selected: null,
     visitDate: persisted.planWindow===D.planningWindow.version && /^\d{4}-\d{2}-\d{2}$/.test(persisted.visitDate || '') && !Number.isNaN(Date.parse(persisted.visitDate)) ? persisted.visitDate : D.planningWindow.reference,
     showRoute: typeof persisted.showRoute==='boolean'?persisted.showRoute:true,
-    showExcluded:typeof persisted.showExcluded==='boolean'?persisted.showExcluded:false,
-    hideClosed:typeof persisted.hideClosed==='boolean'?persisted.hideClosed:true,
+    showHidden:typeof persisted.showHidden==='boolean'?persisted.showHidden:Boolean(persisted.showExcluded||persisted.hideClosed===false),
     mapOrientation:['north','official'].includes(persisted.mapOrientation)?persisted.mapOrientation:'north',
     navCollapsed:persisted.navCollapsed===true,
     listCollapsed:persisted.listCollapsed===true
@@ -36,13 +37,22 @@
   const closureOn = (item, date = dateForStatus()) => item.closures.find(([start, end]) => date >= start && (!end || date <= end));
   const hasDPA = item => Boolean(item.dpa && (!item.dpaFrom || dateForStatus() >= item.dpaFrom));
   const number = n => new Intl.NumberFormat('en-US').format(n);
-  const eligible=item=>(state.showExcluded||!excludedIds.has(item.id))&&(!state.hideClosed||!closureOn(item));
+  const hiddenReasons=item=>{
+    const reasons=[],closure=closureOn(item),manual=D.excluded.find(entry=>entry.id===item.id);
+    if(closure)reasons.push({kind:'official',label:'官方停运',text:`官方停运：${formatDate(closure[0])}${closure[1]?'–'+formatDate(closure[1]):' 起，恢复时间待公布'}`});
+    if(manual)reasons.push({kind:'user',label:'用户主动隐藏',text:`用户主动隐藏：${manual.reason}`});
+    return reasons;
+  };
+  const eligible=item=>state.showHidden||hiddenReasons(item).length===0;
   const mapEligible=item=>item.id===D.indoorArea.id?item.items.some(id=>eligible(byId.get(id))):eligible(item);
   const durationText=item=>item.durationLabel||(item.durationMinutes?`约 ${item.durationMinutes} 分钟`:item.duration||'按现场体验安排');
+  const diningMethod=item=>({seating:'建议提前订座','mobile-required':'须先手机点餐',counter:item.mobileOrder?'无需订座 · 可手机点餐':'无需订座 · 现场选餐',snack:item.mobileOrder?'路边小吃 · 可手机点餐':'路边小吃 · 直接排队'})[item.service];
+  const diningAdvice=item=>item.service==='seating'?'必吃这家：提前一个月日本时间 10:00 订用餐时间。没订到，当天 09:00 先查网上名额，10:00 起可到门口问剩余位；有空位才受理。':item.service==='mobile-required'?'入园后就先在 App 选餐厅、取餐时段并点餐。选在你抵达梦幻泉乡附近的时间；到店后再点 I\'m Here，等通知取餐。':item.showDiningUrl?'普通用餐区无需订座，可直接排队或先手机点餐。要边吃边看达菲演出，则须另订餐饮秀。':item.mobileOrder?'无需提前订座。可以先在 App 选取餐时段和餐点，到店再取；普通柜台与座位按当天现场安排。':'无需预约，走到店前排队购买。若有用餐座位，按现场安排使用。';
+  const mapName=item=>item.type==='show'?'演出':({219:'翱翔',223:'地心探险',255:'冰雪奇缘',256:'长发公主',257:'小飞侠',230:'贡多拉',247:'尼莫',231:'小火车',232:'小火车',227:'渡轮',228:'渡轮',229:'渡轮',40001:'室内区'})[item.id]||item.short;
   const englishLine=item=>{const name=escapeHTML(item?.en||'');return name?`<small class="detail-original" lang="en">${name}</small>`:'';};
 
   function persist() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({visitDate:state.visitDate,showRoute:state.showRoute,showExcluded:state.showExcluded,hideClosed:state.hideClosed,mapOrientation:state.mapOrientation,navCollapsed:state.navCollapsed,listCollapsed:state.listCollapsed,planWindow:D.planningWindow.version})); return true; } catch { return false; }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({visitDate:state.visitDate,showRoute:state.showRoute,showHidden:state.showHidden,mapOrientation:state.mapOrientation,navCollapsed:state.navCollapsed,listCollapsed:state.listCollapsed,planWindow:D.planningWindow.version})); return true; } catch { return false; }
   }
   function syncListToggle(){
     const expanded=innerWidth<=760?$('#workspace').classList.contains('mobile-list'):!state.listCollapsed,label=expanded?'收起项目列表':'展开项目列表';
@@ -74,7 +84,10 @@
   function matchedItems() {
     const q = state.query.normalize('NFKC').toLowerCase().replace(/\s+/g,'');
     return catalogue.filter(item => {
-      if(!eligible(item))return false;
+      const reasons=hiddenReasons(item);
+      if(state.category==='hidden'){if(!reasons.length)return false;}
+      else if(!eligible(item))return false;
+      if(!['all','hidden'].includes(state.category)&&itemCategory(item)!==state.category)return false;
       if (state.area !== 'all' && item.area !== state.area) return false;
       if (q && !`${item.name}${item.short}${item.en}${item.aliases}${areas.get(item.area).name}${indoorIds.has(item.id)?D.indoorArea.name+D.indoorArea.en:''}`.normalize('NFKC').toLowerCase().replace(/\s+/g,'').includes(q)) return false;
       if (state.filter === 'recommended' && !D.coreIds.includes(item.id)) return false;
@@ -83,6 +96,11 @@
       if (state.filter === 'dpa' && !hasDPA(item)) return false;
       if (state.filter === 'indoor' && !item.indoor) return false;
       if (state.filter === 'show' && item.type!=='show') return false;
+      if (state.filter === 'seating' && item.service!=='seating') return false;
+      if (state.filter === 'mobile-required' && item.service!=='mobile-required') return false;
+      if (state.filter === 'walk-in' && !['counter','snack'].includes(item.service)) return false;
+      if (state.filter === 'official-hidden' && !reasons.some(reason=>reason.kind==='official')) return false;
+      if (state.filter === 'user-hidden' && !reasons.some(reason=>reason.kind==='user')) return false;
       return true;
     });
   }
@@ -90,28 +108,35 @@
     currentResults = matchedItems();
     const count = currentResults.length;
     $('#result-count').textContent = `${count} 个`;
-    const labels = {all:'探索全部项目',recommended:'星标项目',gentle:'慢一点，也很好玩',thrill:'来一点心跳加速',dpa:'可选付费尊享卡',indoor:'在室内继续探索',show:'花船与水上秀'};
+    const labels = {all:state.category==='all'?'探索全园':state.category==='hidden'?'隐藏项目与原因':categoryNames[state.category],recommended:'星标项目',gentle:'温和体验',thrill:'刺激冒险',dpa:'DPA 适用',indoor:'室内项目',show:'花船与水上秀',seating:'建议提前订座', 'mobile-required':'须先手机点餐','walk-in':'无需订座','official-hidden':'官方停运','user-hidden':'用户主动隐藏'};
     $('#list-title').textContent = state.query ? '搜索结果' : state.area !== 'all' ? areas.get(state.area).name : labels[state.filter];
-    $('#extra-filter').value=['gentle','thrill','indoor'].includes(state.filter)?state.filter:'all';
-    $('#hide-closed').checked=state.hideClosed;$('#toggle-excluded').textContent=state.showExcluded?'隐藏排除':'显示排除';$('#toggle-excluded').setAttribute('aria-pressed',String(state.showExcluded));
-    $('#closure-filter-note').textContent=`${formatDate(dateForStatus())} · 未公布场次保留`;
-    $('#clear-filter').hidden = state.filter === 'all' && state.area === 'all' && !state.query;
-    $$('#filters button').forEach(b => { const active=b.dataset.filter===state.filter; b.classList.toggle('active',active); b.setAttribute('aria-pressed',String(active)); });
+    const extraOptions=state.category==='hidden'?[['all','全部隐藏原因'],['official-hidden','官方停运'],['user-hidden','用户主动隐藏']]:state.category==='restaurant'?[['all','全部用餐方式'],['seating','建议提前订座'],['mobile-required','须先手机点餐'],['walk-in','无需订座']]:[['all','全部类型'],['recommended','星标项目'],['dpa','DPA 适用'],['gentle','温和体验'],['thrill','刺激冒险'],['indoor','室内项目']];
+    $('#extra-filter').innerHTML=extraOptions.map(([value,label])=>`<option value="${value}">${label}</option>`).join('');$('#extra-filter').value=state.filter;
+    $('#show-hidden').checked=state.showHidden;
+    $('#hidden-filter-note').textContent=`${formatDate(dateForStatus())} · 未公布场次保留`;
+    $('#hidden-list-note').hidden=state.category!=='hidden';
+    $('#clear-filter').hidden = state.category==='all'&&state.filter === 'all' && state.area === 'all' && !state.query;
+    $$('#filters button').forEach(b => { const active=b.dataset.category===state.category; b.classList.toggle('active',active); b.setAttribute('aria-pressed',String(active)); });
     $('#attraction-list').innerHTML = count ? currentResults.map(item => {
-      const area=areas.get(item.area), closed=closureOn(item),stop=activePlan?.stops.find(stop=>stop.id===item.id);
-      return `<article class="attraction-row ${state.selected===item.id?'selected':''}" style="--area-color:${area.color}"><button class="attraction-open" data-select="${item.id}" aria-label="查看${escapeHTML(item.name)}详情"><div class="list-photo"><img src="${item.image}" alt="" loading="lazy" width="80" height="70">${stop?`<span class="list-order">${stop.order}</span>`:''}</div><span class="list-copy"><strong>${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</strong><span class="row-tags"><span>${item.playType}</span><span>${durationText(item)}</span>${closed?`<span class="tag closed">${item.type==='show'?'停演':'检修'}</span>`:''}${excludedIds.has(item.id)?'<span class="tag">排除</span>':''}</span></span></button></article>`;
+      const area=areas.get(item.area),reasons=hiddenReasons(item),stop=activePlan?.stops.find(stop=>stop.id===item.id);
+      return `<article class="attraction-row ${state.selected===item.id?'selected':''}" style="--area-color:${area.color}"><button class="attraction-open" data-select="${item.id}" aria-label="查看${escapeHTML(item.name)}详情"><div class="list-photo ${item.image?'':'list-symbol'}">${item.image?`<img src="${item.image}" alt="" loading="lazy" width="80" height="70">`:icons('food')}${stop?`<span class="list-order">${stop.order}</span>`:''}</div><span class="list-copy"><strong>${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</strong><span class="row-tags"><span>${categoryNames[itemCategory(item)]}</span><span>${item.type==='restaurant'?diningMethod(item):item.playType}</span>${item.type==='restaurant'?'':`<span>${durationText(item)}</span>`}</span>${reasons.length?`<span class="row-hidden-reason">${reasons.map(reason=>escapeHTML(reason.text)).join('<br>')}</span>`:''}</span></button></article>`;
     }).join('') : `<div class="empty-state">${icons('search')}<h3>没有找到匹配项目</h3><p>试试项目的中文名、英文名，或放宽筛选。</p><button class="outline-button" data-action="clear-filters">查看全部项目</button></div>`;
     const ids=new Set(currentResults.map(item=>mapItemId(item.id)));
     $$('.map-pin').forEach(pin => { const item=byId.get(Number(pin.dataset.select));pin.hidden=!mapEligible(item); pin.classList.toggle('is-filtered-out',!ids.has(item.id)); pin.classList.toggle('is-selected',item.id===mapItemId(state.selected)); pin.classList.toggle('is-closed',Boolean(closureOn(item)));pin.classList.toggle('has-dpa',hasDPA(item)&&!closureOn(item)); });
-    $$('.dining-pin').forEach(pin=>pin.classList.toggle('is-selected',Number(pin.dataset.select)===state.selected));
+    $$('.dining-pin').forEach(pin=>{const item=byId.get(Number(pin.dataset.select));pin.hidden=!eligible(item);pin.classList.toggle('is-selected',item.id===state.selected);pin.classList.toggle('is-filtered-out',!ids.has(item.id));});
     $$('.area-boundary').forEach(region=>region.classList.toggle('area-active',region.dataset.area===state.area));
     $('.map-caption strong').textContent=state.area==='all'?'东京迪士尼海洋':areas.get(state.area).name;
-    const available=catalogue.filter(eligible);$('.map-total').textContent=state.area==='all'&&state.filter==='all'&&!state.query?`${available.filter(item=>item.type!=='show').length} 个项目 · ${available.filter(item=>item.type==='show').length} 场演出`:`${count} 个匹配`;
+    const available=catalogue.filter(eligible);$('.map-total').textContent=state.category==='all'&&state.area==='all'&&state.filter==='all'&&!state.query?`${available.filter(item=>item.type!=='show'&&item.type!=='restaurant').length} 项目 · ${available.filter(item=>item.type==='show').length} 演出 · ${available.filter(item=>item.type==='restaurant').length} 餐饮`:`${count} 个${state.category==='all'?'匹配':categoryNames[state.category]}`;
     renderRouteOverlay();
   }
   function clearFilters() {
-    state.query=''; state.area='all'; state.filter='all';
+    state.query=''; state.area='all'; state.filter='all';state.category='all';
     $('#search').value='';$('#area-filter').value='all';renderResults();fitMap();
+  }
+  function setShowHidden(show){
+    state.showHidden=show;persist();renderRoute();renderResults();
+    if(state.selected)renderDetail(byId.get(state.selected));
+    if(state.view==='map')fitMap();
   }
   function selectItem(id, focusDetail = true) {
     const item=byId.get(id);if(!item)return;
@@ -133,8 +158,10 @@
   function showTimeText(item){if(closureOn(item))return '所选日期已公布停演';const times=P.showTimes(item.id,dateForStatus());return times===null?'场次待公布':times.length?times.join(' / '):'所选日期暂无场次';}
   function renderDetail(item) {
     const area=areas.get(item.area),closure=closureOn(item),panel=$('#detail-panel');panel.hidden=false;
-    const isGroup=item.type==='group';panel.classList.toggle('is-indoor-area',isGroup);
-    const status=closure?`<span class="detail-status closed">${formatDate(closure[0])} — ${closure[1]?formatDate(closure[1]):'待定'} ${item.type==='show'?'停演':'检修'}</span>`:item.type==='restaurant'?`<span class="detail-status">${item.snack?'¥'+number(item.price):'可移动点餐'}</span>`:hasDPA(item)?`<span class="detail-status">DPA ¥${number(item.dpa)} / 人 / 次</span>`:'';
+    const isGroup=item.type==='group',hasPhoto=!isGroup&&Boolean(item.image);panel.classList.toggle('is-indoor-area',isGroup);
+    const status=closure?'':item.type==='restaurant'?`<span class="detail-status">${diningMethod(item)}${item.price?' · ¥'+number(item.price):''}</span>`:hasDPA(item)?`<span class="detail-status">DPA ¥${number(item.dpa)} / 人 / 次</span>`:'';
+    const reasons=hiddenReasons(item),hiddenDetails=reasons.length?`<section class="detail-hidden"><h3>隐藏原因</h3>${reasons.map(reason=>`<p>${escapeHTML(reason.text)}</p>`).join('')}${!state.showHidden?'<button class="inline-guide-link" data-action="show-hidden">在地图和普通清单中显示隐藏项目</button>':''}</section>`:'';
+    const diningDetails=item.type==='restaurant'?`<section class="detail-dining"><h3>什么时候处理？</h3><p>${diningAdvice(item)}</p>${item.mapLocationNote?`<p class="quiet-note">${item.mapLocationNote}</p>`:''}${item.showDiningUrl?`<a class="source-link" href="${item.showDiningUrl}" target="_blank" rel="noopener noreferrer">演出用餐区的预约说明 ${icons('external')}</a>`:''}<small>餐饮方式核对：${D.serviceChecked} · 日本时间</small></section>`:'';
     const timing=!isGroup&&item.type!=='restaurant'?`<p class="detail-duration">${durationText(item)}<small>${item.durationIsEstimate?'导览建议，不含排队':'体验时长，不含排队'}</small></p>`:'';
     const times=item.type==='show'?P.showTimes(item.id,dateForStatus()):null;
     const showSchedule=item.type==='show'?`<section class="detail-schedule"><h3>${formatDate(dateForStatus())} 演出时间</h3>${times===null?'<p>该日场次尚未公布。官方通常在前一个月 8 日左右公布下月安排。</p>':times.length?`<ul class="show-time-list">${times.map(time=>`<li><time>${time}</time></li>`).join('')}</ul><small>日本时间</small>`:'<p>该日停演。</p>'}</section>`:'';
@@ -142,7 +169,7 @@
     const children=item.type==='group'?`<ul class="indoor-projects" aria-label="室内项目">${item.items.filter(id=>eligible(byId.get(id))).map(id=>{const child=byId.get(id);return `<li><button class="indoor-project" data-select="${id}" aria-label="查看${escapeHTML(child.name)}详情"><img src="${child.image}" alt="" width="48" height="48" loading="lazy"><span class="indoor-project-copy"><strong>${child.name}</strong><small>${child.playType} · ${durationText(child)}${closureOn(child)?'<span class="tag closed">暂停运营</span>':''}</small></span>${icons('arrow')}</button></li>`;}).join('')}</ul>`:'';
     const close=`<button class="detail-close icon-button" data-action="close-detail" aria-label="关闭项目详情">${icons('close')}</button>`;
     const title=`<h2>${item.name}${D.coreIds.includes(item.id)?icons('star'):''}</h2>`;
-    panel.innerHTML=`${isGroup?'':`<div class="detail-photo"><img src="${item.image}" alt="${escapeHTML(item.imageAlt||item.name)}" width="800" height="450">${close}</div>`}<div class="detail-content">${back}${isGroup?`<div class="detail-group-heading">${title}${close}</div>`:title}${englishLine(item)}${isGroup?'':`<p class="detail-description">${item.oneLine}</p>`}${timing}${status}${showSchedule}${children}</div><div class="detail-footer"><button class="primary-button" data-action="go-route">${icons('route')}查看一日时间表</button><a class="detail-official" href="${item.type==='show'?item.scheduleUrl:item.url}" target="_blank" rel="noopener noreferrer">${item.type==='group'?'官方项目目录':item.type==='show'?'官方场次':'官方详情'} ${icons('external')}</a></div>`;panel.scrollTop=0;
+    panel.innerHTML=`${hasPhoto?`<div class="detail-photo"><img src="${item.image}" alt="${escapeHTML(item.imageAlt||item.name)}" width="800" height="450">${close}</div>`:''}<div class="detail-content">${back}${!hasPhoto?`<div class="detail-group-heading">${title}${close}</div>`:title}${englishLine(item)}${isGroup?'':`<p class="detail-description">${item.oneLine}</p>`}${timing}${status}${hiddenDetails}${diningDetails}${showSchedule}${children}</div><div class="detail-footer"><button class="primary-button" data-action="${item.type==='restaurant'?'go-dining':'go-route'}">${icons(item.type==='restaurant'?'food':'route')}${item.type==='restaurant'?'查看用餐攻略':'查看一日时间表'}</button><a class="detail-official" href="${item.type==='show'?item.scheduleUrl:item.url}" target="_blank" rel="noopener noreferrer">${item.type==='group'?'官方项目目录':item.type==='show'?'官方场次':'官方详情'} ${icons('external')}</a></div>`;panel.scrollTop=0;
   }
   function closeDetail(returnFocus=true) {
     state.selected=null;$('#detail-panel').hidden=true;renderResults();setHash('#map');
@@ -162,16 +189,26 @@
     $('#show-cards').innerHTML=D.shows.filter(eligible).map(item=>`<button class="show-row" data-select="${item.id}"><span>${item.name}</span><span>${showTimeText(item)} · ${item.durationMinutes} 分钟</span>${icons('arrow')}</button>`).join('')||'<p>当前停运筛选下没有可显示的演出。</p>';
   }
   function renderDining() {
-    $('#dining-options').innerHTML=D.dining.filter(item=>!item.snack).map(item=>`<button class="food-row" data-select="${item.id}">${icons('food')}<span>${item.meal} · ${item.name}</span>${icons('arrow')}</button>`).join('');
-    $('#snack-options').innerHTML=D.dining.filter(item=>item.snack).map(item=>`<button class="food-row" data-select="${item.id}">${icons('food')}<span>${item.name}<small>${item.venue}</small></span><b>¥${number(item.price)}</b>${icons('arrow')}</button>`).join('');
+    const foodRow=item=>`<button class="food-row" data-select="${item.id}">${icons('food')}<span>${item.name}<small>${areas.get(item.area).name} · ${diningMethod(item)}${item.venue?' · '+item.venue:''}${item.showDiningUrl?' · 演出区另订':''}</small>${hiddenReasons(item).length?`<small class="row-hidden-reason">${hiddenReasons(item).map(reason=>escapeHTML(reason.text)).join('；')}</small>`:''}</span>${item.price?`<b>¥${number(item.price)}</b>`:''}${icons('arrow')}</button>`;
+    const dining=D.dining.filter(eligible);
+    $('#seating-options').innerHTML=dining.filter(item=>item.service==='seating').map(foodRow).join('');
+    $('#dining-options').innerHTML=dining.filter(item=>item.service==='mobile-required').map(foodRow).join('');
+    $('#walkin-options').innerHTML=dining.filter(item=>item.service==='counter').map(foodRow).join('');
+    $('#snack-options').innerHTML=dining.filter(item=>item.snack).map(foodRow).join('');
+    $('#dining-closure-note').textContent=D.dining.filter(item=>closureOn(item)).map(item=>`${item.name}：${formatDate(closureOn(item)[0])}–${formatDate(closureOn(item)[1])} 停运。`).join(' ');
     const [year,month,day]=dateForStatus().split('-').map(Number),priorMonth=month===1?12:month-1,priorDays=new Date(Date.UTC(year,month-1,0)).getUTCDate();
-    $('#booking-example').textContent=day<=priorDays?`${month} 月 ${day} 日用餐：${priorMonth} 月 ${day} 日 10:00 起可订；当天 09:00 也可查看空位。`:'通常从用餐前一个月开放；具体日期和当日名额以官方预约页为准。';
+    $('#booking-example').textContent=day<=priorDays?`想在 ${month} 月 ${day} 日吃：${priorMonth} 月 ${day} 日日本时间 10:00（北京时间 09:00）开抢。当日补位从日本时间 09:00（北京时间 08:00）开始。`:'提前一个月开放订座；若上月没有同一天，以官方预约页显示的开放日为准。';
+    const fantasyRow=activePlan.rows.find(row=>byId.get(row.itemId)?.area==='fantasy');
+    $('#mobile-order-example').textContent=activePlan.knownHours?`按本日草案，${P.clock(activePlan.opening)} 入园后就先看想吃的餐厅与可取餐时段。${fantasyRow?`梦幻泉乡约 ${P.clock(fantasyRow.start)}–${P.clock(fantasyRow.end)} 游玩，若想在那里吃，把餐单选在附近时段，并相应挪动午餐。`:''}这是操作建议，实际可选时段以 App 为准。`:'入园后先看想吃的餐厅与可取餐时段；按实际到达该区的时间选择。';
   }
   function renderDPA(){
-    const ordered=[...D.coreIds.map(id=>byId.get(id)),...D.attractions.filter(item=>item.dpa&&!D.coreIds.includes(item.id))].filter(eligible);
-    $('#dpa-table-body').innerHTML=ordered.map(item=>`<tr><td><button data-select="${item.id}">${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</button>${closureOn(item)?'<span class="table-closed">检修</span>':''}</td><td>¥${number(item.dpa)}</td></tr>`).join('');
+    const ordered=[...D.coreIds.map(id=>byId.get(id)),...allAttractions.filter(item=>item.dpa&&!D.coreIds.includes(item.id))].filter(eligible);
+    $('#dpa-table-body').innerHTML=ordered.map(item=>`<tr><td><button data-select="${item.id}">${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</button>${hiddenReasons(item).map(reason=>`<span class="table-closed">${reason.label}</span>`).join('')}</td><td>¥${number(item.dpa)}</td></tr>`).join('');
     $('#show-dpa-list').innerHTML=D.dpaShows.filter(item=>{const show=D.shows.find(show=>show.name===item.name);return !show||eligible(show);}).map(item=>`<p class="show-dpa-row"><span>${item.name}</span><strong>¥${number(item.price)}</strong></p>`).join('')+'<p>白天花船无 DPA；可用演出的名额以官方 App 为准。</p>';
-    $('#dpa-plan-cost').textContent=activePlan.dpaActions.length?`当前时间表的 ${activePlan.dpaActions.length} 项示例若全部购买，${D.party.adults} 位成人合计约 ${number(activePlan.dpaExampleCost)} 日元。可按等待时间和预算只买其中几项；这不是已购票。`:'';
+    const planned=activePlan.rows.filter(row=>row.usesDpa).map(row=>byId.get(row.itemId).short).join('、');
+    const budget=activePlan.dpaBudget?`这份草案按 ${planned} 买到 DPA 来留时间，两位成人约 ${number(activePlan.dpaBudget)} 日元。没买到时，需要增加排队时间或删减项目。`:'本日已排项目按普通排队预算。';
+    $('#dpa-plan-cost').textContent=budget+(activePlan.dpaExampleCost>activePlan.dpaBudget?` 旁注还列了可选购买；若全部购买，两人合计约 ${number(activePlan.dpaExampleCost)} 日元。`:'');
+    $('#route-dpa-budget').textContent=budget;
   }
   let timelineFrame=0;
   function queueTimelineLayout(){if(!timelineFrame)timelineFrame=requestAnimationFrame(()=>{timelineFrame=0;layoutTimelineBranches();});}
@@ -192,7 +229,7 @@
   }
   function renderRoute() {
     activePlan=P.plan(dateForStatus());
-    $('#route-profile').textContent=`${D.party.adults} 位成人 · 无儿童｜${activePlan.routeSummary}`;
+    $('#route-profile').textContent=`${D.party.adults} 位成人 · 逆时针主环线｜${activePlan.routeSummary}`;
     const changes=[...activePlan.substitutions.map(change=>`${change.from.short}检修 → ${change.to.short}`),...activePlan.unavailable.map(item=>`${item.short}本次未排入，按现场队列取舍。`)];
     $('#route-changes').hidden=!changes.length;$('#route-change-list').textContent=changes.join('；');
     const relative=value=>{const delta=value-activePlan.opening;return delta<0?`开园前 ${-delta} 分钟`:`开园后 ${Math.floor(delta/60)}:${String(delta%60).padStart(2,'0')}`;};
@@ -201,10 +238,10 @@
     $('#route-timeline').innerHTML=headings+activePlan.rows.map((row,index)=>{
       const item=row.itemId||row.restaurantId?byId.get(row.itemId||row.restaurantId):null,order=row.itemId?activePlan.stops.find(stop=>stop.id===row.itemId)?.order:null;
       const time=row.tentative?`<time class="relative-time">${row.itemId===20001?'午前预留':'晚间预留'}</time><small class="stop-end">${row.end-row.start} 分钟预算</small>`:`<time>${clock(row.start)}</time><small class="stop-end">– ${clock(row.end)}</small>`;
-      const facts=row.kind==='ride'?`体验 ${row.ride} 分钟 <span>·</span> 排队预算 ${row.queue} 分钟 <span>·</span> 步行约 ${row.walk} 分钟`:row.kind==='explore'?`自由探索约 ${row.ride} 分钟 <span>·</span> 步行约 ${row.walk} 分钟`:row.kind==='show'?`${row.tentative?'场次待公布':P.clock(row.showStart)+' 开演'} <span>·</span> 表演 ${row.ride} 分钟`:'';
+      const facts=row.kind==='ride'?`体验 ${row.ride} 分钟 <span>·</span> ${row.usesDpa?'DPA 通道预算':'排队预算'} ${row.queue} 分钟 <span>·</span> 步行约 ${row.walk} 分钟`:row.kind==='explore'?`自由探索约 ${row.ride} 分钟 <span>·</span> 步行约 ${row.walk} 分钟`:row.kind==='show'?`${row.tentative?'场次待公布':P.clock(row.showStart)+' 开演'} <span>·</span> 表演 ${row.ride} 分钟`:'';
       const title=item?(row.kind==='show'?item.name:row.kind==='meal'?`${item.meal} · ${item.name}`:item.short):row.title;
       const actions=activePlan.dpaActions.filter(action=>action.anchorRowIndex===index);
-      const notes=actions.map(action=>{const target=byId.get(action.dpaItemId);return `<article class="dpa-note" data-buy="${action.start}"><div class="dpa-note-heading">${icons('ticket')}<time>${clock(action.start)}</time><span>查 DPA</span></div><button data-select="${target.id}">${target.short}</button><p class="dpa-target">争取 ${clock(action.targetStart)} 前后体验</p><p>${D.party.adults} 人 ${number(action.pairPrice)} 日元 · 下一张最早 ${clock(action.nextEligible)}</p><p>${escapeHTML(action.description)}</p></article>`;}).join('');
+      const notes=actions.map(action=>{const target=byId.get(action.dpaItemId);return `<article class="dpa-note" data-buy="${action.start}"><div class="dpa-note-heading">${icons('ticket')}<time>${clock(action.start)}</time><span>${action.planned?'查 DPA':'可选 DPA'}</span></div><button data-select="${target.id}">${target.short}</button><p class="dpa-target">目标 ${clock(action.targetStart)} 前后使用</p><p>${D.party.adults} 人 ${number(action.pairPrice)} 日元 · 若此时付款，下张最早 ${clock(action.nextEligible)}</p><p>${escapeHTML(action.description)}</p></article>`;}).join('');
       return `<div class="timeline-item" data-start="${row.start}" data-end="${row.end}"><article class="timed-stop ${row.kind}"><div class="stop-time">${time}</div><div class="stop-body"><div class="stop-title">${order?`<span class="stop-number">${order}</span>`:icons(row.kind==='meal'?'food':row.kind==='walk'?'arrow':'route')}${item?`<button data-select="${item.id}">${title}${D.coreIds.includes(item.id)?icons('star'):''}</button>`:`<h3>${title}</h3>`}</div>${facts?`<div class="step-facts">${facts}</div>`:''}${row.description?`<p class="step-note">${escapeHTML(row.description)}</p>`:''}</div></article><aside class="dpa-side-list" aria-label="本段 DPA 操作">${notes}</aside>${notes?'<svg class="timeline-branch" aria-hidden="true" focusable="false"></svg>':''}</div>`;
     }).join('');
     renderShows();renderDPA();renderDining();renderRouteOverlay();queueTimelineLayout();
@@ -223,14 +260,14 @@
     for(const row of activePlan.rows){
       const when=row.tentative?(row.itemId===20001?'午前预留':'晚间预留'):time(row.start)+(row.end>row.start?'–'+time(row.end):'');
       lines.push(`${when}  ${row.title}`);
-      if(row.kind==='ride')lines.push(`  体验约 ${row.ride} 分钟；排队预算 ${row.queue} 分钟；步行约 ${row.walk} 分钟。`);
+      if(row.kind==='ride')lines.push(`  体验约 ${row.ride} 分钟；${row.usesDpa?'DPA 通道预算':'排队预算'} ${row.queue} 分钟；步行约 ${row.walk} 分钟。`);
       if(row.kind==='show')lines.push(`  ${row.tentative?'具体场次待公布':'官方开演 '+P.clock(row.showStart)}；表演 ${row.ride} 分钟；提前预留 ${row.prepare} 分钟找位置。`);
       if(row.kind==='explore')lines.push(`  自由探索约 ${row.ride} 分钟；步行约 ${row.walk} 分钟。`);
       if(row.description)lines.push('  '+row.description);
       lines.push('');
     }
     if(activePlan.dpaActions.length){lines.push('DPA 并行操作（在主行程的排队、等场或用餐间隙进行）');for(const action of activePlan.dpaActions)lines.push(`${time(action.start)}  ${action.title}；争取 ${time(action.targetStart)} 前后体验；下一张最早 ${time(action.nextEligible)}；${D.party.adults} 人 ${number(action.pairPrice)} 日元。`, '  '+action.description);lines.push(`示例全部购买：${D.party.adults} 位成人合计约 ${number(activePlan.dpaExampleCost)} 日元；未预订，可按需只买几项。`);}
-    lines.push(...activePlan.substitutions.map(change=>`${change.from.name}检修 → ${change.to.name}`),...activePlan.unavailable.map(item=>`${item.short}本次未排入，请结合 DPA 和现场队列重新取舍。`),D.sources.calendar,D.sources.dpa);
+    lines.push($('#route-dpa-budget').textContent,'餐厅不接入路线，午晚餐就近自选。',$('#booking-example').textContent,$('#mobile-order-example').textContent,...activePlan.substitutions.map(change=>`${change.from.name}检修 → ${change.to.name}`),...activePlan.unavailable.map(item=>`${item.short}本次未排入，请结合 DPA 和现场队列重新取舍。`),D.sources.calendar,D.sources.dpa,D.sources.dining,D.sources.mobileOrder);
     const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`迪士尼海洋时间表-${dateForStatus()}.txt`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('时间表已导出。');
   }
 
@@ -386,7 +423,7 @@
   function renderMap() {
     $('#map-pins').innerHTML=mapCatalogue.map(item=>{const p=point(item),special=item.type==='show';return `<button class="map-pin ${special?'show-pin show-'+item.id:''}" style="left:${p.x}px;top:${p.y}px;--pin-color:${areas.get(item.area).color}" data-select="${item.id}" aria-label="${item.name}，${areas.get(item.area).name}"><span class="pin-core"></span><span class="pin-label">${item.short}</span>${D.coreIds.includes(item.id)?`<span class="pin-star">${icons('star')}</span>`:''}</button>`;}).join('');
     $('#map-dining').innerHTML=D.dining.map(item=>{const p=point(item);return `<button class="dining-pin ${item.snack?'snack-pin':''}" style="left:${p.x}px;top:${p.y}px" data-select="${item.id}" aria-label="${item.meal}：${item.name}"><span class="dining-core">${icons('food')}</span><span class="pin-label">${item.snack?item.short:item.meal+' · '+item.short}</span></button>`;}).join('');
-    $('#map-labels').innerHTML=[...mapCatalogue,...D.dining].map(item=>`<span class="map-name" data-label-for="${item.id}">${escapeHTML(item.type==='restaurant'?(item.snack?item.short:item.name):item.short)}</span>`).join('');
+    $('#map-labels').innerHTML=[...mapCatalogue,...D.dining].map(item=>`<span class="map-name" data-label-for="${item.id}">${escapeHTML(mapName(item))}</span>`).join('');
     mapNodes=[...mapCatalogue,...D.dining].map(item=>({item,button:$(`[data-select="${item.id}"]`,item.type==='restaurant'?$('#map-dining'):$('#map-pins')),label:$(`[data-label-for="${item.id}"]`)}));
     for(const node of mapNodes){
       node.button.addEventListener('pointerenter',()=>{hoveredMarker=node.item.id;queueMapLayout();});
@@ -452,18 +489,21 @@
     if(target.dataset.section){closeDetail(false);scrollToGuideSection(target.dataset.section);setHash(target.dataset.section);return;}
     if(target.dataset.view){closeDetail(false);setView(target.dataset.view);return;}
     if(target.dataset.filter){state.filter=target.dataset.filter;closeDetail(false);renderResults();return;}
+    if(target.dataset.category){state.category=target.dataset.category;state.filter='all';closeDetail(false);renderResults();return;}
     if(target.dataset.area){selectArea(target.dataset.area);return;}
     if(target.dataset.mobile){$('#workspace').classList.toggle('mobile-list',target.dataset.mobile==='list');updateMobileButtons(target.dataset.mobile);if(target.dataset.mobile==='map')requestAnimationFrame(fitMap);return;}
     if(target.dataset.action==='clear-filters')clearFilters();
     if(target.dataset.action==='close-detail')closeDetail();
     if(target.dataset.action==='go-route'){closeDetail(false);setView('guide');setHash('#day-route');scrollToGuideSection('#day-route');}
+    if(target.dataset.action==='go-dining'){closeDetail(false);scrollToGuideSection('#dining-guide');setHash('#dining-guide');}
+    if(target.dataset.action==='go-dpa'){scrollToGuideSection('#dpa-guide');setHash('#dpa-guide');}
+    if(target.dataset.action==='show-hidden')setShowHidden(true);
   });
   $('#search').addEventListener('input',event=>{state.query=event.target.value;closeDetail(false);renderResults();});
   $('#extra-filter').addEventListener('change',event=>{state.filter=event.target.value;closeDetail(false);renderResults();});
   $('#area-filter').addEventListener('change',event=>{state.area=event.target.value;closeDetail(false);renderResults();fitResults();});
   $('#clear-filter').addEventListener('click',clearFilters);
-  $('#hide-closed').addEventListener('change',event=>{state.hideClosed=event.target.checked;closeDetail(false);renderRoute();renderResults();persist();fitMap();});
-  $('#toggle-excluded').addEventListener('click',()=>{state.showExcluded=!state.showExcluded;closeDetail(false);renderResults();persist();});
+  $('#show-hidden').addEventListener('change',event=>setShowHidden(event.target.checked));
   $('#toggle-orientation').addEventListener('click',()=>{state.mapOrientation=state.mapOrientation==='north'?'official':'north';applyMapOrientation();persist();});
   $('#toggle-navigation').addEventListener('click',()=>{state.navCollapsed=!state.navCollapsed;applyPanelLayout();persist();});
   $('#toggle-project-list').addEventListener('click',()=>{if(innerWidth<=760){const show=!$('#workspace').classList.contains('mobile-list');$('#workspace').classList.toggle('mobile-list',show);updateMobileButtons(show?'list':'map');if(!show)requestAnimationFrame(fitMap);}else{state.listCollapsed=!state.listCollapsed;applyPanelLayout();persist();}});
@@ -472,7 +512,7 @@
   $('#retry-map').addEventListener('click',()=>{const img=$('.map-art image'),url=`assets/official-map.jpg?retry=${Date.now()}`;img.setAttribute('href',url);const check=new Image();check.onload=()=>{$('#map-error').hidden=true;};check.onerror=()=>toast('仍未加载成功，请检查 assets 文件夹是否完整。');check.src=url;});
   $('#visit-date').value=dateForStatus();
   $('#visit-date').addEventListener('change',event=>{state.visitDate=event.target.value||D.planningWindow.reference;event.target.value=state.visitDate;persist();renderHours();renderRoute();renderResults();if(state.selected)renderDetail(byId.get(state.selected));});
-  $('#route-to-map').addEventListener('click',()=>{state.query='';state.area='all';state.filter='all';state.showRoute=true;persist();$('#search').value='';$('#area-filter').value='all';$('#workspace').classList.remove('mobile-list');updateMobileButtons('map');setView('map');renderResults();requestAnimationFrame(fitMap);});
+  $('#route-to-map').addEventListener('click',()=>{state.query='';state.area='all';state.filter='all';state.category='all';state.showRoute=true;persist();$('#search').value='';$('#area-filter').value='all';$('#workspace').classList.remove('mobile-list');updateMobileButtons('map');setView('map');renderResults();requestAnimationFrame(fitMap);});
   $('#route-visible').addEventListener('change',event=>{state.showRoute=event.target.checked;persist();renderRouteOverlay();});
   $('#export-route').addEventListener('click',exportRoute);
   document.addEventListener('keydown',event=>{

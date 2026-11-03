@@ -10,7 +10,7 @@ window.DISNEY_DATA = {
     app: 'https://www.tokyodisneyresort.jp/en/tdr/guide/app.html',
     services: 'https://faq-en.tokyodisneyresort.jp/answer/680ba05101fdf7431bafb6b0/',
     mobileOrder: 'https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/mobileorder.html',
-    dining: 'https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating.html',
+    dining: 'https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/',
     calendar: 'https://www.tokyodisneyresort.jp/en/tds/monthly/calendar.html'
   },
   areas: [
@@ -107,7 +107,7 @@ window.DISNEY_DATA.attractions.forEach(item => {
   window.DISNEY_DATA.attractions.forEach(item => {
     [item.playType,item.oneLine] = simple[item.id];
   });
-  window.DISNEY_DATA.excluded = [{id:246,name:'龟龟漫谈',reason:'主要是日语聊天互动，默认排除，可按需显示。'}];
+  window.DISNEY_DATA.excluded = [{id:246,name:'龟龟漫谈',reason:'主要是日语聊天互动，按当前出游偏好隐藏。'},{id:257,name:'小飞侠梦幻岛历险记',reason:'按你的要求隐藏小飞侠项目。'}];
   window.DISNEY_DATA.excludedAttractions = window.DISNEY_DATA.attractions.filter(item => window.DISNEY_DATA.excluded.some(excluded => excluded.id === item.id));
   window.DISNEY_DATA.attractions = window.DISNEY_DATA.attractions.filter(item => !window.DISNEY_DATA.excluded.some(excluded => excluded.id === item.id));
   window.DISNEY_DATA.hours = {
@@ -150,8 +150,8 @@ window.DISNEY_DATA.attractions.forEach(item => {
     {name:'Dreams Take Flight',price:2500}
   ];
   window.DISNEY_DATA.dining=[
-    {id:30001,type:'restaurant',name:'尚比尼兄弟餐厅',short:'尚比尼兄弟餐厅',en:"Zambini Brothers' Ristorante",meal:'午餐',area:'harbor',x:1638,y:1404,oneLine:'看完白天花船后，在地中海港湾这家意式餐厅吃午餐；可用官方 App 提前选餐和取餐时段。',image:'assets/dining/lunch.jpg',url:'https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/403/',closures:[]},
-    {id:30002,type:'restaurant',name:'纽约美味房',short:'纽约美味房',en:'New York Deli',meal:'晚餐',area:'american',x:1158,y:1545,oneLine:'玩完惊魂古塔后，在美国海滨这家熟食餐厅吃晚餐，再返回海港；可使用官方 App 移动点餐。',image:'assets/dining/dinner.jpg',url:'https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/',closures:[]}
+    {id:30001,type:'restaurant',name:'尚比尼兄弟餐厅',short:'尚比尼兄弟餐厅',en:"Zambini Brothers' Ristorante",meal:'餐厅',area:'harbor',x:1638,y:1404,oneLine:'地中海港湾的意式简餐店；入园后可在官方 App 选餐和取餐时段，按你在附近的时间决定是否吃。',image:'assets/dining/lunch.jpg',url:'https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/403/',closures:[]},
+    {id:30002,type:'restaurant',name:'纽约美味房',short:'纽约美味房',en:'New York Deli',meal:'餐厅',area:'american',x:1158,y:1545,oneLine:'美国海滨的三明治简餐店；可用官方 App 移动点餐，按可取餐时段和当前位置选择。',image:'assets/dining/dinner.jpg',url:'https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/422/',closures:[]}
   ];
 }
 
@@ -220,4 +220,33 @@ window.DISNEY_DATA.indoorArea = {
     if(durations[item.id]!=null){const minutes=durations[item.id],whole=Math.floor(minutes),seconds=Math.round((minutes-whole)*60);item.durationMinutes=minutes;item.durationIsEstimate=false;item.durationLabel=seconds?`约 ${whole} 分 ${seconds} 秒`:`约 ${whole} 分钟`;}
     else {const range=estimates[item.id];item.durationIsEstimate=true;item.durationLabel=`建议 ${range[0]}–${range[1]} 分钟`;}
   }
+}
+// Dining service and closure facts checked against official venue pages on 2026-11-03.
+{
+  const D=window.DISNEY_DATA;
+  const venue=(id,officialId,name,en,area,x,y,service,oneLine,options={})=>({id,officialId,type:'restaurant',name,short:name,en,area,x,y,service,oneLine,meal:'餐厅',url:`https://www.tokyodisneyresort.jp/sc/tds/restaurant/detail/${officialId}/`,closures:[],checked:'2026-11-03',...options});
+  D.dining.forEach(item=>Object.assign(item,{service:item.snack?'snack':'counter',mobileOrder:!item.snack,checked:'2026-11-03'}));
+  D.dining.push(
+    venue(30412,412,'麦哲伦',"Magellan's",'harbor',1422,1243,'seating','海边要塞里的正式西式餐厅，坐下点餐；想吃这家就提前订用餐时间。'),
+    venue(30408,408,'卡纳雷托餐馆','Ristorante di Canaletto','harbor',1221,1584,'seating','运河边的意式餐馆，提供披萨和意大利面，适合提前订座后坐下吃。'),
+    venue(30425,425,'S.S.哥伦比亚餐厅','S.S. Columbia Dining Room','american',716,1343,'seating','在大轮船里坐下吃西式餐点，建议提前订座。'),
+    venue(30429,429,'泰迪罗斯福欢饮厅','The Teddy Roosevelt Lounge','american',745,1361,'seating','大轮船里的休息酒廊，可坐下吃餐点、喝饮品，建议提前订座。'),
+    venue(30432,432,'樱花餐厅','Restaurant Sakura','american',1075,1395,'seating','美国海滨的日式餐厅，采用订座带位；所选日期若停运则隐藏。',{closures:[['2027-01-06','2027-06-30']]}),
+    venue(30451,451,'水平线海湾餐厅','Horizon Bay Restaurant','port',1433,966,'seating','发现港的西式餐厅，拿托盘选餐后结账入座，建议先订用餐时间。'),
+    venue(30409,409,'阿伦黛尔皇家宴会厅','Royal Banquet of Arendelle','fantasy',2678,482,'mobile-required','冰雪奇缘城堡里的柜台餐厅，有用餐座位；须先在 App 选取餐时段并点餐。',{mobileOrder:true}),
+    venue(30413,413,'可爱小鸭餐厅','The Snuggly Duckling','fantasy',2618,576,'mobile-required','长发公主主题的汉堡餐厅，有用餐座位；须先在 App 点餐并选时段。',{mobileOrder:true,aliases:'丑小鸭 长发公主餐厅'}),
+    venue(30414,414,'瞭望台野餐','Lookout Cookout','fantasy',2434,435,'mobile-required','梦幻岛主题的柜台轻食店，有用餐座位；须先在 App 点餐并选时段。',{mobileOrder:true}),
+    venue(30446,446,'鳕鱼岬锦标美食','Cape Cod Cook-Off','american',1159,1157,'counter','普通用餐区卖汉堡，无需订座；观看达菲演出的用餐区要另外预约餐饮秀。',{mobileOrder:true,showDiningUrl:'https://www.tokyodisneyresort.jp/en/tds/restaurant/detail/447/'}),
+    venue(30456,456,'米格勒黄金国快餐中心',"Miguel's El Dorado Cantina",'delta',1743,870,'counter','失落河三角洲的柜台餐厅，有用餐座位，无需提前订座，可手机点餐。',{mobileOrder:true,closures:[['2026-11-03','2026-11-12']]}),
+    venue(30459,459,'犹加敦基地营烧烤','Yucatan Base Camp Grill','delta',2020,795,'counter','遗迹旁的烧烤简餐店，有用餐座位，无需订座，可用手机点餐。',{mobileOrder:true}),
+    venue(30463,463,'凯兹堡餐饮广场','Casbah Food Court','arabian',2178,1114,'counter','阿拉伯海岸的咖喱简餐店，有用餐座位，无需订座，可用手机点餐。',{mobileOrder:true,aliases:'卡斯巴 咖喱'}),
+    venue(30468,468,'赛巴斯丁加力骚厨房',"Sebastian's Calypso Kitchen",'mermaid',1865,1010,'counter','美人鱼礁湖室内的简餐店，无需订座，可手机点餐；地图点位在室内区入口附近。',{mobileOrder:true,mapLocationNote:'位于室内区；地图标在建筑入口附近，非室内精确位置。'}),
+    venue(30418,418,'火山餐厅','Vulcania Restaurant','mysterious',1702,1166,'counter','神秘岛洞穴里的中式餐厅，拿托盘选餐、结账后入座，无需提前订座。'),
+    venue(30410,410,'奥肯好食',"Oaken's OK Foods",'fantasy',2642,489,'snack','梦幻泉乡的路边小吃店，可买手拿餐点，无需订座。',{mobileOrder:true,snack:true}),
+    venue(30465,465,'芝麻开门','Open Sesame','arabian',2195,959,'snack','阿拉伯海岸卖吉拿棒的小铺，走到店前排队购买，无需订座。',{snack:true}),
+    venue(30450,450,'海边小吃','Seaside Snacks','port',1163,981,'snack','发现港的路边小吃铺，直接排队买手拿餐点，无需订座。',{snack:true}),
+    venue(30421,421,'鹦鹉螺号小厨','Nautilus Galley','mysterious',1600,1148,'counter','神秘岛水边的小吃店，可买手拿餐点，无需订座，可用手机点餐。',{mobileOrder:true})
+  );
+  D.dining.forEach(item=>{item.aliases=item.aliases||'';item.playType=({seating:'建议订座','mobile-required':'须先手机点餐',counter:'无需订座',snack:'路边小吃'})[item.service];});
+  D.serviceChecked='2026-11-03';
 }

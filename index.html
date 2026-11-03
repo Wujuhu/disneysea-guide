@@ -8,11 +8,11 @@
   <title>海洋漫游 · 东京迪士尼海洋新手指南</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css?v=20261102-detail-english-only">
+  <link rel="stylesheet" href="styles.css?v=20261103-hidden-catalogue">
   <script src="assets/vendor/bootstrap/bootstrap.min.js" defer></script>
-  <script src="data.js?v=20261102-detail-english-only" defer></script>
-  <script src="planner.js?v=20261102-detail-english-only" defer></script>
-  <script src="app.js?v=20261102-detail-english-only" defer></script>
+  <script src="data.js?v=20261103-hidden-catalogue" defer></script>
+  <script src="planner.js?v=20261103-hidden-catalogue" defer></script>
+  <script src="app.js?v=20261103-hidden-catalogue" defer></script>
 </head>
 <body>
   <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -59,15 +59,16 @@
     <section id="map-view" aria-label="园区交互地图">
       <h1 class="visually-hidden">东京迪士尼海洋</h1>
       <div class="map-workspace" id="workspace">
-        <aside class="explorer" id="project-explorer" aria-label="查找游乐项目">
+        <aside class="explorer" id="project-explorer" aria-label="查找项目、演出与餐厅">
           <div class="explorer-head">
-            <label class="search-box"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索项目" aria-label="搜索项目中文名、英文名或别名" autocomplete="off"></label>
-            <div class="filter-chips btn-group" id="filters" role="group" aria-label="项目筛选"><button class="chip btn btn-sm active" data-filter="all" aria-pressed="true">全部</button><button class="chip btn btn-sm" data-filter="recommended" aria-pressed="false">星标</button><button class="chip btn btn-sm" data-filter="dpa" aria-pressed="false">DPA</button><button class="chip btn btn-sm" data-filter="show" aria-pressed="false">演出</button></div>
-            <div class="filter-selects"><select class="form-select form-select-sm" id="area-filter" aria-label="按主题海港筛选"><option value="all">全部园区</option></select><select class="form-select form-select-sm" id="extra-filter" aria-label="更多项目类型"><option value="all">全部类型</option><option value="gentle">温和体验</option><option value="thrill">刺激冒险</option><option value="indoor">室内项目</option></select></div>
-            <label class="closed-filter"><input class="form-check-input" id="hide-closed" type="checkbox" checked><span>隐藏官方停运<small id="closure-filter-note">按所选日期判断，未公布场次仍保留</small></span></label>
+            <label class="search-box"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索项目、餐厅" aria-label="搜索中文名、英文名或别名" autocomplete="off"></label>
+            <div class="filter-chips btn-group" id="filters" role="group" aria-label="清单类别"><button class="chip btn btn-sm active" data-category="all" aria-pressed="true">全部</button><button class="chip btn btn-sm" data-category="attraction" aria-pressed="false">项目</button><button class="chip btn btn-sm" data-category="show" aria-pressed="false">演出</button><button class="chip btn btn-sm" data-category="restaurant" aria-pressed="false">餐厅</button><button class="chip btn btn-sm" data-category="other" aria-pressed="false">其他</button><button class="chip btn btn-sm" data-category="hidden" aria-pressed="false">隐藏</button></div>
+            <div class="filter-selects"><select class="form-select form-select-sm" id="area-filter" aria-label="按主题海港筛选"><option value="all">全部园区</option></select><select class="form-select form-select-sm" id="extra-filter" aria-label="筛选项目或用餐方式"><option value="all">全部类型</option><option value="recommended">星标项目</option><option value="dpa">DPA 适用</option><option value="gentle">温和体验</option><option value="thrill">刺激冒险</option><option value="indoor">室内项目</option></select></div>
+            <label class="closed-filter"><input class="form-check-input" id="show-hidden" type="checkbox" aria-controls="attraction-list map-pins map-dining"><span>显示隐藏项目<small id="hidden-filter-note">包括官方停运与用户主动隐藏</small></span></label>
           </div>
           <div class="list-heading"><h2 id="list-title">探索全部项目</h2><span id="result-count" aria-live="polite">32 个</span><button class="reset-link" id="clear-filter" hidden>重置</button></div>
-          <div class="attraction-list" id="attraction-list" aria-label="项目搜索结果"></div>
+          <p class="hidden-type-note" id="hidden-list-note" hidden>这里集中列出隐藏项及原因。开启“显示隐藏项目”，可同时在地图和普通分类中显示。</p>
+          <div class="attraction-list" id="attraction-list" aria-label="园区清单搜索结果"></div>
         </aside>
         <div class="map-panel">
           <div class="map-topbar"><div class="map-caption"><button class="map-panel-toggle" id="toggle-project-list" type="button" aria-label="收起项目列表" title="收起项目列表" aria-expanded="true" aria-controls="project-explorer"><svg aria-hidden="true"><use href="#i-list"/></svg></button><span class="status-dot"></span><strong>东京迪士尼海洋</strong><span class="map-total"></span></div><div class="map-actions"><button class="orientation-toggle" id="toggle-orientation" type="button" aria-pressed="true" title="切换为官方方向"><svg aria-hidden="true"><use href="#i-compass"/></svg><span>北向朝上</span></button><label class="route-toggle form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="route-visible" checked><span class="form-check-label">连线</span></label><span class="north-indicator" aria-label="正北朝上，左西右东"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg><span>北</span></span></div></div>
@@ -86,7 +87,7 @@
               <div class="map-leaders" id="map-leaders" aria-hidden="true"></div>
               <div class="map-labels" id="map-labels" aria-hidden="true"></div>
               <div class="map-pins" id="map-pins"></div><div class="map-dining" id="map-dining"></div>
-              <div class="entry-label"><svg><use href="#i-arrow"/></svg><span>主入口 · 从这里出发</span></div>
+              <div class="entry-label"><svg><use href="#i-arrow"/></svg><span>入口</span></div>
             </div>
             <div class="map-error" id="map-error" hidden>地图暂时无法加载。你仍可通过项目清单查看全部详情。<button class="text-button" id="retry-map">重新加载地图</button></div>
           </div>
@@ -95,7 +96,7 @@
           <aside class="detail-panel" id="detail-panel" hidden tabindex="-1" aria-label="项目详情"></aside>
         </div>
       </div>
-      <div class="map-footnote"><details class="about-note"><summary>资料来源</summary><p>地图与图片来自东京迪士尼度假区官方资料，© Disney / Pixar。分区边界为导览示意。运营与预约以官方 App 为准。</p><a href="https://media2.tokyodisneyresort.jp/home/download/map/TDS_map_sc.pdf" target="_blank" rel="noopener noreferrer">官方地图 ↗</a></details><button class="exclusion-toggle" id="toggle-excluded" aria-pressed="false" aria-controls="map-pins attraction-list">显示排除</button></div>
+      <div class="map-footnote"><details class="about-note"><summary>资料来源</summary><p>地图与图片来自东京迪士尼度假区官方资料，© Disney / Pixar。分区边界为导览示意。运营与预约以官方 App 为准。</p><a href="https://media2.tokyodisneyresort.jp/home/download/map/TDS_map_sc.pdf" target="_blank" rel="noopener noreferrer">官方地图 ↗</a></details></div>
       <div class="mobile-switch" aria-label="手机视图切换"><button class="active" data-mobile="map" aria-pressed="true"><svg><use href="#i-map"/></svg>地图</button><button data-mobile="list" aria-pressed="false"><svg><use href="#i-list"/></svg>项目清单</button></div>
     </section>
 
@@ -108,7 +109,8 @@
         <section class="tab-pane show active" id="day-route" role="region" aria-labelledby="plan-tab" tabindex="0">
           <div class="plan-topline"><div id="route-changes" class="plan-change" hidden><div id="route-change-list"></div></div><div class="route-actions"><button class="btn btn-primary btn-sm" id="route-to-map">看地图</button><button class="btn btn-outline-secondary btn-sm" id="export-route">导出</button></div></div>
           <p class="route-profile" id="route-profile"></p>
-          <p class="route-assumptions">左侧是连续行程，右侧连线为排队或用餐时顺手操作的 DPA 提醒。目标时段不代表库存，实际时段与下一次可购时间以 App 为准。</p>
+          <p class="route-assumptions">按一个方向绕园，梦幻泉乡进出会经过同一片连接区。演出未公布场次时只留预算，前后时间也需随之调整；地图连线只表示顺序。</p>
+          <div class="route-prep"><p id="route-dpa-budget"></p><p>DPA 提醒紧贴对应活动；下一张何时能买，按实际付款时间计算。<button class="inline-guide-link" data-action="go-dpa">看两个时间例子</button></p><p>餐厅不接入路线。想吃需订座的餐厅，提前一个月日本时间 10:00 订；想用移动点餐，入园后先选时段。<button class="inline-guide-link" data-action="go-dining">查看餐厅与预约时点</button></p></div>
           <div class="route-timeline" id="route-timeline"></div>
           <div class="accordion accordion-flush compact-accordion" id="plan-more">
             <div class="accordion-item" id="shows-guide"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#show-information" aria-expanded="false" aria-controls="show-information">花船与夜秀场次</button></h2><div class="accordion-collapse collapse" id="show-information"><div class="accordion-body" id="show-cards"></div></div></div>
@@ -116,22 +118,25 @@
           </div>
         </section>
         <section class="tab-pane" id="dpa-guide" role="region" aria-labelledby="dpa-tab" tabindex="0">
-          <p class="section-intro">两位成人把两张门票加入同一 App 群组，购买时一起勾选，确认相同体验时段。晨间短队先玩；库存紧的必玩项目应在入园后先查。</p>
-          <ol class="simple-steps"><li>时间表旁的 DPA 连线标出操作时点，可在对应项目排队、等场或用餐时顺手购买，不占用一整段行程。</li><li>购买另一游乐项目：付款满 60 分钟，或上一张卡的体验时段开始，哪个先到就按哪个。</li><li>例如 10:10 买了 16:35 开始的古塔，11:10 就能买其他项目，无需先玩完古塔；实际看 App 的下一次可购时间。</li></ol>
+          <p class="section-intro">DPA 买的是<strong>某个项目、某个时段、少排队的一次机会</strong>。两位成人各需一张；入园后在 App 里一起勾选两张门票，再选项目和时段。</p>
+          <section class="dpa-rule" aria-labelledby="dpa-sale-title"><h2 id="dpa-sale-title">几点开卖？每轮都有全部项目吗？</h2><p><strong>先过闸机入园，再打开 App 查和买。</strong>例如当天计划 09:00 入园，就入园后马上查看；日历开园时间不等于固定的“整点抢票钟”。</p><p><strong>项目各自卖，时段各自看余票。</strong>你选的是一项体验，App 里哪个项目还有可选时段，就按你的购买资格选哪个。当天停运、售罄或未提供 DPA 的项目，都可能买不到。</p><p><strong>60 分钟算的是“你何时能再买”。</strong>它不代表园区每小时一起放一轮新票；<strong>后续补票时间不确定</strong>：官方未公布固定补票表，也不保证售罄后会再放。入园先处理最想玩的项目，之后看 App 当时的时段与余量。</p><a class="source-link" href="https://faq-en.tokyodisneyresort.jp/answer/680ba05101fdf7431bafb6b8/" target="_blank" rel="noopener noreferrer">官方购买与余量说明 ↗</a></section>
+          <section class="dpa-rule" aria-labelledby="next-dpa-title"><h2 id="next-dpa-title">下一张什么时候能买？</h2><p>买完一张，先记下两个时间：<strong>付款后 60 分钟</strong>、<strong>这张卡开始使用的时间</strong>。哪个先到，就能买另一个项目的 DPA。上一张可以留到下午再用。</p><div class="dpa-examples"><p><strong>10:00 买，16:00 开始用</strong><span>11:00 就能买其他项目。</span><small>付款满 60 分钟先到。</small></p><p><strong>10:00 买，10:30 开始用</strong><span>10:30 就能买其他项目。</span><small>开始使用的时间先到，只等 30 分钟。</small></p></div><p class="quiet-note">每买下一张，按这次付款和这张卡的开始时间重新算。App 会直接显示下一次可购时间；获得购买资格后，仍要有余票才能买。</p></section>
+          <ol class="simple-steps"><li><strong>重复买同一个项目：</strong>先把手里这一张用掉，或等它的使用时段结束，再买。</li><li><strong>游乐项目和演出分开算：</strong>刚买完项目 DPA，仍可购买演出 DPA；各自再买其他项目或演出时，各算各的等待时间。</li><li><strong>先选顺路的使用时段：</strong>本路线入园先查冰雪奇缘下午的 DPA，再查傍晚古塔。翱翔晨间先看普通队列；若排队超预算，先调整后续安排。</li></ol>
           <p class="dpa-plan-cost" id="dpa-plan-cost"></p>
           <table class="table price-table"><thead><tr><th scope="col">项目</th><th scope="col">日元 / 人 / 次</th></tr></thead><tbody id="dpa-table-body"></tbody></table>
           <div class="accordion accordion-flush compact-accordion">
-            <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dpa-how" aria-expanded="false" aria-controls="dpa-how">购买规则</button></h2><div class="accordion-collapse collapse" id="dpa-how"><div class="accordion-body"><p>例如 10:00 付款、10:30 即可使用，下一张其他项目在 10:30 就可买，不必等到 11:00。重复买同一个项目，则要等本张用完或体验时段结束。</p><p>游乐设施与演出 DPA 可同时持有，各自计算下一次可购时间。确认两张成人票、使用时段和总价后再付款；付款后一般不能主动改时或取消。</p><a href="https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/disneypremieraccess.html" target="_blank" rel="noopener noreferrer">官方价格与规则 ↗</a></div></div></div>
+            <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dpa-how" aria-expanded="false" aria-controls="dpa-how">从付款到入场怎么用？</button></h2><div class="accordion-collapse collapse" id="dpa-how"><div class="accordion-body"><p>打开 App 的 Disney Premier Access → 勾选两人的门票 → 选项目与使用时段 → 核对两人总价后付款。到使用时段，去对应入口出示 App 里的码。</p><p>同一天只能在所选时段使用；付款前避开演出、用餐和步行冲突。付款后不能自行改时或取消，也不保证完全不用排队。</p><a href="https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/disneypremieraccess.html" target="_blank" rel="noopener noreferrer">官方价格与规则 ↗</a></div></div></div>
             <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#show-dpa" aria-expanded="false" aria-controls="show-dpa">演出 DPA</button></h2><div class="accordion-collapse collapse" id="show-dpa"><div class="accordion-body" id="show-dpa-list"></div></div></div>
           </div>
         </section>
         <section class="tab-pane" id="dining-guide" role="region" aria-labelledby="food-tab" tabindex="0">
-          <div class="nav nav-pills dining-tabs" role="tablist" aria-label="用餐方式"><button class="nav-link active" id="mobile-order-tab" data-bs-toggle="tab" data-bs-target="#mobile-order-panel" type="button" role="tab" aria-controls="mobile-order-panel" aria-selected="true">当天点餐</button><button class="nav-link" id="seating-tab" data-bs-toggle="tab" data-bs-target="#seating-panel" type="button" role="tab" aria-controls="seating-panel" aria-selected="false">餐厅订位</button></div>
+          <p class="section-intro">先看餐厅采用哪种方式：<strong>订用餐时间、先手机点餐、直接排队</strong>。有桌椅不等于要预约；梦幻泉乡的三家主要餐厅有座位，却采用手机点餐。餐厅都不接入游玩路线。</p>
+          <div class="nav nav-pills dining-tabs" role="tablist" aria-label="用餐方式"><button class="nav-link active" id="seating-tab" data-bs-toggle="tab" data-bs-target="#seating-panel" type="button" role="tab" aria-controls="seating-panel" aria-selected="true">提前订座</button><button class="nav-link" id="mobile-order-tab" data-bs-toggle="tab" data-bs-target="#mobile-order-panel" type="button" role="tab" aria-controls="mobile-order-panel" aria-selected="false">先手机点餐</button><button class="nav-link" id="walkin-tab" data-bs-toggle="tab" data-bs-target="#walkin-panel" type="button" role="tab" aria-controls="walkin-panel" aria-selected="false">无需订座</button></div>
           <div class="tab-content dining-content">
-            <div class="tab-pane show active" id="mobile-order-panel" role="tabpanel" aria-labelledby="mobile-order-tab"><p class="section-intro">入园当天在 App 点好餐、选取餐时段。到店再点 I'm Here，等通知取餐。</p><div class="dining-options" id="dining-options"></div></div>
-            <div class="tab-pane" id="seating-panel" role="tabpanel" aria-labelledby="seating-tab"><p class="section-intro"><strong>提前一个月，是最早开放预约的时间，不是必须提前一个月订。</strong></p><p>之后只要有空位就能订，当天也可查看名额。优先入座预约的是用餐时间，到店后等空桌带位。</p><p id="booking-example"></p><a href="https://www.tokyodisneyresort.jp/sc/tdr/guide/app_service/priorityseating.html" target="_blank" rel="noopener noreferrer">官方预约入口与规则 ↗</a></div>
+            <div class="tab-pane show active" id="seating-panel" role="tabpanel" aria-labelledby="seating-tab"><h2 class="reading-subtitle">必吃某家，就在提前一个月放号时订</h2><p>以下餐厅提供订座，官方称“优先入座”。建议在用餐日前一个月的<strong>日本时间 10:00</strong> 登录网站或 App，选中午或傍晚的用餐时间；有余位时之后也能订。</p><p class="dining-timing" id="booking-example"></p><p><strong>当天先网上查，门口是补位办法。</strong>09:00 起查网上当日名额；10:00 起可到餐厅门口问剩余位，有空位才受理。早上去门口并不保证能约到中午。</p><p>订的是用餐时间，到店后等空桌带位，仍可能短等。正式桌餐建议留 60–90 分钟，并删减相应游玩内容。</p><p class="quiet-note" id="dining-closure-note"></p><div class="dining-options" id="seating-options"></div><a href="https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/priorityseating/" target="_blank" rel="noopener noreferrer">官方预约入口、餐厅与时点 ↗</a></div>
+            <div class="tab-pane" id="mobile-order-panel" role="tabpanel" aria-labelledby="mobile-order-tab"><h2 class="reading-subtitle">想吃梦幻泉乡这三家，入园就先选时段</h2><p>这三家须使用手机点餐。入园后在 App 选餐厅、取餐时段与餐点；先把餐单下好，按选定时间再去，不用先跑到餐厅门口。</p><p class="dining-timing" id="mobile-order-example"></p><p>到店后再点 <span lang="en">I'm Here</span>，等通知取餐。你选的是取餐时段，座位按现场安排。餐厅点餐和订座都不占 DPA 的购买等待时间。</p><div class="dining-options" id="dining-options"></div><a class="source-link" href="https://faq-en.tokyodisneyresort.jp/answer/6838947bb5f9218ff51a969e/" target="_blank" rel="noopener noreferrer">官方梦幻泉乡点餐规则 ↗</a></div>
+            <div class="tab-pane" id="walkin-panel" role="tabpanel" aria-labelledby="walkin-tab"><h2 class="reading-subtitle">坐下吃的快餐，也有很多不用订座</h2><p>以下普通用餐区无需提前订座，按现场方式排队或选餐。有“可手机点餐”的店，可入园后先选取餐时段，少排点餐的队；手机餐单不替你保留一张桌子。</p><p class="quiet-note">简餐约留 30 分钟；若路线顺、营业时间允许，可考虑 11 点前或 17 点左右错峰。这是安排建议，队长和可取餐时段看当天 App。</p><div class="dining-options" id="walkin-options"></div><div class="snack-section"><h2>路边小铺与手拿小吃</h2><p class="quiet-note">无需订座，走到铺子前排队；标了手机点餐的，也可提前下单。</p><div id="snack-options"></div></div><a class="source-link" href="https://www.tokyodisneyresort.jp/en/tdr/guide/app_service/mobileorder.html" target="_blank" rel="noopener noreferrer">官方移动点餐说明 ↗</a></div>
           </div>
-          <div class="snack-section"><h2>火鸡腿在哪里？</h2><div id="snack-options"></div></div>
         </section>
       </div>
       <footer class="guide-footer"><span>日本时间 · 价格与运营以官方当日信息为准</span><a href="https://www.tokyodisneyresort.jp/sc/tds/" target="_blank" rel="noopener noreferrer">官网 ↗</a></footer>
