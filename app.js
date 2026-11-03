@@ -236,13 +236,13 @@
     const clock=value=>activePlan.knownHours?P.clock(value):relative(value);
     const headings='<div class="timeline-column-headings"><span>整体行程</span><span>DPA 并行操作</span></div>';
     $('#route-timeline').innerHTML=headings+activePlan.rows.map((row,index)=>{
-      const item=row.itemId||row.restaurantId?byId.get(row.itemId||row.restaurantId):null,order=row.itemId?activePlan.stops.find(stop=>stop.id===row.itemId)?.order:null;
+      const item=row.itemId||row.restaurantId?byId.get(row.itemId||row.restaurantId):null,order=row.kind==='arrival'?0:row.itemId?activePlan.stops.find(stop=>stop.id===row.itemId)?.order:null;
       const time=row.tentative?`<time class="relative-time">${row.itemId===20001?'午前预留':'晚间预留'}</time><small class="stop-end">${row.end-row.start} 分钟预算</small>`:`<time>${clock(row.start)}</time><small class="stop-end">– ${clock(row.end)}</small>`;
       const facts=row.kind==='ride'?`体验 ${row.ride} 分钟 <span>·</span> ${row.usesDpa?'DPA 通道预算':'排队预算'} ${row.queue} 分钟 <span>·</span> 步行约 ${row.walk} 分钟`:row.kind==='explore'?`自由探索约 ${row.ride} 分钟 <span>·</span> 步行约 ${row.walk} 分钟`:row.kind==='show'?`${row.tentative?'场次待公布':P.clock(row.showStart)+' 开演'} <span>·</span> 表演 ${row.ride} 分钟`:'';
       const title=item?(row.kind==='show'?item.name:row.kind==='meal'?`${item.meal} · ${item.name}`:item.short):row.title;
       const actions=activePlan.dpaActions.filter(action=>action.anchorRowIndex===index);
       const notes=actions.map(action=>{const target=byId.get(action.dpaItemId);return `<article class="dpa-note" data-buy="${action.start}"><div class="dpa-note-heading">${icons('ticket')}<time>${clock(action.start)}</time><span>${action.planned?'查 DPA':'可选 DPA'}</span></div><button data-select="${target.id}">${target.short}</button><p class="dpa-target">目标 ${clock(action.targetStart)} 前后使用</p><p>${D.party.adults} 人 ${number(action.pairPrice)} 日元 · 若此时付款，下张最早 ${clock(action.nextEligible)}</p><p>${escapeHTML(action.description)}</p></article>`;}).join('');
-      return `<div class="timeline-item" data-start="${row.start}" data-end="${row.end}"><article class="timed-stop ${row.kind}"><div class="stop-time">${time}</div><div class="stop-body"><div class="stop-title">${order?`<span class="stop-number">${order}</span>`:icons(row.kind==='show'?(row.itemId===20001?'boat':'moon'):row.kind==='meal'?'food':row.kind==='walk'?'arrow':'route')}${item?`<button data-select="${item.id}">${title}${D.coreIds.includes(item.id)?icons('star'):''}</button>`:`<h3>${title}</h3>`}</div>${facts?`<div class="step-facts">${facts}</div>`:''}${row.description?`<p class="step-note">${escapeHTML(row.description)}</p>`:''}</div></article><aside class="dpa-side-list" aria-label="本段 DPA 操作">${notes}</aside>${notes?'<svg class="timeline-branch" aria-hidden="true" focusable="false"></svg>':''}</div>`;
+      return `<div class="timeline-item" data-start="${row.start}" data-end="${row.end}"><article class="timed-stop ${row.kind}"><div class="stop-time">${time}</div><div class="stop-body"><div class="stop-title">${order!=null?`<span class="stop-number">${order}</span>`:icons(row.kind==='show'?(row.itemId===20001?'boat':'moon'):row.kind==='meal'?'food':row.kind==='walk'?'arrow':'route')}${item?`<button data-select="${item.id}">${title}${D.coreIds.includes(item.id)?icons('star'):''}</button>`:`<h3>${title}</h3>`}</div>${facts?`<div class="step-facts">${facts}</div>`:''}${row.description?`<p class="step-note">${escapeHTML(row.description)}</p>`:''}</div></article><aside class="dpa-side-list" aria-label="本段 DPA 操作">${notes}</aside>${notes?'<svg class="timeline-branch" aria-hidden="true" focusable="false"></svg>':''}</div>`;
     }).join('');
     renderShows();renderDPA();renderDining();renderRouteOverlay();queueTimelineLayout();
   }
@@ -318,7 +318,8 @@
     if(!width||!height||!activePlan)return;
     const entry=$('.entry-label',viewport),entryPoint=rotatePoint(475,1020),entryX=view.x+entryPoint.x*view.scale,entryY=view.y+entryPoint.y*view.scale;
     entry.hidden=entryX<0||entryX>width||entryY<0||entryY>height;
-    entry.style.left=`${Math.max(entry.offsetWidth/2+6,Math.min(width-entry.offsetWidth/2-6,entryX))}px`;entry.style.top=`${entryY}px`;
+    const entryLeft=entry.hidden?entryX:Math.max(18,Math.min(width-entry.offsetWidth+6,entryX));
+    entry.style.left=`${entryLeft}px`;entry.style.top=`${entryY}px`;
     const viewportRect=viewport.getBoundingClientRect(),controlRect=$('.map-controls').getBoundingClientRect();
     const controls={x:controlRect.left-viewportRect.left-4,y:controlRect.top-viewportRect.top-4,w:controlRect.width+8,h:controlRect.height+8};
     const routeIds=new Set(activePlan.stops.map(item=>mapItemId(item.id)));
@@ -349,7 +350,7 @@
       placed.push(best.box);positionMap.set(node.item.id,node);
       if(Math.hypot(best.dx,best.dy)>2)leaders.push(`<path d="M${view.x+node.p.x*view.scale} ${view.y+node.p.y*view.scale}L${node.x} ${node.y}"/>`);
     }
-    const routePoints=activePlan.routePoints.map(item=>positionMap.get(mapItemId(item.id))||{stageX:point(item).x,stageY:point(item).y});
+    const routePoints=[{stageX:(entryLeft-view.x)/view.scale,stageY:entryPoint.y},...activePlan.routePoints.map(item=>positionMap.get(mapItemId(item.id))||{stageX:point(item).x,stageY:point(item).y})];
     $('#map-route').innerHTML=`<svg class="route-lines" viewBox="0 0 ${MAP_W} ${MAP_H}" xmlns="http://www.w3.org/2000/svg"><defs><marker id="route-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#ac175f" stroke="none"/></marker></defs>${routePoints.slice(1).map((to,index)=>{const from=routePoints[index],d=`M${from.stageX} ${from.stageY}L${to.stageX} ${to.stageY}`;return `<path class="route-halo" d="${d}"/><path class="route-segment" d="${d}" marker-end="url(#route-arrow)"/>`;}).join('')}</svg>`;
     mapNodes.forEach(node=>node.label.classList.remove('is-visible'));
     const fixedLabels=$$('.entry-label',viewport).filter(element=>!element.hidden).map(element=>{const r=element.getBoundingClientRect();return {x:r.left-viewportRect.left-3,y:r.top-viewportRect.top-3,w:r.width+6,h:r.height+6};});
