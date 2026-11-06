@@ -140,6 +140,14 @@ window.DISNEY_DATA.attractions.forEach(item => {
   }
   window.DISNEY_DATA.coreIds=[219,223,222,242,243];
   window.DISNEY_DATA.planningWindow={start:'2027-02-01',end:'2027-02-06',reference:'2027-02-06',version:'2027-02-01-to-06'};
+  window.DISNEY_DATA.admissionPrices={
+    ticketName:'成人一日票',checked:'2026-11-06',
+    sourceUrl:'https://www.tokyodisneyresort.jp/en/ticket/index/202702/?park=tds',
+    calendarUrl:'https://www.tokyodisneyresort.jp/en/tds/monthly/calendar/202702/',
+    cnyPerJpy:0.04225,exchangeChecked:'2026-11-06',
+    exchangeSource:'https://wise.com/gb/currency-converter/jpy-to-cny-rate',
+    days:[['2027-02-01',9900],['2027-02-02',9900],['2027-02-03',9900],['2027-02-04',9900],['2027-02-05',9900],['2027-02-06',10900]]
+  };
   window.DISNEY_DATA.parkCalendars={
     '2026-11':{days:30,open:'09:00',close:'21:00',exceptions:{'2026-11-27':{open:'09:00',close:'18:30'}},url:'https://www.tokyodisneyresort.jp/en/tds/monthly/calendar/202611/'},
     '2027-02':{days:28,open:'09:00',close:'21:00',exceptions:{'2027-02-05':{open:'09:00',close:'18:30'},'2027-02-19':{open:'09:00',close:'18:30'}},url:'https://www.tokyodisneyresort.jp/en/tds/monthly/calendar/202702/'}

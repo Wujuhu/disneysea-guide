@@ -217,7 +217,18 @@
     $('#booking-example').textContent=seatingTimingText();
     $('#mobile-order-instructions').innerHTML=mobileOrderHTML();
   }
+  function renderAdmissionPrices(){
+    const prices=D.admissionPrices,weekday=new Intl.DateTimeFormat('zh-CN',{weekday:'long',timeZone:'UTC'});
+    $('#ticket-price-body').innerHTML=prices.days.map(([date,jpy])=>{const day=new Date(date+'T00:00:00Z');return `<tr><th scope="row"><time datetime="${date}">${day.getUTCMonth()+1} 月 ${day.getUTCDate()} 日</time></th><td>${weekday.format(day)}</td><td>${number(jpy)}</td><td>${number(Math.round(jpy*prices.cnyPerJpy))}</td></tr>`;}).join('');
+    $('#ticket-rate-source').textContent=`1 日元 ≈ ${prices.cnyPerJpy} 元人民币（${formatDate(prices.exchangeChecked)}）`;
+    $('#ticket-price-source').href=prices.sourceUrl;$('#ticket-rate-source').href=prices.exchangeSource;
+    const now=new Date(),today=$('#ticket-today'),parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now);
+    today.dateTime=['year','month','day'].map(type=>parts.find(part=>part.type===type).value).join('-');
+    today.textContent='今天 · '+new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',weekday:'long'}).format(now);
+    today.title=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'long',day:'numeric'}).format(now)+'（北京时间）';
+  }
   function renderDPA(){
+    renderAdmissionPrices();
     const ordered=[...D.coreIds.map(id=>byId.get(id)),...allAttractions.filter(item=>item.dpa&&!D.coreIds.includes(item.id))].filter(eligible);
     $('#dpa-table-body').innerHTML=ordered.map(item=>`<tr><td><button data-select="${item.id}">${item.short}${D.coreIds.includes(item.id)?icons('star'):''}</button>${hiddenReasons(item).map(reason=>`<span class="table-closed">${reason.label}</span>`).join('')}</td><td>¥${number(item.dpa)}</td></tr>`).join('');
     $('#show-dpa-list').innerHTML=D.dpaShows.filter(item=>{const show=D.shows.find(show=>show.name===item.name);return !show||eligible(show);}).map(item=>`<p class="show-dpa-row"><span>${item.name}</span><strong>¥${number(item.price)}</strong></p>`).join('')+'<p>白天花船无 DPA；可用演出的名额以官方 App 为准。</p>';

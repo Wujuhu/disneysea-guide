@@ -337,6 +337,19 @@ body.nav-collapsed{--sidebar-width:48px}
 .dpa-examples strong,.dpa-examples span,.dpa-examples small{display:block}
 .dpa-examples span{font-size:17px;font-weight:600;color:var(--teal);margin:6px 0}
 .dpa-examples small{font-size:12px;color:var(--secondary)}
+.ticket-prices{margin-bottom:30px;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.ticket-prices-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;margin-bottom:10px}
+.ticket-prices-heading h2{margin:0}
+.ticket-today{font-size:13px;line-height:1.7;color:var(--secondary);font-variant-numeric:tabular-nums}
+.ticket-price-context{margin:0 0 14px;font-size:14px;line-height:1.8;color:var(--secondary)}
+.ticket-price-table{max-width:760px;margin:0 0 14px;font-size:15px;font-variant-numeric:tabular-nums;color:var(--ink);--bs-table-bg:transparent;--bs-table-border-color:var(--line)}
+.ticket-price-table th,.ticket-price-table td{padding:12px 10px;vertical-align:middle}
+.ticket-price-table thead th{font-size:13px;font-weight:500;color:var(--secondary)}
+.ticket-price-table tbody th{font-weight:500;white-space:nowrap}
+.ticket-price-table th:nth-child(2),.ticket-price-table td:nth-child(2){text-align:center;white-space:nowrap}
+.ticket-price-table th:nth-child(n+3),.ticket-price-table td:nth-child(n+3){text-align:right;white-space:nowrap}
+.ticket-rate-note{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0;font-size:12px;line-height:1.8;color:var(--secondary)}
+@media(max-width:760px){.ticket-prices{padding-bottom:22px;margin-bottom:24px}.ticket-prices-heading{gap:6px;margin-bottom:8px}.ticket-today{font-size:12px}.ticket-price-context{font-size:12px}.ticket-price-table{font-size:13px}.ticket-price-table th,.ticket-price-table td{padding:11px 5px}.ticket-price-table thead th{font-size:12px;white-space:normal}}
 .dining-content .dining-timing{font-size:15px;color:var(--teal);line-height:1.9;padding:14px 0;border-block:1px solid var(--line)}
 .dining-content .quiet-note{font-size:13px;color:var(--secondary)}
 @media(max-width:760px){.route-prep{font-size:11px;margin:10px 0 14px}.dpa-rule h2,.reading-subtitle{font-size:18px}.dpa-rule>p{font-size:14px}.dpa-examples{grid-template-columns:1fr;gap:16px}.dpa-examples p+p{border-top:1px solid var(--line);padding-top:16px}.dpa-examples span{font-size:16px}.dining-content .dining-timing{font-size:14px}}

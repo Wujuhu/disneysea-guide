@@ -1,0 +1,61 @@
+{
+  "checked": "2026-11-06",
+  "park": "Tokyo DisneySea",
+  "ticket": "1-Day Passport (Adult, ages 18 and over)",
+  "unit": "per person",
+  "sources": {
+    "officialTickets": "https://www.tokyodisneyresort.jp/en/ticket/index/202702/?park=tds",
+    "officialCalendar": "https://www.tokyodisneyresort.jp/en/tds/monthly/calendar/202702/"
+  },
+  "exchange": {
+    "source": "https://wise.com/gb/currency-converter/jpy-to-cny-rate",
+    "observed": "2026-11-06",
+    "kind": "Displayed mid-market reference rate snapshot",
+    "cnyPerJpy": 0.04225,
+    "displayRounding": "Nearest whole CNY",
+    "boundary": "Planning estimate only; actual payment uses the settlement rate and applicable fees. No live FX request runs in the page."
+  },
+  "days": [
+    {
+      "date": "2027-02-01",
+      "weekday": "星期一",
+      "adultJPY": 9900,
+      "estimatedCNY": 418
+    },
+    {
+      "date": "2027-02-02",
+      "weekday": "星期二",
+      "adultJPY": 9900,
+      "estimatedCNY": 418
+    },
+    {
+      "date": "2027-02-03",
+      "weekday": "星期三",
+      "adultJPY": 9900,
+      "estimatedCNY": 418
+    },
+    {
+      "date": "2027-02-04",
+      "weekday": "星期四",
+      "adultJPY": 9900,
+      "estimatedCNY": 418
+    },
+    {
+      "date": "2027-02-05",
+      "weekday": "星期五",
+      "adultJPY": 9900,
+      "estimatedCNY": 418
+    },
+    {
+      "date": "2027-02-06",
+      "weekday": "星期六",
+      "adultJPY": 10900,
+      "estimatedCNY": 461
+    }
+  ],
+  "todayHeader": {
+    "timezone": "Asia/Shanghai",
+    "behavior": "Current browser date, independent of selected planning date, refreshed when the DPA content is rendered.",
+    "display": "Today plus weekday only; the complete date is stored in datetime and the hover title."
+  }
+}

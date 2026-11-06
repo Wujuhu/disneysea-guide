@@ -8,11 +8,11 @@
   <title>海洋漫游 · 东京迪士尼海洋新手指南</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css?v=20261103-photo-gallery">
+  <link rel="stylesheet" href="styles.css?v=20261106-admission-prices">
   <script src="assets/vendor/bootstrap/bootstrap.min.js" defer></script>
-  <script src="data.js?v=20261103-photo-gallery" defer></script>
-  <script src="planner.js?v=20261103-photo-gallery" defer></script>
-  <script src="app.js?v=20261103-photo-gallery" defer></script>
+  <script src="data.js?v=20261106-admission-prices" defer></script>
+  <script src="planner.js?v=20261106-admission-prices" defer></script>
+  <script src="app.js?v=20261106-admission-prices" defer></script>
 </head>
 <body>
   <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -119,9 +119,15 @@
           </div>
         </section>
         <section class="tab-pane" id="dpa-guide" role="region" aria-labelledby="dpa-tab" tabindex="0">
+          <section class="ticket-prices" aria-labelledby="ticket-price-title">
+            <div class="ticket-prices-heading"><h2 class="reading-subtitle" id="ticket-price-title">门票价格</h2><time class="ticket-today" id="ticket-today" title="北京时间"></time></div>
+            <p class="ticket-price-context" id="ticket-price-context">2027 年 2 月 · 成人一日票／人</p>
+            <table class="table ticket-price-table" aria-describedby="ticket-price-context ticket-rate-note"><thead><tr><th scope="col">日期</th><th scope="col">星期</th><th scope="col">日元原价</th><th scope="col">预估人民币</th></tr></thead><tbody id="ticket-price-body"></tbody></table>
+            <p class="ticket-rate-note" id="ticket-rate-note"><a class="source-link" id="ticket-price-source" href="https://www.tokyodisneyresort.jp/en/ticket/index/202702/?park=tds" target="_blank" rel="noopener noreferrer">官方票价 <svg aria-hidden="true"><use href="#i-external"/></svg></a><a class="source-link" id="ticket-rate-source" href="https://wise.com/gb/currency-converter/jpy-to-cny-rate" target="_blank" rel="noopener noreferrer"></a></p>
+          </section>
           <p class="section-intro">DPA 买的是<strong>某个项目、某个时段、少排队的一次机会</strong>。两位成人各需一张；入园后在 App 里一起勾选两张门票，再选项目和时段。</p>
           <section class="dpa-rule" aria-labelledby="dpa-sale-title"><h2 id="dpa-sale-title">几点开卖？每轮都有全部项目吗？</h2><p><strong>先过闸机入园，再打开 App 查和买。</strong>例如当天计划 09:00 入园，就入园后马上查看；日历开园时间不等于固定的“整点抢票钟”。</p><p><strong>项目各自卖，时段各自看余票。</strong>你选的是一项体验，App 里哪个项目还有可选时段，就按你的购买资格选哪个。当天停运、售罄或未提供 DPA 的项目，都可能买不到。</p><p><strong>60 分钟算的是“你何时能再买”。</strong>它不代表园区每小时一起放一轮新票；<strong>后续补票时间不确定</strong>：官方未公布固定补票表，也不保证售罄后会再放。入园先处理最想玩的项目，之后看 App 当时的时段与余量。</p><a class="source-link" href="https://faq-en.tokyodisneyresort.jp/answer/680ba05101fdf7431bafb6b8/" target="_blank" rel="noopener noreferrer">官方购买与余量说明 ↗</a></section>
-          <section class="dpa-rule" aria-labelledby="next-dpa-title"><h2 id="next-dpa-title">下一张什么时候能买？</h2><div class="dpa-examples"><p><strong>10:00 买，16:00 开始用</strong><span>11:00 就能买其他项目。</span><small>付款满 60 分钟先到。</small></p><p><strong>10:00 买，10:30 开始用</strong><span>10:30 就能买其他项目。</span><small>开始使用的时间先到，只等 30 分钟。</small></p></div><p class="quiet-note">每买下一张，按这次付款和这张卡的开始时间重新算。App 会直接显示下一次可购时间；获得购买资格后，仍要有余票才能买。</p></section>
+          <section class="dpa-rule" aria-labelledby="next-dpa-title"><h2 id="next-dpa-title">下一张购买时间点</h2><div class="dpa-examples"><p><strong>10:00 买，16:00 开始用</strong><span>11:00 就能买其他项目。</span><small>付款满 60 分钟先到。</small></p><p><strong>10:00 买，10:30 开始用</strong><span>10:30 就能买其他项目。</span><small>开始使用的时间先到，只等 30 分钟。</small></p></div><p class="quiet-note">每买下一张，按这次付款和这张卡的开始时间重新算。App 会直接显示下一次可购时间；获得购买资格后，仍要有余票才能买。</p></section>
           <ol class="simple-steps"><li><strong>重复买同一个项目：</strong>先把手里这一张用掉，或等它的使用时段结束，再买。</li><li><strong>游乐项目和演出分开算：</strong>刚买完项目 DPA，仍可购买演出 DPA；各自再买其他项目或演出时，各算各的等待时间。</li><li><strong>先选顺路的使用时段：</strong>本路线入园先查冰雪奇缘下午的 DPA，再查傍晚古塔。翱翔晨间先看普通队列；若排队超预算，先调整后续安排。</li></ol>
           <p class="dpa-plan-cost" id="dpa-plan-cost"></p>
           <table class="table price-table"><thead><tr><th scope="col">项目</th><th scope="col">日元 / 人 / 次</th></tr></thead><tbody id="dpa-table-body"></tbody></table>
